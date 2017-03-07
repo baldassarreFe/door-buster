@@ -1,3 +1,12 @@
-<h1>
-  {{title}}
-</h1>
+<div *ngIf="!user">
+  <button md-raised-button (click)="login()">
+    <img width="30" src="google-logo.png" />Use My Google Account
+  </button>
+</div>
+
+<div *ngIf="user">
+  <h1>Welcome {{user.auth.displayName}}</h1>
+  <button md-raised-button (click)="logout()">
+    Logout
+  </button>
+</div>
