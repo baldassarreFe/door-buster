@@ -1,27 +1,52 @@
-# DoorBuster
+# Door Buster!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
+| Group 8              |               |
+|----------------------|---------------|
+| Federico Baldassarre | fedbal@kth.se |
+| Ela Yudhanira        | elayu@kth.se  |
+| Yinan Xu             | yinanx@kth.se |
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Problem
+In a world where applying for a job is as easy as sending an email, keeping track of the status of your applications has become complex and time consuming. So many versions of your curriculum spread over your USB drive, your Desktop and a cloud account, not to mention the cover letters!
 
-## Code scaffolding
+## Solution
+We propose a single integrated platform to keep track of every step of your application: from dreaming the job to your first day on it. The service will allow the user to manage the status of his applications, together with all the attached documents, deadlines, meetings, messages and emails. It will also help the user selecting the right set of skills to introduce himself to a new company, based on similar applications he’s done in the past.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+## Target
+Every person in need of a systematized solution to track his application, from students looking for summer jobs to seasoned professionals chasing their next CEO position.
 
-## Build
+## Technologies
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Frontend (web application):
+* Angular
 
-## Running unit tests
+Backend (auth and storage):
+* Firebase
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+External APIs:
+* LinkedIn and GlassDoor
+* Some email/reminder service
+* Some other cool stuff we can add randomly
 
-## Running end-to-end tests
+## Draft of the steps of an application
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. Pre-application:
+  1. Name of the company and basic informations (headquarters, number of employees, founded, contacts)
+  2. Position (position, where you found it, when you found it, how to apply, requirements)
+  3. Kind of job (period, contract type)
+  4. Deadlines (applications open, application closes)
+  5. Reminders (apply before/after)
+  6. Documents: link to the job listing, photo of the advertise etc.
+  7. CV/CL drafts
+2. Application step:
+  1. Upload a CV + Cover Letter (specific for that company, help deciding the skills to highlight, maybe some typo checking)
+  2. Reminders (when to expect a follow up)
+3. Ongoing (the largest and more generic step):
+  1. Track each step of the interviewing process based on:
+  2. What (Skype/phone/in person/on site)
+  3. Who (interviewers you interacted with)
+  4. When (incoming/completed + optional reminders)
+4. Final Step:
+  1. Rejected: keep it for reference/delete it
+  2. Got an offer: how much, starting when, type of contract, who you spoke with
+  3. Accepted: celebrate
