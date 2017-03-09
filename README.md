@@ -1,10 +1,11 @@
 # Door Buster!
 
-| Group 8              |               |
-|----------------------|---------------|
-| Federico Baldassarre | fedbal@kth.se |
-| Ela Yudhanira        | elayu@kth.se  |
-| Yinan Xu             | yinanx@kth.se |
+| Group 8              |                 |
+|----------------------|-----------------|
+| Aleksi Ala-Harja     | aleksiah@kth.se |
+| Federico Baldassarre | fedbal@kth.se   |
+| Yinan Xu             | yinanx@kth.se   |
+| Ela Yudhanira        | elayu@kth.se    |
 
 ## Problem
 In a world where applying for a job is as easy as sending an email, keeping track of the status of your applications has become complex and time consuming. So many versions of your curriculum spread over your USB drive, your Desktop and a cloud account, not to mention the cover letters!
