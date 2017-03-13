@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
   template: `
-<navigation></navigation>
+<navigation title="My deliveries"></navigation>
 <dashboard></dashboard>
 `
 })

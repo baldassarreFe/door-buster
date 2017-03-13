@@ -1,0 +1,8 @@
+<md-toolbar color="primary">
+  <span>{{title}}</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="spacer"></span>
+
+  <nav-icon-link *ngFor="let ic of links" [icon]="ic.icon" [link]="ic.link"></nav-icon-link>
+</md-toolbar>

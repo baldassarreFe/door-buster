@@ -1,15 +1,19 @@
-<ng-container *ngIf="!userService.loggedIn">
-  <button md-raised-button color="primary" (click)="userService.login()">
-    <img width="30" src="google-logo.png"/>Use My Google Account
-  </button>
-</ng-container>
+<navigation title="Welcome" [links]="[{icon:'info_outline', link:'/about'}]"></navigation>
 
-<ng-container *ngIf="userService.loggedIn">
-  <h1>Welcome {{userService.userName}}</h1>
-  <a md-raised-button color="primary" routerLink="/home" routerLinkActive="active">
-    Continue
-  </a>
-  <button md-raised-button (click)="userService.logout()">
-    Logout
-  </button>
-</ng-container>
+<div class="center">
+  <ng-container *ngIf="!userService.loggedIn">
+    <button md-raised-button color="primary" (click)="userService.login()">
+      <img width="30" src="assets/google-logo.png"/>Use My Google Account
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="userService.loggedIn">
+    <h1>Welcome {{userService.userName}}</h1>
+    <a md-raised-button color="primary" routerLink="/home" routerLinkActive="active">
+      Continue
+    </a>
+    <button md-raised-button (click)="userService.logout()">
+      Logout
+    </button>
+  </ng-container>
+</div>
