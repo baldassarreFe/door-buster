@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
+import {Component} from '@angular/core';
 
 @Component({
   template: `
-<navigation title="My deliveries"></navigation>
+<navigation title="Door Buster!"></navigation>
 <dashboard></dashboard>
 `
 })

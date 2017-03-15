@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {DoorBusterUserService} from "../core/door-buster-user.service";
+import {LoginService} from "../core/login.service";
 
 @Component({
   templateUrl: './welcome.component.html',
@@ -7,7 +7,7 @@ import {DoorBusterUserService} from "../core/door-buster-user.service";
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(public userService: DoorBusterUserService) {
+  constructor(public userService: LoginService) {
   }
 
   ngOnInit() {

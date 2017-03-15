@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {AngularFire, AuthProviders} from "angularfire2";
 
 @Injectable()
-export class DoorBusterUserService {
+export class LoginService {
   private _userName: string = null;
   private _loggedIn: boolean = false;
 

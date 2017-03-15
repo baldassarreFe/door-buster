@@ -1,14 +1,16 @@
-import {NgModule, Optional, SkipSelf, ModuleWithProviders} from "@angular/core";
-import {AuthMethods, AngularFireModule, AuthProviders} from "angularfire2";
-import {DoorBusterUserService} from "./door-buster-user.service";
-import {AuthGuard} from "./auth-guard.service";
+import {NgModule, Optional, SkipSelf, ModuleWithProviders} from '@angular/core';
+import {AuthMethods, AngularFireModule, AuthProviders} from 'angularfire2';
+import {LoginService} from './login.service';
+import {AuthGuard} from './auth-guard.service';
+import {ApplicationsService} from './applications.service';
+import {ApplicationsMockService} from './applications-mock.service';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDogVK8K6fxGwQNAKv5_vL7xmv7kkpuJn8",
-  authDomain: "door-buster.firebaseapp.com",
-  databaseURL: "https://door-buster.firebaseio.com",
-  storageBucket: "door-buster.appspot.com",
-  messagingSenderId: "861150742247"
+  apiKey: 'AIzaSyDogVK8K6fxGwQNAKv5_vL7xmv7kkpuJn8',
+  authDomain: 'door-buster.firebaseapp.com',
+  databaseURL: 'https://door-buster.firebaseio.com',
+  storageBucket: 'door-buster.appspot.com',
+  messagingSenderId: '861150742247'
 };
 
 @NgModule({
@@ -20,16 +22,21 @@ const firebaseConfig = {
   ]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
-    if (parentModule)
-      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
-  }
-
   // https://angular.io/docs/ts/latest/guide/ngmodule.html#!#prevent-reimport-of-the-_coremodule_
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [DoorBusterUserService, AuthGuard]
+      providers: [
+        LoginService,
+        {provide: ApplicationsService, useClass: ApplicationsMockService},
+        AuthGuard
+      ]
     };
+  }
+
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+    }
   }
 }

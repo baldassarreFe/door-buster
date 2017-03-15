@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {DoorBusterUserService} from "./door-buster-user.service";
+import {LoginService} from "./login.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private doorBusterUserService: DoorBusterUserService) { }
+  constructor(private router: Router, private doorBusterUserService: LoginService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (this.doorBusterUserService.loggedIn) {
