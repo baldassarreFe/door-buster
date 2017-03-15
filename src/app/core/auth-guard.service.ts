@@ -5,10 +5,10 @@ import {LoginService} from "./login.service";
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private doorBusterUserService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.doorBusterUserService.loggedIn) {
+    if (this.loginService.loggedIn) {
       return true;
     } else {
       this.router.navigate(['/welcome'], {queryParams: {returnUrl: state.url}});

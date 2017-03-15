@@ -4,6 +4,7 @@ import {LoginService} from './login.service';
 import {AuthGuard} from './auth-guard.service';
 import {ApplicationsService} from './applications.service';
 import {ApplicationsMockService} from './applications-mock.service';
+import {ApplicationsFirebaseService} from './applications-firebase.service';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDogVK8K6fxGwQNAKv5_vL7xmv7kkpuJn8',
@@ -28,7 +29,7 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         LoginService,
-        {provide: ApplicationsService, useClass: ApplicationsMockService},
+        {provide: ApplicationsService, useClass: ApplicationsFirebaseService},
         AuthGuard
       ]
     };
