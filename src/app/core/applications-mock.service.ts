@@ -15,25 +15,25 @@ export class ApplicationsMockService extends ApplicationsService {
 
 const data = [
   {
-    'dreaming-of': {
+    'dreamingOf': {
       'company': {
         'name': 'KTH Stories',
-        'linkedin-id': 123,
-        'glassdoor-id': 456,
+        'linkedinId': 123,
+        'glassdoorId': 456,
         'employees': 5,
-        'location': 'KTH Libary',
-        'contact-person': {
+        'location': 'KTH Library',
+        'contactPerson': {
           'name': 'Mike',
           'role': 'Cook',
           'email': 'mike@mike.com',
           'phone': 123456789
         },
-        'business-area': 'Restoration'
+        'businessArea': 'Restoration'
       },
       'position': {
         'title': 'Dish washer',
         'notes': 'Need experience with soap',
-        'expected-salary': {
+        'expectedSalary': {
           'value': 300,
           'currency': 'SEK',
           'billing': 'hourly'
@@ -48,9 +48,9 @@ const data = [
           'what': 'Applications open',
           'when': 'date',
           'reminder': {
-            'how-much': 12,
+            'howMuch': 12,
             'unit': 'hour',
-            'before-after': 'before'
+            'beforeAfter': 'before'
           }
         },
         {
@@ -61,7 +61,7 @@ const data = [
       ]
     },
     'applied': {
-      'application-date': 'date',
+      'applicationDate': 'date',
       'documents': [
         {
           'type': 'Curriculum',
@@ -72,12 +72,12 @@ const data = [
           'document': 'link to doc'
         }
       ],
-      'follow-up-reminder': {
-        'how-much': 1,
+      'followUpReminder': {
+        'howMuch': 1,
         'unit': 'week',
-        'before-after': 'after'
+        'beforeAfter': 'after'
       }
-      // contact person is the same from dreaming-of
+      // contact person is the same from dreamingOf
     },
     'ongoing': {
       'events': [
@@ -92,9 +92,9 @@ const data = [
             'phone': 9876543
           },
           'reminder': {
-            'how-much': 2,
+            'howMuch': 2,
             'unit': 'hour',
-            'before-after': 'before'
+            'beforeAfter': 'before'
           }
         },
         {
@@ -125,25 +125,25 @@ const data = [
     }
   },
   {
-    'dreaming-of': {
+    'dreamingOf': {
       'company': {
         'name': 'KTH Stories',
-        'linkedin-id': 123,
-        'glassdoor-id': 456,
+        'linkedinId': 123,
+        'glassdoorId': 456,
         'employees': 5,
-        'location': 'KTH Libary',
-        'contact-person': {
+        'location': 'KTH Library',
+        'contactPerson': {
           'name': 'Mike',
           'role': 'Cook',
           'email': 'mike@mike.com',
           'phone': 123456789
         },
-        'business-area': 'Restoration'
+        'businessArea': 'Restoration'
       },
       'position': {
         'title': 'Dish washer',
         'notes': 'Need experience with soap',
-        'expected-salary': {
+        'expectedSalary': {
           'value': 300,
           'currency': 'SEK',
           'billing': 'hourly'
@@ -158,9 +158,9 @@ const data = [
           'what': 'Applications open',
           'when': 'date',
           'reminder': {
-            'how-much': 12,
+            'howMuch': 12,
             'unit': 'hour',
-            'before-after': 'before'
+            'beforeAfter': 'before'
           }
         },
         {
@@ -171,7 +171,7 @@ const data = [
       ]
     },
     'applied': {
-      'application-date': 'date',
+      'applicationDate': 'date',
       'documents': [
         {
           'type': 'Curriculum',
@@ -182,12 +182,12 @@ const data = [
           'document': 'link to doc'
         }
       ],
-      'follow-up-reminder': {
-        'how-much': 1,
+      'followUpReminder': {
+        'howMuch': 1,
         'unit': 'week',
-        'before-after': 'after'
+        'beforeAfter': 'after'
       }
-      // contact person is the same from dreaming-of
+      // contact person is the same from dreamingOf
     },
     'ongoing': {
       'events': [
@@ -202,9 +202,9 @@ const data = [
             'phone': 9876543
           },
           'reminder': {
-            'how-much': 2,
+            'howMuch': 2,
             'unit': 'hour',
-            'before-after': 'before'
+            'beforeAfter': 'before'
           }
         },
         {
