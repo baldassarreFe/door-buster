@@ -21,3 +21,13 @@ $iot-theme: mat-light-theme($iot-primary, $iot-accent, $iot-warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($iot-theme);
+
+// custom styling for all pages
+body{
+	margin: 0;
+	font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+.mat-toolbar{
+	position: relative;
+	z-index: 2;
+}
