@@ -1,36 +1,66 @@
 .mainboard{
 	width: 100%;
 	max-width: 1250px;
-	padding: 20px;
-	margin : 0 auto;
+	padding-top:84px;
+	padding-bottom: 20px;
+	margin : 64px auto 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	height: 100%;
+	top:-64px;
+	box-sizing: border-box;
+	overflow-y: hidden;
+	z-index: 1;
 }
 .mainboard .flex-item{
 	border: 1px solid #eee;
-	padding: 0;
+	padding: 0 0 60px 0;
+	overflow: hidden;
+}
+.flex-item .avatar{
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
 }
 .board-title{
 	margin: 0;
 	padding: 20px;
 	color: #fff;
+	font-weight:400;
+}
+.board-content{
+	overflow-y: scroll;
+	position: relative;
+	height: 100%;
 }
 .board-item{
-	margin: 20px;
+	margin: 0px 15px 10px 15px;
 	box-shadow: none;
-	border: 1px solid #eee;
+	padding: 20px 0;
 	border-radius: 5px;
+	border-bottom: 1px solid #eee;
 }
-.lighter-theme .board-title{
+.blue-theme .board-title{
 	background-color: #4150b7;
 }
 .lighter-theme .board-item{
 	background-color: #fff;
 }
-.light-theme .board-title{
+.green-theme .board-title{
 	background-color: #52ae4b;
 }
-.darker-theme .board-title{
-	background-color: #239af6;
+.orange-theme .board-title{
+	background-color: #ff9800;
 }
-.dark-theme .board-title{
+.pink-theme .board-title{
 	background-color: #e52163;
+}
+
+.edit-icon{
+	font-size: 1em;
+	position: absolute;
+	top: 20px;
+	right: 0;
+	cursor: pointer;
 }
