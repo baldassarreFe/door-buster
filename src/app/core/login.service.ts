@@ -4,10 +4,15 @@ import {AngularFire, AuthProviders} from "angularfire2";
 @Injectable()
 export class LoginService {
   private _userName: string = null;
+  private _uid: string = null;
   private _loggedIn: boolean = false;
 
   public get userName(): string {
     return this._userName;
+  }
+
+  public get uid(): string {
+    return this._uid;
   }
 
   public get loggedIn(): boolean {
@@ -26,9 +31,11 @@ export class LoginService {
     if (user != null) {
       this._userName = user.auth.displayName;
       this._loggedIn = true;
+      this._uid = user.uid;
     } else {
       this._userName = null;
       this._loggedIn = false;
+      this._uid = null;
     }
   }
 
