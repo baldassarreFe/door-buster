@@ -9,9 +9,13 @@ import {ApplicationsService} from "../../core/applications.service";
 export class DashboardComponent implements OnInit {
 
   constructor(public applicationsService: ApplicationsService) {
+  	
+  	console.log(applicationsService);
   }
 
   ngOnInit() {
   }
 
 }
+
+

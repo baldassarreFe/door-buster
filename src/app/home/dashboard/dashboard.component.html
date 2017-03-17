@@ -1,3 +1,44 @@
-<p>
-  dashboard works!
-</p>
+<div class="mainboard">
+	<div class="flex-container" 
+	     fxLayout="row" 
+	     fxLayout.xs="column"
+	     fxLayoutAlign.xs="start"
+	     fxLayoutGap="20px">
+	  <div class="flex-item lighter-theme" fxFlex="25%">
+	  	<h4 class="board-title">Dreaming Of</h4>
+	  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
+	  		<md-card-header>
+	  			<md-card-title>{{job.dreamingOf.company.name}}	</md-card-title>
+	  			<md-card-subtitle>{{job.dreamingOf.position.title}}</md-card-subtitle>
+	  		</md-card-header>
+	  		<md-card-content>
+	  			{{job.dreamingOf.deadlines[0].what}} : {{job.dreamingOf.deadlines[0].when}}
+	  		</md-card-content>
+	  	</md-card>
+	  </div>
+	  <div class="flex-item light-theme" fxFlex="25%">
+	  	<h4 class="board-title">Applied</h4>
+	  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
+	  		<md-card-header>
+	  			<md-card-title>{{job.applied.applicationDate}}	</md-card-title>
+	  		</md-card-header>
+	  	</md-card>
+	  </div>
+	  <div class="flex-item darker-theme" fxFlex="25%">
+	  	<h4 class="board-title">Ongoing</h4>
+	  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
+			<md-card-header>
+				<md-card-title>{{job.ongoing.events.title}}	</md-card-title>
+			</md-card-header>
+		</md-card>
+	  </div>
+	  <div class="flex-item dark-theme" fxFlex="25%">
+	  	<h4 class="board-title">Gotcha!</h4>
+	  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
+			<md-card-header>
+				<md-card-title>{{job.gotcha.outcome}}	</md-card-title>
+			</md-card-header>
+			</md-card>
+	  </div>
+	</div>
+</div>

@@ -5,10 +5,12 @@ import {NavigationComponent} from "./navigation/navigation.component";
 import {NavLinkComponent} from "./navigation/nav-link.component";
 import {RouterModule} from "@angular/router";
 
+import {FlexLayoutModule} from "@angular/flex-layout";
+
 @NgModule({
-  imports: [CommonModule, MaterialModule, RouterModule],
+  imports: [CommonModule, MaterialModule, RouterModule,FlexLayoutModule.forRoot()],
   declarations: [NavigationComponent, NavLinkComponent],
-  exports: [CommonModule, MaterialModule, NavigationComponent]
+  exports: [CommonModule, MaterialModule, NavigationComponent,FlexLayoutModule]
 })
 export class SharedModule {
 }

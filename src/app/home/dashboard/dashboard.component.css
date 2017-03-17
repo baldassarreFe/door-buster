@@ -1,0 +1,36 @@
+.mainboard{
+	width: 100%;
+	max-width: 1250px;
+	padding: 20px;
+	margin : 0 auto;
+}
+.mainboard .flex-item{
+	border: 1px solid #eee;
+	padding: 0;
+}
+.board-title{
+	margin: 0;
+	padding: 20px;
+	color: #fff;
+}
+.board-item{
+	margin: 20px;
+	box-shadow: none;
+	border: 1px solid #eee;
+	border-radius: 5px;
+}
+.lighter-theme .board-title{
+	background-color: #4150b7;
+}
+.lighter-theme .board-item{
+	background-color: #fff;
+}
+.light-theme .board-title{
+	background-color: #52ae4b;
+}
+.darker-theme .board-title{
+	background-color: #239af6;
+}
+.dark-theme .board-title{
+	background-color: #e52163;
+}
