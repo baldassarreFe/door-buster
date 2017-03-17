@@ -1,7 +1,7 @@
-import {NgModule} from "@angular/core";
-import {Routes, RouterModule} from "@angular/router";
-import {AuthGuard} from "./core/auth-guard.service";
-import {NotFoundComponent} from "./not-found/not-found.component";
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {AuthGuard} from './core/auth-guard.service';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 /*
  loadChildren: 'app/home/home.module#HomeModule'
@@ -20,6 +20,8 @@ import {NotFoundComponent} from "./not-found/not-found.component";
  */
 const appRoutes: Routes = [
   {path: 'home', loadChildren: 'app/home/home.module#HomeModule', canActivate: [AuthGuard]},
+  // TODO reactivate the guard once done testing the editor
+  {path: 'editor', loadChildren: 'app/editor/editor.module#EditorModule', /*canActivate: [AuthGuard]*/},
   {path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: '**', loadChildren: 'app/not-found/not-found.module#NotFoundModule'}

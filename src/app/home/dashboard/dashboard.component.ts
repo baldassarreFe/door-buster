@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {ApplicationsService} from "../../core/applications.service";
+import {Component, OnInit} from '@angular/core';
+import {ApplicationsService} from '../../core/applications.service';
 
 @Component({
   selector: 'dashboard',
@@ -9,8 +9,6 @@ import {ApplicationsService} from "../../core/applications.service";
 export class DashboardComponent implements OnInit {
 
   constructor(public applicationsService: ApplicationsService) {
-  	
-  	console.log(applicationsService);
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'navigation',
@@ -7,8 +7,8 @@ import {Component, Input} from "@angular/core";
 })
 export class NavigationComponent {
 
-  @Input() title: string = 'Navigation';
-  @Input() links: any[] = [];
+  @Input() title = 'Navigation';
+  @Input() buttons: any[] = [];
 
   constructor() {
 

@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {AngularFire, AuthProviders} from "angularfire2";
+import {Injectable} from '@angular/core';
+import {AngularFire, AuthProviders} from 'angularfire2';
 
 @Injectable()
 export class LoginService {

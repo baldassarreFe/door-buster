@@ -1,0 +1,26 @@
+<div class="container">
+  <form class="form-horizontal">
+    <label for="company"><h4>Company</h4></label>
+    <div class="form-group" id="company">
+      <label for="company-name">Name</label>
+      <input placeholder="Company name" id="company-name"
+             class="form-control" type="text" required
+             [(ngModel)]="a.company.name" name="companyName" >
+      <label for="company-location">Location</label>
+      <input placeholder="Company location" id="company-location"
+             class="form-control" type="text"
+             [(ngModel)]="a.company.location" name="companyLocation" >
+    </div>
+
+    <label for="position"><h4>Position</h4></label>
+    <div class="form-group" id="position">
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text" class="form-control" id="alterEgo">
+      <label for="power">Hero Power</label>
+      <select class="form-control" id="power" required>
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>

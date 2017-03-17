@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {LoginService} from "../core/login.service";
+import {Component, OnInit} from '@angular/core';
+import {LoginService} from '../core/login.service';
 
 @Component({
   templateUrl: './welcome.component.html',

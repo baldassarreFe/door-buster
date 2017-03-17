@@ -4,6 +4,7 @@ import {LoginService} from './login.service';
 import {AuthGuard} from './auth-guard.service';
 import {ApplicationsService} from './applications.service';
 import {ApplicationsMockService} from './applications-mock.service';
+import {NewApplicationService} from './new-application.service';
 import {ApplicationsFirebaseService} from './applications-firebase.service';
 
 const firebaseConfig = {
@@ -30,6 +31,7 @@ export class CoreModule {
       providers: [
         LoginService,
         {provide: ApplicationsService, useClass: ApplicationsFirebaseService},
+        NewApplicationService,
         AuthGuard
       ]
     };
