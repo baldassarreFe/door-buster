@@ -1,5 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {NewApplicationService} from '../../core/new-application.service';
+import {ApplicationsService} from '../../core/applications.service';
+import {Deadline} from '../../core/model/deadline';
 
 @Component({
   selector: 'application-form',
@@ -10,11 +12,13 @@ export class EditorComponent implements OnInit {
 
   @Input() a = this.newApplicationService.newApplication();
 
-  private powers = ['a', 'b', 'c'];
-
-  constructor(private newApplicationService: NewApplicationService) { }
+  constructor(private newApplicationService: NewApplicationService, public applicationsService: ApplicationsService) { }
 
   ngOnInit() {
+  }
+
+  private addDreamingDeadline() {
+    this.a.dreamingOf.deadlines.push(new Deadline());
   }
 
   // TODO: Remove this when we're done

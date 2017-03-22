@@ -3,24 +3,89 @@
     <label for="company"><h4>Company</h4></label>
     <div class="form-group" id="company">
       <label for="company-name">Name</label>
-      <input placeholder="Company name" id="company-name"
-             class="form-control" type="text" required
+      <input placeholder="Your New Company Ltd" id="company-name" required
+             class="form-control" type="text"
              [(ngModel)]="a.company.name" name="companyName" >
       <label for="company-location">Location</label>
-      <input placeholder="Company location" id="company-location"
+      <input placeholder="Bahamas" id="company-location"
              class="form-control" type="text"
              [(ngModel)]="a.company.location" name="companyLocation" >
+      <label for="company-business-area">Business area</label>
+      <input placeholder="Recreation" id="company-business-area"
+             class="form-control" type="text"
+             [(ngModel)]="a.company.businessArea" name="companyBusinessArea" >
+      <label for="company-number-of-employees">Number of employees</label>
+      <input placeholder="10" id="company-number-of-employees"
+             class="form-control" type="number"
+             [(ngModel)]="a.company.employees" name="companyEmployees" >
     </div>
 
     <label for="position"><h4>Position</h4></label>
     <div class="form-group" id="position">
-      <label for="alterEgo">Alter Ego</label>
-      <input type="text" class="form-control" id="alterEgo">
-      <label for="power">Hero Power</label>
-      <select class="form-control" id="power" required>
-        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-      </select>
+      <label for="position-title">Title</label>
+      <input placeholder="Chief of Everything" id="position-title"
+             class="form-control" type="text"
+             [(ngModel)]="a.position.title" name="positionTitle" >
+      <label for="position-notes">Notes</label>
+      <textarea placeholder="A little bird told me about this position" id="position-notes"
+             class="form-control" type="text" rows="3"
+             [(ngModel)]="a.position.notes" name="positionTitle"></textarea>
+      <label for="position-salary">Expected Salary</label>
+      <div class="form-inline" id="position-salary">
+        <input placeholder="100"
+               class="form-control" type="number"
+               [(ngModel)]="a.position.expectedSalary.value" name="positionSalaryValue" >
+        <select class="form-control" [(ngModel)]="a.position.expectedSalary.currency" name="positionSalaryCurrency">
+          <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
+        </select>
+        <select class="form-control" [(ngModel)]="a.position.expectedSalary.billings" name="positionSalaryBilling">
+          <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
+        </select>
+      </div>
+      <!-- TODO upload attachments -->
     </div>
+
+    <label for="dreaming"><h4>Dreaming of</h4></label>
+    <div class="form-group" id="dreaming">
+      <label for="dreaming-contact">Contact person</label>
+      <div id="dreaming-contact">
+        <input placeholder="The Boss"
+               class="form-control" type="text"
+               [(ngModel)]="a.dreamingOf.contactPerson.name" name="dreamingContactName" >
+        <input placeholder="theboss@mail.com"
+               class="form-control" type="email"
+               [(ngModel)]="a.dreamingOf.contactPerson.email" name="dreamingContactEmail" >
+        <input placeholder="123-456789"
+               class="form-control" type="tel"
+               [(ngModel)]="a.dreamingOf.contactPerson.phone" name="dreamingContactPhone" >
+        <input placeholder="Head of HR Office"
+               class="form-control" type="text"
+               [(ngModel)]="a.dreamingOf.contactPerson.role" name="dreamingContactRole" >
+      </div>
+      <label for="dreaming-deadlines">Reminders</label>
+      <div id="dreaming-deadlines">
+        <div *ngFor="let d of a.dreamingOf.deadlines" class="form-inline">
+          <input placeholder="Applications open"
+                 class="form-control" type="text"
+                 [(ngModel)]="d.what" name="deadlineWhat" >
+          <input class="form-control" type="datetime"
+                 [(ngModel)]="d.when" name="deadlineWhen" >
+          <div class="form-inline">
+            <input placeholder="1"
+                   class="form-control" type="number"
+                   [(ngModel)]="d.reminder.howMuch" name="deadlineHowMuch" >
+            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit">
+              <option *ngFor="let tu of applicationsService.timeUnits" [value]="tu.value">{{tu.display}}</option>
+            </select>
+            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter">
+              <option *ngFor="let ba of applicationsService.beforeAfter" [value]="ba.value">{{ba.display}}</option>
+            </select>
+          </div>
+        </div>
+        <button (click)="addDreamingDeadline()">Add</button>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
 </div>
