@@ -5,7 +5,13 @@
       <label for="company-name">Name</label>
       <input placeholder="Your New Company Ltd" id="company-name" required
              class="form-control" type="text"
-             [(ngModel)]="a.company.name" name="companyName" >
+             [formControl]="term"
+             name="companyName" >     
+      <ul class="list-unstyled">
+        <li *ngFor="let item of items | async">
+          {{item.name}}<br>
+        </li>
+      </ul>
       <label for="company-location">Location</label>
       <input placeholder="Bahamas" id="company-location"
              class="form-control" type="text"
