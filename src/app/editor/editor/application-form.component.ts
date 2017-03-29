@@ -28,6 +28,11 @@ export class EditorComponent implements OnInit {
   fileName: string;
   isSelected: string;
 
+  /*
+  * TODO refactor this so that we only use an indexer 1-2-3-4,
+  * progress bar is at 25*idx
+  * and the steps are on if they match that number
+  */
   // Progress bar properties
   color = 'primary';
   mode = 'determinate';
