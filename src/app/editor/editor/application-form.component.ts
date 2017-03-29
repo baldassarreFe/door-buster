@@ -5,7 +5,8 @@ import {Deadline} from "../../core/model/deadline";
 import {GlassdoorService} from "../../core/glassdoor.service";
 import {Company} from "../../core/model/company";
 import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'application-form',
@@ -44,12 +45,25 @@ export class EditorComponent implements OnInit {
   step3: boolean;
   step4: boolean;
 
-  @Input() a = this.newApplicationService.newApplication();
+  @Input() applicationId;
 
-  constructor(private newApplicationService: NewApplicationService, public applicationsService: ApplicationsService, public glassdoorService: GlassdoorService) {
+  public a: any;
+
+  constructor(public newApplicationService: NewApplicationService,
+              public applicationsService: ApplicationsService,
+              public glassdoorService: GlassdoorService,
+              private router: Router) {
+    this.a = this.newApplicationService.newApplication();
   }
 
   ngOnInit() {
+    if (this.applicationId) {
+      this.applicationsService.get(this.applicationId)
+        .take(1)
+        .subscribe(a => this.a = a);
+    } else {
+      this.a = this.newApplicationService.newApplication();
+    }
     this.autocompletions = this.term.valueChanges
       .distinctUntilChanged()
       .debounceTime(500) // wait after typing
@@ -75,7 +89,7 @@ export class EditorComponent implements OnInit {
   set dropdownVisible(value: boolean) {
     // HACK to prevent the dropdown to disappear
     // before a click on it is performed
-    setTimeout(() => this._dropdownVisible = value, 10);
+    setTimeout(() => this._dropdownVisible = value, 20);
   }
 
   private showCompanyInfo(companyInfo) {
@@ -88,6 +102,11 @@ export class EditorComponent implements OnInit {
 
   private addDreamingDeadline() {
     this.a.dreamingOf.deadlines.push(new Deadline());
+  }
+
+  private saveApplication() {
+    this.applicationsService.update(this.applicationId, this.a)
+      .then(() => this.router.navigate(['/home']));
   }
 
   // Move from one step to another

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApplicationsService} from '../../core/applications.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'dashboard',
@@ -8,13 +9,17 @@ import {ApplicationsService} from '../../core/applications.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public applicationsService: ApplicationsService) {
+  constructor(public applicationsService: ApplicationsService,
+              private router: Router) {
   }
 
-  ngOnInit(){	
+  ngOnInit() {
   }
 
-
+  public edit(key: string) {
+    console.log(key);
+    this.router.navigate(['/editor'], { queryParams: { applicationId: key } });
+  }
 }
 
 

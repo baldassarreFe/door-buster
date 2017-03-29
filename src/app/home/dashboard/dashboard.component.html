@@ -9,16 +9,16 @@
 	  	<div class="board-content">
 	  		<div *ngFor="let job of applicationsService.applications$| async">
 	  		<ng-container *ngIf="job.status==='dreamingOf'">
-	  			<md-card class="board-item">	  			
+	  			<md-card class="board-item">
 	  			<md-card-header>
 	  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
 	  				<md-card-title>{{job.company.name}}	</md-card-title>
 	  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-	  				<md-icon class="edit-icon" color="primary">edit</md-icon>
+	  				<md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
 	  			</md-card-header>
 	  			<md-card-content>
 	  				{{job.dreamingOf.deadlines[0].when}} - {{job.dreamingOf.deadlines[1].when}}
-	  			</md-card-content>	  					
+	  			</md-card-content>
 	  			</md-card>
 	  		</ng-container>
 	  		</div>
@@ -29,15 +29,15 @@
 	  	<div class="board-content">
 	  		<div *ngFor="let job of applicationsService.applications$| async">
 		  	<ng-container *ngIf="job.status==='Applied'">
-		  		<md-card class="board-item" >	  			
+		  		<md-card class="board-item" >
 	 	  			<md-card-header>
 		  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
 		  				<md-card-title>{{job.company.name}}	</md-card-title>
 		  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-		  				<md-icon class="edit-icon" color="primary">edit</md-icon>
-		  			</md-card-header> 							
+              <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
+		  			</md-card-header>
 		  		</md-card>
-		  	</ng-container>	  			
+		  	</ng-container>
 		  	</div>
 	  	</div>
 	  </div>
@@ -45,16 +45,16 @@
 	  	<h4 class="board-title">Ongoing</h4>
 	  	<div class="board-content">
 	  		<div *ngFor="let job of applicationsService.applications$| async">
-		  	<ng-container *ngIf="job.status==='Ongoing'">		  	
+		  	<ng-container *ngIf="job.status==='Ongoing'">
 	  		  	<md-card class="board-item">
 		  			<md-card-header>
 		  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
 		  				<md-card-title>{{job.company.name}}	</md-card-title>
 		  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-		  				<md-icon class="edit-icon" color="primary">edit</md-icon>
-		  			</md-card-header>
+              <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
+            </md-card-header>
 	  			</md-card>
-		  	</ng-container>	  			
+		  	</ng-container>
 		  	</div>
 	  	</div>
 
@@ -69,8 +69,8 @@
 		  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
 		  				<md-card-title>{{job.company.name}}	</md-card-title>
 		  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-		  				<md-icon class="edit-icon" color="primary">edit</md-icon>
-		  			</md-card-header>
+              <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
+            </md-card-header>
 					<md-card-content>
 		  				<p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billing}}</p>
 		  			</md-card-content>
@@ -82,4 +82,4 @@
 	</div>
 </div>
 
- 
+

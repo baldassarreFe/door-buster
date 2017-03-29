@@ -1,7 +1,11 @@
 import {Observable} from 'rxjs/Observable';
 
-export class ApplicationsService {
+export abstract class ApplicationsService {
   public applications$: Observable<any[]>;
+
+  public abstract get(id: string): any;
+
+  public abstract update(id: string, application: any): any;
 
   public currencies = [
     { value: 'eur', display: '€' },
