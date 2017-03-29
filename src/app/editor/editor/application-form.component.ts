@@ -14,7 +14,7 @@ import {Observable} from 'rxjs/Rx';
   providers:[GlassdoorService]
 })
 export class EditorComponent implements OnInit {
- 
+
   // errorMessage: string = '';
   // isLoading: boolean = true;
   items: Observable<Company[]>;
@@ -29,9 +29,13 @@ export class EditorComponent implements OnInit {
   // Progress bar properties
   color = 'primary';
   mode = 'determinate';
-  progressValue = 0;
+  progressValue = 25;
   bufferValue = 25;
-  isActiveStep="inactive";
+  stepActive="step1";
+  step1:boolean=true;
+  step2:boolean;
+  step3:boolean;
+  step4:boolean;
 
   @Input() a = this.newApplicationService.newApplication();
 
@@ -41,6 +45,7 @@ export class EditorComponent implements OnInit {
     this.items = this.term.valueChanges
                  .debounceTime(100) //1s after typing
                  .distinctUntilChanged()
+                 .filter(s => s !== '')
                  .switchMap(term => this.glassdoorService.search(term));
   }
 
@@ -68,6 +73,36 @@ export class EditorComponent implements OnInit {
 
   private addDreamingDeadline() {
     this.a.dreamingOf.deadlines.push(new Deadline());
+  }
+
+  // Move from one step to another
+  moveTo(stepTarget){
+    this.stepActive=stepTarget;
+    if(stepTarget==='step1'){
+      this.progressValue=25;
+      this.step2=false;
+      this.step3=false;
+      this.step4=false;
+      this.step1=true;
+    }else if(stepTarget==='step2'){
+      this.progressValue = 50;
+      this.step1=false;
+      this.step3=false;
+      this.step4=false;
+      this.step2=true;
+    } else if(stepTarget==='step3'){
+      this.progressValue=75;
+      this.step1=false;
+      this.step2=false;
+      this.step4=false;
+      this.step3=true;
+    } else {
+      this.progressValue=100;
+      this.step1=false;
+      this.step2=false;
+      this.step3=false;
+      this.step4=true;
+    }
   }
 
   // TODO: Remove this when we're done

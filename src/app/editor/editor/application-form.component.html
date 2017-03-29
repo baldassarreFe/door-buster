@@ -9,14 +9,16 @@
           [value]="progressValue"
           [bufferValue]="bufferValue">
       </md-progress-bar>
-      <ul class="step-points" [ngClass]="progressValue">
-        <li><span>1</span></li>
-        <li><span>2</span></li>
-        <li><span>3</span></li>
-        <li><span>4</span></li>
+      <ul class="step-points" [ngClass]="stepActive">
+        <li (click)="moveTo('step1')"><span>1</span></li>
+        <li (click)="moveTo('step2')"><span>2</span></li>
+        <li (click)="moveTo('step3')"><span>3</span></li>
+        <li (click)="moveTo('step4')"><span>4</span></li>
       </ul>
     </div>
-    <div class="form-group" id="company" class="step1">
+    <!-- Form step 1 -->
+
+    <div class="form-group" id="company" class="step1" *ngIf="step1">
       <label class="fullwidth" for="company"><h4>Company</h4></label>
       <label for="company-name">Name</label>
       <input placeholder="Your New Company Ltd" id="company-name" required
@@ -61,21 +63,14 @@
           </select>
 
         </div>
-        <label for="upload-files">Upload CV / Cover Letter</label>
-        <ul class="files-wrapper list-unstyled">
-          <li>
-            <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
-            <label for="file" [ngClass]="isSelected"></label>
-            <p class="fileinfo">{{fileName}}</p>
-          </li>
-        </ul>
         
         <!-- TODO upload attachments -->
       </div>
     </div>
     
-    <div class="form-group" id="dreaming" class="step2 hidden">
-      <label for="dreaming" class="fullwidth"><h4>Dreaming of</h4></label>
+    <!-- Form step 2 -->
+    <div class="form-group" id="dreaming" class="step2" *ngIf="step2">
+      <label for="dreaming" class="fullwidth"><h4>Applied</h4></label>
       <label for="dreaming-contact">Contact person</label>
       <div id="dreaming-contact">
         <input placeholder="The Boss"
@@ -111,8 +106,44 @@
             </select>
           </div>
         </div>
-        <button (click)="addDreamingDeadline()">Add</button>
+        <button md-button (click)="addDreamingDeadline()">Add</button>
       </div>
+
+        <label for="upload-files">Upload CV / Cover Letter</label>
+        <ul class="files-wrapper list-unstyled">
+          <li>
+            <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
+            <label for="file" [ngClass]="isSelected"></label>
+            <p class="fileinfo">{{fileName}}</p>
+          </li>
+        </ul>
+    </div>
+
+    <!-- Form step 3 -->
+    <div class="form-group" id="ongoing" class="step3" *ngIf="step3">
+      <button class="btn-add-more" md-button>
+        <md-icon>add</md-icon><span>Add event</span>
+      </button>
+    </div>
+
+     <!-- Form step 4 -->
+    <div class="form-group" id="ongoing" class="step4" *ngIf="step4">
+    <div class="result-wrapper">
+      <ul class="list-unstyled">
+        <li class="thinking" mdTooltip="Thinking Offer">
+          <md-icon>sms</md-icon>
+        </li>
+        <li class="accept" mdTooltip="Accepted!">
+          <md-icon>mood</md-icon>
+        </li>
+        <li class="reject" mdTooltip="Rejected">
+          <md-icon>mood_bad</md-icon>
+        </li>
+      </ul>
+    </div>
+      <input placeholder="Contract Type" id="contract"
+             class="form-control" type="text"
+             name="contractType" >
     </div>
 
     <button type="submit" class="submit-btn btn btn-success">Submit</button>

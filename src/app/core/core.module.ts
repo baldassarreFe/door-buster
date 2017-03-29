@@ -6,6 +6,7 @@ import {ApplicationsService} from './applications.service';
 import {ApplicationsMockService} from './applications-mock.service';
 import {NewApplicationService} from './new-application.service';
 import {ApplicationsFirebaseService} from './applications-firebase.service';
+import {JsonpModule} from '@angular/http';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDogVK8K6fxGwQNAKv5_vL7xmv7kkpuJn8',
@@ -17,6 +18,7 @@ const firebaseConfig = {
 
 @NgModule({
   imports: [
+    JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig, {
       provider: AuthProviders.Google,
       method: AuthMethods.Popup
