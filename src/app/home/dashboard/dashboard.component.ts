@@ -11,8 +11,9 @@ export class DashboardComponent implements OnInit {
   constructor(public applicationsService: ApplicationsService) {
   }
 
-  ngOnInit() {
+  ngOnInit(){	
   }
+
 
 }
 
