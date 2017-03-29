@@ -9,7 +9,7 @@
 	  	<div class="board-content">
 	  		<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
 	  			<md-card-header>
-	  				<img class="avatar" md-card-avatar src="http://placehold.it/150x150">
+	  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
 	  				<md-card-title>{{job.company.name}}	</md-card-title>
 	  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
 	  				<md-icon class="edit-icon" color="primary">edit</md-icon>
@@ -24,10 +24,12 @@
 	  	<h4 class="board-title">Applied</h4>
 	  	<div class="board-content">
 		  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
-		  		<md-card-header>
-		  			<img class="avatar" md-card-avatar src="http://placehold.it/150x150">
-		  			<md-card-title>{{job.applied.applicationDate}}	</md-card-title>
-		  		</md-card-header>
+	  			<md-card-header>
+	  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
+	  				<md-card-title>{{job.company.name}}	</md-card-title>
+	  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
+	  				<md-icon class="edit-icon" color="primary">edit</md-icon>
+	  			</md-card-header>
 		  	</md-card>
 	  	</div>
 	  </div>
@@ -35,9 +37,12 @@
 	  	<h4 class="board-title">Ongoing</h4>
 	  	<div class="board-content">
   		  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
-  				<md-card-header>
-  					<md-card-title *ngFor="let event of job.ongoing.events">{{event.date}} {{event.title}} with {{event.with.name}}</md-card-title>
-  				</md-card-header>
+	  			<md-card-header>
+	  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
+	  				<md-card-title>{{job.company.name}}	</md-card-title>
+	  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
+	  				<md-icon class="edit-icon" color="primary">edit</md-icon>
+	  			</md-card-header>
   			</md-card>
 	  	</div>
 
@@ -46,12 +51,14 @@
 	  	<h4 class="board-title">Gotcha!</h4>
 	  	<div class="board-content">
 		  	<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
-				<md-card-header [ngClass]="job.gotcha.outcome">
-					<md-card-title>{{job.gotcha.outcome}}	</md-card-title>
-				</md-card-header>
+	  			<md-card-header>
+	  				<img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
+	  				<md-card-title>{{job.company.name}}	</md-card-title>
+	  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
+	  				<md-icon class="edit-icon" color="primary">edit</md-icon>
+	  			</md-card-header>
 				<md-card-content>
-	  				<p>Contract: {{job.gotcha.contractType}}</p>
-	  				<p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billings}}</p>
+	  				<p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billing}}</p>
 	  			</md-card-content>
 			</md-card>
 	  	</div>
