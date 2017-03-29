@@ -14,7 +14,7 @@ import {Observable} from 'rxjs/Rx';
   providers:[GlassdoorService]
 })
 export class EditorComponent implements OnInit {
- 
+
   // errorMessage: string = '';
   // isLoading: boolean = true;
   items: Observable<Company[]>;
@@ -28,6 +28,7 @@ export class EditorComponent implements OnInit {
     this.items = this.term.valueChanges
                  .debounceTime(100) //1s after typing
                  .distinctUntilChanged()
+                 .filter(s => s !== '')
                  .switchMap(term => this.glassdoorService.search(term));
   }
 
