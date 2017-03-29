@@ -1,58 +1,81 @@
 <div class="container">
   <form class="form-horizontal">
-    <label for="company"><h4>Company</h4></label>
-    <div class="form-group" id="company">
+    <div class="steps">
+      <p>Break the door and reach your dream!</p>
+      <md-progress-bar
+          class="progress-form"
+          [color]="color"
+          [mode]="mode"
+          [value]="progressValue"
+          [bufferValue]="bufferValue">
+      </md-progress-bar>
+      <ul class="step-points" [ngClass]="progressValue">
+        <li><span>1</span></li>
+        <li><span>2</span></li>
+        <li><span>3</span></li>
+        <li><span>4</span></li>
+      </ul>
+    </div>
+    <div class="form-group" id="company" class="step1">
+      <label class="fullwidth" for="company"><h4>Company</h4></label>
       <label for="company-name">Name</label>
       <input placeholder="Your New Company Ltd" id="company-name" required
              class="form-control" type="text"
              [formControl]="term"
-             name="companyName" >     
-      <ul class="list-unstyled">
-        <li *ngFor="let item of items | async">
-          {{item.name}}<br>
+             (blur)="displayDropdown(false)" (focus)="displayDropdown(true)" 
+             [(ngModel)]="a.company.name" name="companyName">     
+      <ul class="list-unstyled dropdown" [ngClass]="isVisible">
+        <li *ngFor="let item of items | async" (click)="showCompanyInfo(item)">
+          {{item.name}}<br><span class="hidden">{{item.id}}</span>
         </li>
       </ul>
-      <label for="company-location">Location</label>
-      <input placeholder="Bahamas" id="company-location"
+      <label for="company-website">Website</label>
+      <input placeholder="Website URL" id="company-website"
              class="form-control" type="text"
-             [(ngModel)]="a.company.location" name="companyLocation" >
+             [(ngModel)]="a.company.website" name="companyLocation" >
       <label for="company-business-area">Business area</label>
       <input placeholder="Recreation" id="company-business-area"
              class="form-control" type="text"
              [(ngModel)]="a.company.businessArea" name="companyBusinessArea" >
-      <label for="company-number-of-employees">Number of employees</label>
-      <input placeholder="10" id="company-number-of-employees"
-             class="form-control" type="number"
-             [(ngModel)]="a.company.employees" name="companyEmployees" >
-    </div>
 
-    <label for="position"><h4>Position</h4></label>
-    <div class="form-group" id="position">
-      <label for="position-title">Title</label>
-      <input placeholder="Chief of Everything" id="position-title"
-             class="form-control" type="text"
-             [(ngModel)]="a.position.title" name="positionTitle" >
-      <label for="position-notes">Notes</label>
-      <textarea placeholder="A little bird told me about this position" id="position-notes"
-             class="form-control" type="text" rows="3"
-             [(ngModel)]="a.position.notes" name="positionTitle"></textarea>
-      <label for="position-salary">Expected Salary</label>
-      <div class="form-inline" id="position-salary">
-        <input placeholder="100"
-               class="form-control" type="number"
-               [(ngModel)]="a.position.expectedSalary.value" name="positionSalaryValue" >
-        <select class="form-control" [(ngModel)]="a.position.expectedSalary.currency" name="positionSalaryCurrency">
-          <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
-        </select>
-        <select class="form-control" [(ngModel)]="a.position.expectedSalary.billings" name="positionSalaryBilling">
-          <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
-        </select>
+      <div id="position">
+        <label for="position" class="fullwidth"><h4>Position</h4></label>
+        <label for="position-title">Title</label>
+        <input placeholder="Chief of Everything" id="position-title"
+               class="form-control" type="text"
+               [(ngModel)]="a.position.title" name="positionTitle" >
+        <label for="position-notes">Notes</label>
+        <textarea placeholder="A little bird told me about this position" id="position-notes"
+               class="form-control" type="text" rows="3"
+               [(ngModel)]="a.position.notes" name="positionTitle"></textarea>
+        <label for="position-salary">Expected Salary</label>
+        <div class="form-inline" id="position-salary">
+          <input placeholder="100"
+                 class="form-control" type="number"
+                 [(ngModel)]="a.position.expectedSalary.value" name="positionSalaryValue" >
+          <select class="form-control" [(ngModel)]="a.position.expectedSalary.currency" name="positionSalaryCurrency">
+            <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
+          </select>
+          <select class="form-control" [(ngModel)]="a.position.expectedSalary.billings" name="positionSalaryBilling">
+            <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
+          </select>
+
+        </div>
+        <label for="upload-files">Upload CV / Cover Letter</label>
+        <ul class="files-wrapper list-unstyled">
+          <li>
+            <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
+            <label for="file" [ngClass]="isSelected"></label>
+            <p class="fileinfo">{{fileName}}</p>
+          </li>
+        </ul>
+        
+        <!-- TODO upload attachments -->
       </div>
-      <!-- TODO upload attachments -->
     </div>
-
-    <label for="dreaming"><h4>Dreaming of</h4></label>
-    <div class="form-group" id="dreaming">
+    
+    <div class="form-group" id="dreaming" class="step2 hidden">
+      <label for="dreaming" class="fullwidth"><h4>Dreaming of</h4></label>
       <label for="dreaming-contact">Contact person</label>
       <div id="dreaming-contact">
         <input placeholder="The Boss"
@@ -92,6 +115,6 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="submit" class="submit-btn btn btn-success">Submit</button>
   </form>
 </div>

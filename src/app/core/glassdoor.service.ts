@@ -33,7 +33,8 @@ function toCompany(r:any): Company{
   	id: r.id,
   	name: r.name,
     website:r.website,
-    squareLogo: r.squareLogo
+    squareLogo: r.squareLogo,
+    industry:r.industry
   });
   return company;
 }

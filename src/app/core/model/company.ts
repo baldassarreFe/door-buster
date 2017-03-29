@@ -3,4 +3,5 @@ export interface Company{
     name: string;
     website:string;
     squareLogo: string;
+    industry:string;
 }

@@ -13,7 +13,8 @@ export class NewApplicationService {
         'employees': null,
         'glassdoorId': null,
         'linkedinId': null,
-        'location': null,
+        'website': null,
+        'squareLogo':null,
         'name': null
       },
       'position': {
