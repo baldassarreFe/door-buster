@@ -10,8 +10,8 @@
 	  		<md-card class="board-item" *ngFor="let job of applicationsService.applications$| async">
 	  			<md-card-header>
 	  				<img class="avatar" md-card-avatar src="http://placehold.it/150x150">
-	  				<md-card-title>{{job.dreamingOf.company.name}}	</md-card-title>
-	  				<md-card-subtitle>{{job.dreamingOf.position.title}}</md-card-subtitle>
+	  				<md-card-title>{{job.company.name}}	</md-card-title>
+	  				<md-card-subtitle>{{job.position.title}}</md-card-subtitle>
 	  				<md-icon class="edit-icon" color="primary">edit</md-icon>
 	  			</md-card-header>
 	  			<md-card-content>
@@ -58,3 +58,5 @@
 	  </div>
 	</div>
 </div>
+
+ 
