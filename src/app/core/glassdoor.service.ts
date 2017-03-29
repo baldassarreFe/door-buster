@@ -7,12 +7,13 @@ import {Observable} from "rxjs/Rx";
 export class GlassdoorService {
 
   private baseUrl = 'http://api.glassdoor.com/api';
+  private headers: Headers;
 
   constructor(private http: Http, private jsonp: Jsonp) {
+    this.headers = new Headers({'Content-Type': 'application/json'});
   }
 
-  search(term: string): Observable<Company[]> {
-    // console.log(term);
+  public search(term: string): Observable<Company[]> {
     return this.jsonp.get(
         'http://api.glassdoor.com/api/api.htm?' +
         'v=1&' +
@@ -22,35 +23,27 @@ export class GlassdoorService {
         'action=employers&' +
         'callback=JSONP_CALLBACK&' +
         'q=' + term,
-        {headers: this.getHeaders()})
-      .map(mapResults)
-      .catch(handleError);
+        {headers: this.headers}
+      )
+      .map(this.mapResults)
+      .catch(this.handleError);
   }
 
-  private getHeaders() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return headers;
+  private mapResults: (Response) => Company[] =
+    response => response.json().response.employers.map(this.toCompany);
+
+  private toCompany: (any) => Company =
+    r => <Company> {
+      id: r.id,
+      name: r.name,
+      website: r.website,
+      squareLogo: r.squareLogo,
+      industry: r.industry
+    };
+
+  private handleError(error: any) {
+    console.log('There has been a problem:' + error);
+    return Observable.of([]);
   }
-
-}
-
-function mapResults(response: Response): Company[] {
-  return response.json().response.employers.map(toCompany)
-}
-
-function toCompany(r:any): Company{
-  return <Company>({
-  	id: r.id,
-  	name: r.name,
-    website:r.website,
-    squareLogo: r.squareLogo,
-    industry:r.industry
-  });
-}
-
-function handleError(error: any) {
-  // console.log(error.message || 'There is a problem');
-  return Observable.of([]);
 }
 

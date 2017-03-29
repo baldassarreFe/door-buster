@@ -1,7 +1,7 @@
-export interface Company{
-	id: string;
-    name: string;
-    website:string;
-    squareLogo: string;
-    industry:string;
+export interface Company {
+  id: string;
+  name: string;
+  website: string;
+  squareLogo: string;
+  industry: string;
 }

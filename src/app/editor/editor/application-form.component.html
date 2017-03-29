@@ -24,11 +24,11 @@
       <input placeholder="Your New Company Ltd" id="company-name" required
              class="form-control" type="text"
              [formControl]="term"
-             (blur)="displayDropdown(false)" (focus)="displayDropdown(true)" 
-             [(ngModel)]="a.company.name" name="companyName">     
-      <ul class="list-unstyled dropdown" [ngClass]="isVisible">
-        <li *ngFor="let item of items | async" (click)="showCompanyInfo(item)">
-          {{item.name}}<br><span class="hidden">{{item.id}}</span>
+             (blur)="dropdownVisible = false" (focus)="dropdownVisible = true"
+             [(ngModel)]="a.company.name" name="companyName">
+      <ul class="list-unstyled dropdown" [ngClass]="{'isVisible': dropdownVisible}">
+        <li *ngFor="let item of autocompletions | async">
+          <a (click)="showCompanyInfo(item)">{{item.name}}</a>
         </li>
       </ul>
       <label for="company-website">Website</label>
@@ -63,11 +63,11 @@
           </select>
 
         </div>
-        
+
         <!-- TODO upload attachments -->
       </div>
     </div>
-    
+
     <!-- Form step 2 -->
     <div class="form-group" id="dreaming" class="step2" *ngIf="step2">
       <label for="dreaming" class="fullwidth"><h4>Applied</h4></label>

@@ -14,7 +14,7 @@ export class NewApplicationService {
         'glassdoorId': null,
         'linkedinId': null,
         'website': null,
-        'squareLogo':null,
+        'squareLogo': null,
         'name': null
       },
       'position': {
