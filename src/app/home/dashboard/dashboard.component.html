@@ -16,7 +16,12 @@
               <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
             </md-card-header>
             <md-card-content>
-              {{job.dreamingOf.deadlines[0].when}} - {{job.dreamingOf.deadlines[1].when}}
+              <ng-container *ngIf="job.dreamingOf.deadlines">
+                <ul>
+                  <li *ngFor="let d of job.dreamingOf.deadlines">{{d.what}} - {{d.when}}</li>
+                </ul>
+              </ng-container>
+
             </md-card-content>
           </md-card>
         </ng-container>

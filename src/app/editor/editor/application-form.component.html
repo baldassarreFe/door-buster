@@ -7,11 +7,11 @@
     <div class="steps">
       <p>Break the door and reach your dream!</p>
       <md-progress-bar
-          class="progress-form"
-          [color]="color"
-          [mode]="mode"
-          [value]="progressValue"
-          [bufferValue]="bufferValue">
+        class="progress-form"
+        [color]="color"
+        [mode]="mode"
+        [value]="progressValue"
+        [bufferValue]="bufferValue">
       </md-progress-bar>
       <ul class="step-points" [ngClass]="stepActive">
         <li (click)="moveTo('step1')"><span>1</span></li>
@@ -51,27 +51,27 @@
       <label for="company-website">Website</label>
       <input placeholder="Website URL" id="company-website"
              class="form-control" type="text"
-             [(ngModel)]="a.company.website" name="companyLocation" >
+             [(ngModel)]="a.company.website" name="companyLocation">
       <label for="company-business-area">Business area</label>
       <input placeholder="Recreation" id="company-business-area"
              class="form-control" type="text"
-             [(ngModel)]="a.company.businessArea" name="companyBusinessArea" >
+             [(ngModel)]="a.company.businessArea" name="companyBusinessArea">
 
       <div id="position">
         <label for="position" class="fullwidth"><h4>Position</h4></label>
         <label for="position-title">Title</label>
         <input placeholder="Chief of Everything" id="position-title"
                class="form-control" type="text"
-               [(ngModel)]="a.position.title" name="positionTitle" >
+               [(ngModel)]="a.position.title" name="positionTitle">
         <label for="position-notes">Notes</label>
         <textarea placeholder="A little bird told me about this position" id="position-notes"
-               class="form-control" type="text" rows="3"
-               [(ngModel)]="a.position.notes" name="positionTitle"></textarea>
+                  class="form-control" type="text" rows="3"
+                  [(ngModel)]="a.position.notes" name="positionTitle"></textarea>
         <label for="position-salary">Expected Salary</label>
         <div class="form-inline" id="position-salary">
           <input placeholder="100"
                  class="form-control" type="number"
-                 [(ngModel)]="a.position.expectedSalary.value" name="positionSalaryValue" >
+                 [(ngModel)]="a.position.expectedSalary.value" name="positionSalaryValue">
           <select class="form-control" [(ngModel)]="a.position.expectedSalary.currency" name="positionSalaryCurrency">
             <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
           </select>
@@ -92,77 +92,83 @@
       <div id="dreaming-contact">
         <input placeholder="The Boss"
                class="form-control" type="text"
-               [(ngModel)]="a.dreamingOf.contactPerson.name" name="dreamingContactName" >
+               [(ngModel)]="a.dreamingOf.contactPerson.name" name="dreamingContactName">
         <input placeholder="theboss@mail.com"
                class="form-control" type="email"
-               [(ngModel)]="a.dreamingOf.contactPerson.email" name="dreamingContactEmail" >
+               [(ngModel)]="a.dreamingOf.contactPerson.email" name="dreamingContactEmail">
         <input placeholder="123-456789"
                class="form-control" type="tel"
-               [(ngModel)]="a.dreamingOf.contactPerson.phone" name="dreamingContactPhone" >
+               [(ngModel)]="a.dreamingOf.contactPerson.phone" name="dreamingContactPhone">
         <input placeholder="Head of HR Office"
                class="form-control" type="text"
-               [(ngModel)]="a.dreamingOf.contactPerson.role" name="dreamingContactRole" >
+               [(ngModel)]="a.dreamingOf.contactPerson.role" name="dreamingContactRole">
       </div>
       <label for="dreaming-deadlines">Reminders</label>
       <div id="dreaming-deadlines">
         <div *ngFor="let d of a.dreamingOf.deadlines" class="form-inline">
           <input placeholder="Applications open"
                  class="form-control" type="text"
-                 [(ngModel)]="d.what" name="deadlineWhat" >
+                 [(ngModel)]="d.what" name="deadlineWhat">
           <input class="form-control" type="datetime"
-                 [(ngModel)]="d.when" name="deadlineWhen" >
-          <div class="form-inline">
+                 [(ngModel)]="d.when" name="deadlineWhen">
+          <ng-container *ngIf="d.reminder">
             <input placeholder="1"
                    class="form-control" type="number"
-                   [(ngModel)]="d.reminder.howMuch" name="deadlineHowMuch" >
+                   [(ngModel)]="d.reminder.howMuch" name="deadlineHowMuch">
             <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit">
               <option *ngFor="let tu of applicationsService.timeUnits" [value]="tu.value">{{tu.display}}</option>
             </select>
             <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter">
               <option *ngFor="let ba of applicationsService.beforeAfter" [value]="ba.value">{{ba.display}}</option>
             </select>
-          </div>
+          </ng-container>
+          <ng-container *ngIf="!d.reminder">
+            <button md-button (click)="d['reminder']={howMuch:0, unit: 'hours', beforeAfter: 'before'}">
+              ADD
+            </button>
+          </ng-container>
         </div>
         <button md-button (click)="addDreamingDeadline()">Add</button>
       </div>
 
-        <label for="upload-files">Upload CV / Cover Letter</label>
-        <ul class="files-wrapper list-unstyled">
-          <li>
-            <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
-            <label for="file" [ngClass]="isSelected"></label>
-            <p class="fileinfo">{{fileName}}</p>
-          </li>
-        </ul>
+      <label for="upload-files">Upload CV / Cover Letter</label>
+      <ul class="files-wrapper list-unstyled">
+        <li>
+          <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
+          <label for="file" [ngClass]="isSelected"></label>
+          <p class="fileinfo">{{fileName}}</p>
+        </li>
+      </ul>
     </div>
 
     <!-- Form step 3 -->
     <div class="form-group" id="ongoing" class="step3" *ngIf="step3">
       <button class="btn-add-more" md-button>
-        <md-icon>add</md-icon><span>Add event</span>
+        <md-icon>add</md-icon>
+        <span>Add event</span>
       </button>
     </div>
 
-     <!-- Form step 4 -->
+    <!-- Form step 4 -->
     <div class="form-group" id="ongoing" class="step4" *ngIf="step4">
-    <div class="result-wrapper">
-      <ul class="list-unstyled">
-        <li class="thinking" mdTooltip="Thinking Offer">
-          <md-icon>sms</md-icon>
-        </li>
-        <li class="accept" mdTooltip="Accepted!">
-          <md-icon>mood</md-icon>
-        </li>
-        <li class="reject" mdTooltip="Rejected">
-          <md-icon>mood_bad</md-icon>
-        </li>
-      </ul>
-    </div>
+      <div class="result-wrapper">
+        <ul class="list-unstyled">
+          <li class="thinking" mdTooltip="Thinking Offer">
+            <md-icon>sms</md-icon>
+          </li>
+          <li class="accept" mdTooltip="Accepted!">
+            <md-icon>mood</md-icon>
+          </li>
+          <li class="reject" mdTooltip="Rejected">
+            <md-icon>mood_bad</md-icon>
+          </li>
+        </ul>
+      </div>
       <input placeholder="Contract Type" id="contract"
              class="form-control" type="text"
-             name="contractType" >
+             name="contractType">
     </div>
 
-    <button type="button" (click)="saveApplication()"  class="submit-btn btn btn-success">Submit</button>
+    <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
   </form>
 </div>
