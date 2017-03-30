@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, OnInit, Input, NgZone, ChangeDetectorRef} from "@angular/core";
 import {NewApplicationService} from "../../core/new-application.service";
 import {ApplicationsService} from "../../core/applications.service";
 import {Deadline} from "../../core/model/deadline";
@@ -30,10 +30,10 @@ export class EditorComponent implements OnInit {
   isSelected: string;
 
   /*
-  * TODO refactor this so that we only use an indexer 1-2-3-4,
-  * progress bar is at 25*idx
-  * and the steps are on if they match that number
-  */
+   * TODO refactor this so that we only use an indexer 1-2-3-4,
+   * progress bar is at 25*idx
+   * and the steps are on if they match that number
+   */
   // Progress bar properties
   color = 'primary';
   mode = 'determinate';
@@ -52,23 +52,27 @@ export class EditorComponent implements OnInit {
   constructor(public newApplicationService: NewApplicationService,
               public applicationsService: ApplicationsService,
               public glassdoorService: GlassdoorService,
-              private router: Router) {
-    this.a = this.newApplicationService.newApplication();
+              private router: Router,
+              private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
     if (this.applicationId) {
-      this.applicationsService.get(this.applicationId)
-        .take(1)
-        .subscribe(a => this.a = a);
+      this.applicationsService
+        .get(this.applicationId)
+        .subscribe(a => {
+          this.a = a;
+          // don't know why, angular does not detect this change automatically
+          this.ref.detectChanges();
+        });
     } else {
       this.a = this.newApplicationService.newApplication();
     }
     this.autocompletions = this.term.valueChanges
       .distinctUntilChanged()
       .debounceTime(500) // wait after typing
-      .filter(s => s.length > 2)
-      .do(console.log)
+      .filter(s => s && s.length > 2)
+      // .do(console.log)
       .switchMap(term => this.glassdoorService.search(term));
   }
 
@@ -94,10 +98,11 @@ export class EditorComponent implements OnInit {
 
   private showCompanyInfo(companyInfo) {
     // TODO see if we can do: this.a.company = companyInfo
+    console.log('Clicked on', companyInfo.name);
     this.a.company.name = companyInfo.name;
     this.a.company.businessArea = companyInfo.industry;
     this.a.company.website = companyInfo.website;
-    this.a.company.squareLogo = companyInfo.sqareLogo;
+    this.a.company.squareLogo = companyInfo.squareLogo;
   }
 
   private addDreamingDeadline() {
@@ -143,4 +148,10 @@ export class EditorComponent implements OnInit {
   get diagnostic() {
     return JSON.stringify(this.a);
   }
+
+  /*
+   test(event: Event) {
+   console.log(event.target['value']);
+   }
+   */
 }

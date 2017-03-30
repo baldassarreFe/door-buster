@@ -1,5 +1,9 @@
 <div class="container">
-  <form class="form-horizontal">
+  <div *ngIf="!a">
+    Loading
+    <!-- TODO insert cool spinner here -->
+  </div>
+  <form *ngIf="a" class="form-horizontal">
     <div class="steps">
       <p>Break the door and reach your dream!</p>
       <md-progress-bar
@@ -20,6 +24,19 @@
 
     <div class="form-group" id="company" class="step1" *ngIf="step1">
       <label class="fullwidth" for="company"><h4>Company</h4></label>
+      <!-- TODO make this dropdown work, I don't know how to receive the selected event
+      <label for="company-name2">Name</label>
+      <input placeholder="Your New Company Ltd" id="company-name2" required
+             class="form-control" type="text" list="autocompletions-list"
+             [formControl]="term"
+             (select)="test($event)"
+             [(ngModel)]="a.company.name" name="companyName">
+      <datalist id="autocompletions-list">
+        <option *ngFor="let c of autocompletions | async"
+                [value]="c.name"
+                [label]="c.website"></option>
+      </datalist>
+      -->
       <label for="company-name">Name</label>
       <input placeholder="Your New Company Ltd" id="company-name" required
              class="form-control" type="text"

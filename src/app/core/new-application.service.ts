@@ -6,57 +6,64 @@ export class NewApplicationService {
   constructor() {
   }
 
+  // When uploading to firebase all null values and empty arrays get deleted,
+  // so when we retrieve back the application we get errors like
+  // "cannot read property x of undefined"
+  //
+  // The fastest solution is to start with empty strings rather than nulls
+  // I'm still thinking what to do with the arrays, maybe just check them when importing
+  // and add them manually if not present
   public newApplication() {
     return {
       'company': {
-        'businessArea': null,
-        'employees': null,
-        'glassdoorId': null,
-        'linkedinId': null,
-        'website': null,
-        'squareLogo': null,
-        'name': null
+        'businessArea': '',
+        'employees': '',
+        'glassdoorId': '',
+        'linkedinId': '',
+        'website': '',
+        'squareLogo': '',
+        'name': ''
       },
       'position': {
         'attachments': [],
         'expectedSalary': {
-          'billing': null,
-          'currency': null,
-          'value': null
+          'billing': '',
+          'currency': '',
+          'value': ''
         },
-        'notes': null,
-        'title': null
+        'notes': '',
+        'title': ''
       },
       'status': 'dreamingOf',
       'applied': {
-        'applicationDate': null,
+        'applicationDate': '',
         'documents': [],
         'followUpReminder': {
-          'beforeAfter': null,
-          'howMuch': null,
-          'unit': null
+          'beforeAfter': '',
+          'howMuch': '',
+          'unit': ''
         }
       },
       'dreamingOf': {
         'contactPerson': {
-          'email': null,
-          'name': null,
-          'phone': null,
-          'role': null
+          'email': '',
+          'name': '',
+          'phone': '',
+          'role': ''
         },
         'deadlines': []
       },
       'gotcha': {
-        'contract type': null,
-        'deadline': null,
-        'notes': null,
-        'outcome': null,
+        'contract type': '',
+        'deadline': '',
+        'notes': '',
+        'outcome': '',
         'salary': {
-          'billing': null,
-          'currency': null,
-          'value': null
+          'billing': '',
+          'currency': '',
+          'value': ''
         },
-        'starting date': null
+        'starting date': ''
       },
       'ongoing': {
         'events': []
