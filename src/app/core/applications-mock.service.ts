@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ApplicationsService} from './applications.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {deprecate} from "util";
 
 @Injectable()
 export class ApplicationsMockService extends ApplicationsService {
@@ -10,6 +11,14 @@ export class ApplicationsMockService extends ApplicationsService {
   constructor() {
     super();
     this.applications$ = Observable.of(data);
+  }
+
+  get(id: string): any {
+    return undefined;
+  }
+
+  update(id: string, application: any): any {
+    return undefined;
   }
 }
 
