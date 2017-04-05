@@ -1,0 +1,12 @@
+To do list :
+1. Finish the editor form
+	a. Dreaming of (fix the data input) >> Federico
+	b. Applied (add reminders, make upload file works) >> Federico
+	c. Ongoing (add event function) >> Ela
+	d. Gotcha (add refuse offer(?), add final salary field) >>Ela
+2. Expand the application card >>Yinan
+3. Edit the about page
+4. Change column headers (?) >>Yinan
+5. Drag and drop interaction
+6. Add logout button
+7. Profile page (Name, statistics, list of CVs)
