@@ -2,6 +2,7 @@ import {Component, OnInit, Input, NgZone, ChangeDetectorRef} from "@angular/core
 import {NewApplicationService} from "../../core/new-application.service";
 import {ApplicationsService} from "../../core/applications.service";
 import {Deadline} from "../../core/model/deadline";
+import {Event} from "../../core/model/event";
 import {GlassdoorService} from "../../core/glassdoor.service";
 import {Company} from "../../core/model/company";
 import {FormControl} from "@angular/forms";
@@ -28,6 +29,8 @@ export class EditorComponent implements OnInit {
   fileInfo: File;
   fileName: string;
   isSelected: string;
+  resultStatus:string;
+  resultText:string;
 
   /*
    * TODO refactor this so that we only use an indexer 1-2-3-4,
@@ -109,9 +112,33 @@ export class EditorComponent implements OnInit {
     this.a.dreamingOf.deadlines.push(new Deadline());
   }
 
+  private addOngoingEvents() {
+    this.a.ongoing.events.push(new Event());
+  }
+
   private saveApplication() {
     this.applicationsService.update(this.applicationId, this.a)
       .then(() => this.router.navigate(['/home']));
+  }
+
+  private addJobResult(result){
+    if(result==='thinking'){
+      this.resultStatus='thinking';
+      this.resultText='What are you waiting for?';
+      this.a.gotcha.outcome='thinking';
+    } else if(result==='accept'){
+      this.resultStatus='accept';
+      this.resultText='Time to party!';
+      this.a.gotcha.outcome='accept';
+    }else if(result==='rejected'){
+      this.resultStatus='rejected';
+      this.resultText='This is not the end of the world. Keep moving on!';
+      this.a.gotcha.outcome='rejected';
+    } else if(result==='refuse'){
+      this.resultText='Follow that little voice inside your head';
+      this.resultStatus='refuse';
+      this.a.gotcha.outcome='refuse';
+    }
   }
 
   // Move from one step to another

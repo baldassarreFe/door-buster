@@ -79,8 +79,9 @@
 .inputfile + label:hover {
     cursor: pointer;
 }
-.step2 input.form-control{
-	margin: 5px 0;
+.step2 input.form-control, .form-set input.form-control{
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .step3, .step4{padding-top: 30px;}
@@ -88,6 +89,10 @@
 	margin: 10px;
 }
 
+.result-wrapper{
+	width: 100%;
+	float: left;
+}
 .result-wrapper li{
 	float: left;
 	width: 70px;
@@ -100,6 +105,7 @@
 	margin-bottom: 20px;
 	color: #fff;
 	cursor: pointer;
+	transition: border ease 0.5s, padding 0.2s;
 }
 .result-wrapper li.thinking{
 	background: #febe11;
@@ -109,6 +115,43 @@
 }
 .result-wrapper li.reject{
 	background: #f04438;
+}
+.result-wrapper li.refuse{
+	background: #FF5722;
+	padding: 19px;
+}
+.thinking li.thinking{
+	border:8px solid #1e88e5;
+	padding: 16px;
+}
+.accept li.accept{
+	border:8px solid #1e88e5;
+	padding: 16px;
+}
+.rejected li.reject{
+	border:8px solid #1e88e5;
+	padding: 16px;
+}
+.refuse li.refuse{
+	border:8px solid #1e88e5;
+	padding: 13px;
+}
+
+.button-wrapper{
+	width: 100%;
+	float: left;
+}
+.new-event{
+	float: left;
+	width: 50%;
+	box-sizing: border-box;
+	margin-bottom: 30px;
+	padding: 10px 10px 20px 10px;
+	border-bottom: 1px solid #eee;
+}
+.input-date{
+	width: 100%;
+	max-width: 200px;
 }
 
 /*Progress indicator*/
@@ -179,4 +222,10 @@
 }
 .progress-form{
 	margin: 5px 0;
+}
+
+@media (max-width: 410px) {
+  .new-event {
+    width: 100%;
+  }
 }

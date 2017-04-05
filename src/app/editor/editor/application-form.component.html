@@ -70,7 +70,7 @@
         <label for="position-salary">Expected Salary</label>
         <div class="form-inline" id="position-salary">
           <input placeholder="100"
-                 class="form-control" type="number"
+                 class="form-control" type="number" step="100" min="0"
                  [(ngModel)]="a.position.expectedSalary.value" name="positionSalaryValue">
           <select class="form-control" [(ngModel)]="a.position.expectedSalary.currency" name="positionSalaryCurrency">
             <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
@@ -129,7 +129,7 @@
           </ng-container>
         </div>
         <button md-button (click)="addDreamingDeadline()">Add</button>
-      </div>
+      </div>  
 
       <label for="upload-files">Upload CV / Cover Letter</label>
       <ul class="files-wrapper list-unstyled">
@@ -143,32 +143,96 @@
 
     <!-- Form step 3 -->
     <div class="form-group" id="ongoing" class="step3" *ngIf="step3">
-      <button class="btn-add-more" md-button>
-        <md-icon>add</md-icon>
-        <span>Add event</span>
-      </button>
+      <div class="button-wrapper">
+        <button class="btn-add-more" md-button  (click)="addOngoingEvents()">
+          <md-icon>add</md-icon>
+          <span>Add event</span>
+        </button>
+      </div>
+      <div class="new-event" *ngFor="let d of a.ongoing.events">
+      <label>Event Title</label>
+        <input placeholder="Interview / Test / Event title"
+                 class="form-control" type="text"
+                 [(ngModel)]="d.title" [ngModelOptions]="{standalone: true}">
+        <div id="eventContact" class="form-set">
+        <label>Date</label>
+        <input placeholder="mm/dd/yy"
+         class="form-control" type="datetime"
+         [(ngModel)]="d.date" [ngModelOptions]="{standalone: true}">
+          <label class="subtitle">Contact Person</label>
+          <input placeholder="Name"
+                   class="form-control" type="text"
+                   [(ngModel)]="d.with.name" [ngModelOptions]="{standalone: true}">
+          <input placeholder="example@email.com"
+                   class="form-control" type="text"
+                   [(ngModel)]="d.with.email" [ngModelOptions]="{standalone: true}">
+          <input placeholder="phone number"
+                   class="form-control" type="text"
+                   [(ngModel)]="d.with.phone" [ngModelOptions]="{standalone: true}">
+          <input placeholder="role"
+                   class="form-control" type="text"
+                   [(ngModel)]="d.with.role" [ngModelOptions]="{standalone: true}">
+        </div>
+        <label>Notes</label>
+        <textarea placeholder="Important interview with R&D manager"
+                  class="form-control" type="text" rows="3"
+                  [(ngModel)]="d.notes" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+      
     </div>
 
     <!-- Form step 4 -->
     <div class="form-group" id="ongoing" class="step4" *ngIf="step4">
       <div class="result-wrapper">
-        <ul class="list-unstyled">
-          <li class="thinking" mdTooltip="Thinking Offer">
+        <ul class="list-unstyled" [ngClass]="a.gotcha.outcome">
+          <li class="thinking" mdTooltip="Thinking Offer" (click)="addJobResult('thinking')">
             <md-icon>sms</md-icon>
           </li>
-          <li class="accept" mdTooltip="Accepted!">
+          <li class="accept" mdTooltip="Accepted!" (click)="addJobResult('accept')">
             <md-icon>mood</md-icon>
           </li>
-          <li class="reject" mdTooltip="Rejected">
+          <li class="reject" mdTooltip="Rejected" (click)="addJobResult('rejected')">
             <md-icon>mood_bad</md-icon>
           </li>
+          <li class="refuse" mdTooltip="Refuse" (click)="addJobResult('refuse')">
+            <md-icon>pan_tool</md-icon>
+          </li>
         </ul>
+        <p><em>{{resultText}}</em></p>
       </div>
-      <input placeholder="Contract Type" id="contract"
+      <label>Contract Type</label>
+      <input placeholder="Contract Type"
              class="form-control" type="text"
-             name="contractType">
+             [(ngModel)]="a.gotcha.contractType" name="contractType">
+      <label>Starting Date</label>
+      <input placeholder="Starting date"
+             class="form-control input-date" type="date"
+             [(ngModel)]="a.gotcha.startingDate" name="startDate">
+      <label>Final Salary</label>
+      <div class="form-inline" id="final-salary">
+          <input placeholder="10000"
+                 class="form-control" type="number" step="100" min="0"
+                 [(ngModel)]="a.gotcha.salary.value" name="finalSalaryValue">
+          <select class="form-control" [(ngModel)]="a.gotcha.salary.currency" name="finalSalaryCurrency">
+            <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
+          </select>
+          <select class="form-control" [(ngModel)]="a.gotcha.salary.billings" name="finalSalaryBilling">
+            <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
+          </select>
+      </div>
+      <label>Offer Deadline</label>
+      <input placeholder="Offer Deadline"
+             class="form-control input-date" type="date"
+             [(ngModel)]="a.gotcha.deadline" name="offerDeadline">
+      <label>Notes</label>
+      <textarea placeholder="Such a cool job"
+                class="form-control" type="text" rows="3"
+                [(ngModel)]="a.gotcha.notes" name="gotchaNotes"></textarea>
     </div>
 
-    <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
+    <div class="button-wrapper">
+      <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
+    </div>
+    
   </form>
 </div>
