@@ -7,6 +7,7 @@ import {ApplicationsMockService} from './applications-mock.service';
 import {NewApplicationService} from './new-application.service';
 import {ApplicationsFirebaseService} from './applications-firebase.service';
 import {JsonpModule} from '@angular/http';
+import {StorageService} from "./storage.service";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDogVK8K6fxGwQNAKv5_vL7xmv7kkpuJn8',
@@ -33,6 +34,7 @@ export class CoreModule {
       providers: [
         LoginService,
         {provide: ApplicationsService, useClass: ApplicationsFirebaseService},
+        StorageService,
         NewApplicationService,
         AuthGuard
       ]

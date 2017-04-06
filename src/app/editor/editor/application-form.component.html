@@ -131,8 +131,28 @@
         <button md-button (click)="addDreamingDeadline()">Add</button>
       </div>
 
+      <!-- TODO make this work
       <label for="upload-files">Upload CV / Cover Letter</label>
-      <ul class="files-wrapper list-unstyled">
+      <div class="row file-uploader">
+        <div *ngFor="let doc of a.applied.documents.concat(temporaryDocs)"
+             class="col-md-4 col-sm-6 col-xs-12">
+          <a target="_blank" [href]="doc.link" >{{doc.name}}</a>
+        </div>
+        <div *ngFor="let doc of a.applied.documents.concat(temporaryDocs)"
+             class="col-md-3 col-sm-4 col-xs-12">
+          <label class="btn-upload">
+            <input type="file" name="file" (change)="uploadFile($event)">
+            <button class="btn">+</button>
+          </label>
+        </div>
+      </div>
+      -->
+
+      <ul class="files-uploading list-unstyled" id="upload-files">
+        <li *ngFor="let doc of a.applied.documents.concat(temporaryDocs)">
+          <label for="file" class="isSelected"></label>
+          <a class="fileinfo" target="_blank" [href]="doc.link" >{{doc.name}}</a>
+        </li>
         <li>
           <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
           <label for="file" [ngClass]="isSelected"></label>
@@ -169,6 +189,7 @@
              name="contractType">
     </div>
 
-    <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
+    <button type="button" (click)="saveApplicfileation()" class="submit-btn btn btn-success">Submit</button>
+    <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
   </form>
 </div>

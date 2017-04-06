@@ -1,12 +1,13 @@
-import {Component, OnInit, Input, NgZone, ChangeDetectorRef} from "@angular/core";
-import {NewApplicationService} from "../../core/new-application.service";
-import {ApplicationsService} from "../../core/applications.service";
-import {Deadline} from "../../core/model/deadline";
-import {GlassdoorService} from "../../core/glassdoor.service";
-import {Company} from "../../core/model/company";
-import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
-import {Router} from "@angular/router";
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
+import {NewApplicationService} from '../../core/new-application.service';
+import {ApplicationsService} from '../../core/applications.service';
+import {Deadline} from '../../core/model/deadline';
+import {GlassdoorService} from '../../core/glassdoor.service';
+import {Company} from '../../core/model/company';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
+import {StorageService} from '../../core/storage.service';
 
 @Component({
   selector: 'application-form',
@@ -48,10 +49,12 @@ export class EditorComponent implements OnInit {
   @Input() applicationId;
 
   public a: any;
+  private temporaryDocs = [];
 
   constructor(public newApplicationService: NewApplicationService,
               public applicationsService: ApplicationsService,
               public glassdoorService: GlassdoorService,
+              private storageService: StorageService,
               private router: Router,
               private ref: ChangeDetectorRef) {
   }
@@ -77,13 +80,17 @@ export class EditorComponent implements OnInit {
   }
 
   uploadFile(event: EventTarget) {
-    let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    let files: FileList = target.files;
-    this.fileInfo = files[0];
-    this.fileName = this.fileInfo.name;
+    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const files: FileList = target.files;
+    const file = files[0];
     this.isSelected = 'selected';
-    // console.log(this.fileInfo.name);
+    console.log(file.name);
+    const uploadTask = this.storageService.uploadPdf(file)
+      .then(doc => {
+        this.temporaryDocs.push(doc);
+      })
+      .catch(error => alert(error.message));
   }
 
   get dropdownVisible(): boolean {
@@ -110,8 +117,16 @@ export class EditorComponent implements OnInit {
   }
 
   private saveApplication() {
+    this.a.applied.documents = this.a.applied.documents.concat(this.temporaryDocs);
+    this.temporaryDocs = [];
     this.applicationsService.update(this.applicationId, this.a)
       .then(() => this.router.navigate(['/home']));
+  }
+
+  private cancelEdits() {
+    Promise.all(this.temporaryDocs.map(
+      this.storageService.delete
+    )).then(() => this.router.navigate(['/home']));
   }
 
   // Move from one step to another
