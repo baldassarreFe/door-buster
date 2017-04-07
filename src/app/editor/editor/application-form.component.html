@@ -7,22 +7,36 @@
     <div class="steps">
       <p>Break the door and reach your dream!</p>
       <md-progress-bar
-        class="progress-form"
-        [color]="color"
-        [mode]="mode"
-        [value]="progressValue"
-        [bufferValue]="bufferValue">
+        color="primary"
+        mode="determinate"
+        [value]="progressValue">
       </md-progress-bar>
-      <ul class="step-points" [ngClass]="stepActive">
-        <li (click)="moveTo('step1')"><span>1</span></li>
-        <li (click)="moveTo('step2')"><span>2</span></li>
-        <li (click)="moveTo('step3')"><span>3</span></li>
-        <li (click)="moveTo('step4')"><span>4</span></li>
+      <ul class="steps-list">
+        <li (click)="a.status='dreamingOf'"
+            [class.active-step]="a.status=='dreamingOf'">
+          <span>1</span>
+          <p>Dreaming of</p>
+        </li>
+        <li (click)="a.status='applied'"
+            [class.active-step]="a.status=='applied'">
+          <span>2</span>
+          <p>Applied</p>
+        </li>
+        <li (click)="a.status='ongoing'"
+            [class.active-step]="a.status=='ongoing'">
+          <span>3</span>
+          <p>Ongoing</p>
+        </li>
+        <li (click)="a.status='gotcha'"
+            [class.active-step]="a.status=='gotcha'">
+          <span>4</span>
+          <p>Gotcha!</p>
+        </li>
       </ul>
     </div>
-    <!-- Form step 1 -->
 
-    <div class="form-group" id="company" class="step1" *ngIf="step1">
+    <!-- Form step 1 -->
+    <div class="form-group" id="company" *ngIf="a.status==='dreamingOf'">
       <label class="fullwidth" for="company"><h4>Company</h4></label>
       <!-- TODO make this dropdown work, I don't know how to receive the selected event
       <label for="company-name2">Name</label>
@@ -86,8 +100,7 @@
     </div>
 
     <!-- Form step 2 -->
-    <div class="form-group" id="dreaming" class="step2" *ngIf="step2">
-      <label for="dreaming" class="fullwidth"><h4>Applied</h4></label>
+    <div class="form-group" *ngIf="a.status==='applied'">
       <label for="dreaming-contact">Contact person</label>
       <div id="dreaming-contact">
         <input placeholder="The Boss"
@@ -131,17 +144,21 @@
         <button md-button (click)="addDreamingDeadline()">Add</button>
       </div>  
 
-      <label for="upload-files">Upload CV / Cover Letter</label>
-      <ul class="files-wrapper list-unstyled">
-        <li>
-          <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
-          <label for="file" [ngClass]="isSelected"></label>
-          <p class="fileinfo">{{fileName}}</p>
-        </li>
-      </ul>
+      <label for="upload-documents">Upload CV / Cover Letter</label>
+      <div class="row file-uploader" id="upload-documents">
+        <div *ngFor="let doc of a.applied.documents.concat(temporaryDocs)"
+             class="col-md-4 col-sm-6 col-xs-12">
+          <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
+        </div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <input type="file" name="file" (change)="uploadFile($event)">
+            <span class="center-me">+</span>
+        </div>
+      </div>
     </div>
 
     <!-- Form step 3 -->
+
     <div class="form-group" id="ongoing" class="step3" *ngIf="step3">
       <div class="button-wrapper">
         <button class="btn-add-more" md-button  (click)="addOngoingEvents()">
@@ -178,11 +195,10 @@
                   class="form-control" type="text" rows="3"
                   [(ngModel)]="d.notes" [ngModelOptions]="{standalone: true}"></textarea>
       </div>
-      
     </div>
 
     <!-- Form step 4 -->
-    <div class="form-group" id="ongoing" class="step4" *ngIf="step4">
+    <div class="form-group" *ngIf="a.status==='gotcha'">
       <div class="result-wrapper">
         <ul class="list-unstyled" [ngClass]="a.gotcha.outcome">
           <li class="thinking" mdTooltip="Thinking Offer" (click)="addJobResult('thinking')">
@@ -230,9 +246,7 @@
                 [(ngModel)]="a.gotcha.notes" name="gotchaNotes"></textarea>
     </div>
 
-    <div class="button-wrapper">
-      <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
-    </div>
-    
+    <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
+    <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
   </form>
 </div>

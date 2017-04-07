@@ -42,12 +42,15 @@
 	border: none;
 	background-color: rgba(255,255,255,0.5);
 }
+
 .board-item{
+	position: relative;
 	margin: 10px 15px 0 15px;
 	box-shadow: none;
 	padding: 20px 10px;
 	border-radius: 5px;
 	border: 1px solid #eee;
+	z-index: 10;
 }
 .blue-theme .board-title{
 	background-color: #8693e8;
@@ -74,5 +77,81 @@
 	position: absolute;
 	top: 20px;
 	right: 0;
+	z-index: 100;
 	cursor: pointer;
+}
+/*#popUp {
+	position: absolute;
+	top:0;
+	width: 50%;
+	margin-left: 25%;
+	border: 1px solid black;
+	z-index: 10;
+}*/
+#popUp {
+  
+}
+.view-show {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(1,1,1,0.7);
+  z-index: 1001;
+  overflow-y: scroll;
+}
+.close {
+	font-size: 31px;
+/*	position: absolute;
+	left: 70%;
+	top:20%;*/
+}
+.close:hover {
+	color: red;
+}
+.white_content {
+  position: absolute;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  margin-left: 25%;
+  width: 50%;
+  padding: 16px;
+  padding-left: 30px;
+  border: 16px solid #95d4f1;
+  background-color: white;
+  z-index: 1002;
+}
+.white_content h5{
+	font-size: 17px;
+}
+.intro {
+	height: 88px;
+	border-bottom: 1px solid lightgrey;
+	margin-bottom: 20px;
+}
+.logo{
+	width: 64px;
+	height: 64px;
+	float: left;
+	margin-right: 20px;
+}
+.event_style{
+	border-left: 2px solid #ffa1a1;
+	padding-left: 10px;
+}
+.position{
+	border-bottom: 1px solid lightgrey;
+	margin-bottom: 20px;
+}
+.failed{
+	color: #FF3373;
+	font-weight: bold;
+	font-size: 20px;
+}
+.success h5{
+	color: #FF3373;
+	font-weight: bold;
+	font-size: 20px;
 }

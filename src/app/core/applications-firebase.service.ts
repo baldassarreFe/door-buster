@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {ApplicationsService} from './applications.service';
-import {Observable} from 'rxjs/Observable';
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
-import {LoginService} from './login.service';
-import 'rxjs/operator/mergeMap';
+import {Injectable} from "@angular/core";
+import {ApplicationsService} from "./applications.service";
+import {Observable} from "rxjs/Observable";
+import {AngularFire, FirebaseListObservable} from "angularfire2";
+import {LoginService} from "./login.service";
+import "rxjs/operator/mergeMap";
 import app = firebase.app;
 
 @Injectable()
@@ -21,7 +21,17 @@ export class ApplicationsFirebaseService extends ApplicationsService {
 
   public get(id: string): any {
     return this.af.auth.switchMap(
-      user => user ? this.af.database.object('/users/' + user.uid + '/' + id) : null);
+      user => user ? this.af.database.object(`/users/${user.uid}/${id}`).map(this.replaceNulls) : null);
+  }
+
+  // Firebase does not persist null values of empty arrays,
+  // so when we retrieve applications we need to manually add them back
+  // so that the UI does not crash
+  private replaceNulls = (application) => {
+    application.dreamingOf.deadlines = application.dreamingOf.deadlines || [];
+    application.applied.documents = application.applied.documents || [];
+    application.ongoing.events = application.ongoing.events || [];
+    return application;
   }
 
   public update(key: string, application: any): firebase.Promise<void> {

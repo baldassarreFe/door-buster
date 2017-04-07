@@ -8,6 +8,7 @@ import {Company} from "../../core/model/company";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {Router} from "@angular/router";
+import {StorageService} from '../../core/storage.service';
 
 @Component({
   selector: 'application-form',
@@ -16,45 +17,39 @@ import {Router} from "@angular/router";
   providers: [GlassdoorService]
 })
 export class EditorComponent implements OnInit {
-
   private _dropdownVisible: boolean;
 
   // errorMessage: string = '';
   // isLoading: boolean = true;
   autocompletions: Observable<Company[]>;
   term = new FormControl();
-  result: Company[] = [];
   company = [];
-  isVisible: string;
-  fileInfo: File;
-  fileName: string;
   isSelected: string;
   resultStatus:string;
   resultText:string;
 
-  /*
-   * TODO refactor this so that we only use an indexer 1-2-3-4,
-   * progress bar is at 25*idx
-   * and the steps are on if they match that number
-   */
-  // Progress bar properties
-  color = 'primary';
-  mode = 'determinate';
-  progressValue = 25;
-  bufferValue = 25;
-  stepActive = 'step1';
-  step1: boolean = true;
-  step2: boolean;
-  step3: boolean;
-  step4: boolean;
+  get progressValue() {
+    switch (this.a.status) {
+      case 'dreamingOf':
+        return 25;
+      case 'applied':
+        return 50;
+      case 'ongoing':
+        return 75;
+      case 'gotcha':
+        return 100;
+    }
+  }
 
-  @Input() applicationId;
+  @Input() public applicationId;
 
   public a: any;
+  private temporaryDocs = [];
 
   constructor(public newApplicationService: NewApplicationService,
               public applicationsService: ApplicationsService,
               public glassdoorService: GlassdoorService,
+              private storageService: StorageService,
               private router: Router,
               private ref: ChangeDetectorRef) {
   }
@@ -80,13 +75,17 @@ export class EditorComponent implements OnInit {
   }
 
   uploadFile(event: EventTarget) {
-    let eventObj: MSInputMethodContext = <MSInputMethodContext> event;
-    let target: HTMLInputElement = <HTMLInputElement> eventObj.target;
-    let files: FileList = target.files;
-    this.fileInfo = files[0];
-    this.fileName = this.fileInfo.name;
+    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const files: FileList = target.files;
+    const file = files[0];
     this.isSelected = 'selected';
-    // console.log(this.fileInfo.name);
+    console.log(file.name);
+    const uploadTask = this.storageService.uploadPdf(file)
+      .then(doc => {
+        this.temporaryDocs.push(doc);
+      })
+      .catch(error => alert(error.message));
   }
 
   get dropdownVisible(): boolean {
@@ -117,6 +116,8 @@ export class EditorComponent implements OnInit {
   }
 
   private saveApplication() {
+    this.a.applied.documents = this.a.applied.documents.concat(this.temporaryDocs);
+    this.temporaryDocs = [];
     this.applicationsService.update(this.applicationId, this.a)
       .then(() => this.router.navigate(['/home']));
   }
@@ -141,39 +142,11 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  // Move from one step to another
-  moveTo(stepTarget) {
-    this.stepActive = stepTarget;
-    if (stepTarget === 'step1') {
-      this.progressValue = 25;
-      this.step2 = false;
-      this.step3 = false;
-      this.step4 = false;
-      this.step1 = true;
-    } else if (stepTarget === 'step2') {
-      this.progressValue = 50;
-      this.step1 = false;
-      this.step3 = false;
-      this.step4 = false;
-      this.step2 = true;
-    } else if (stepTarget === 'step3') {
-      this.progressValue = 75;
-      this.step1 = false;
-      this.step2 = false;
-      this.step4 = false;
-      this.step3 = true;
-    } else {
-      this.progressValue = 100;
-      this.step1 = false;
-      this.step2 = false;
-      this.step3 = false;
-      this.step4 = true;
-    }
-  }
-
-  // TODO: Remove this when we're done
-  get diagnostic() {
-    return JSON.stringify(this.a);
+  
+  private cancelEdits() {
+    Promise.all(this.temporaryDocs.map(
+      this.storageService.delete
+    )).then(() => this.router.navigate(['/home']));
   }
 
   /*
