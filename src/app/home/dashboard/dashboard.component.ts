@@ -19,8 +19,10 @@ export class DashboardComponent implements OnInit {
   }
 
   public edit(key: string) {
-    console.log(key);
+    //console.log(key);
     this.router.navigate(['/editor'], { queryParams: { applicationId: key } });
+    event.stopPropagation();
+
   }
 
   public popup(cardKey:string) {
