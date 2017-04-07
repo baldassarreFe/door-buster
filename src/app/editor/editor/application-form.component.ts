@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, NgZone, ChangeDetectorRef} from "@angular/core";
+import {Component, OnInit, Input, ChangeDetectorRef} from "@angular/core";
 import {NewApplicationService} from "../../core/new-application.service";
 import {ApplicationsService} from "../../core/applications.service";
 import {Deadline} from "../../core/model/deadline";
@@ -8,7 +8,8 @@ import {Company} from "../../core/model/company";
 import {FormControl} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {Router} from "@angular/router";
-import {StorageService} from '../../core/storage.service';
+import {StorageService} from "../../core/storage.service";
+import {Reminder} from "../../core/model/reminder";
 
 @Component({
   selector: 'application-form',
@@ -25,8 +26,8 @@ export class EditorComponent implements OnInit {
   term = new FormControl();
   company = [];
   isSelected: string;
-  resultStatus:string;
-  resultText:string;
+  resultStatus: string;
+  resultText: string;
 
   get progressValue() {
     switch (this.a.status) {
@@ -74,16 +75,23 @@ export class EditorComponent implements OnInit {
       .switchMap(term => this.glassdoorService.search(term));
   }
 
+  deleteFile(name) {
+    this.storageService.delete(name)
+      .then(res => {
+        this.a.applied.documents = this.temporaryDocs.filter(d => d.name !== name);
+        this.temporaryDocs = this.temporaryDocs.filter(d => d.name !== name);
+      });
+  }
+
   uploadFile(event: EventTarget) {
     const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     const files: FileList = target.files;
     const file = files[0];
-    this.isSelected = 'selected';
-    console.log(file.name);
     const uploadTask = this.storageService.uploadPdf(file)
       .then(doc => {
         this.temporaryDocs.push(doc);
+        target.value = '';
       })
       .catch(error => alert(error.message));
   }
@@ -108,7 +116,13 @@ export class EditorComponent implements OnInit {
   }
 
   private addDreamingDeadline() {
+    console.log(this.a.dreamingOf.deadlines)
     this.a.dreamingOf.deadlines.push(new Deadline());
+  }
+
+  private addReminder(deadline) {
+    console.log(JSON.stringify(deadline))
+    deadline.reminder = new Reminder();
   }
 
   private addOngoingEvents() {
@@ -122,27 +136,27 @@ export class EditorComponent implements OnInit {
       .then(() => this.router.navigate(['/home']));
   }
 
-  private addJobResult(result){
-    if(result==='thinking'){
-      this.resultStatus='thinking';
-      this.resultText='What are you waiting for?';
-      this.a.gotcha.outcome='thinking';
-    } else if(result==='accept'){
-      this.resultStatus='accept';
-      this.resultText='Time to party!';
-      this.a.gotcha.outcome='accept';
-    }else if(result==='rejected'){
-      this.resultStatus='rejected';
-      this.resultText='This is not the end of the world. Keep moving on!';
-      this.a.gotcha.outcome='rejected';
-    } else if(result==='refuse'){
-      this.resultText='Follow that little voice inside your head';
-      this.resultStatus='refuse';
-      this.a.gotcha.outcome='refuse';
+  private addJobResult(result) {
+    if (result === 'thinking') {
+      this.resultStatus = 'thinking';
+      this.resultText = 'What are you waiting for?';
+      this.a.gotcha.outcome = 'thinking';
+    } else if (result === 'accept') {
+      this.resultStatus = 'accept';
+      this.resultText = 'Time to party!';
+      this.a.gotcha.outcome = 'accept';
+    } else if (result === 'rejected') {
+      this.resultStatus = 'rejected';
+      this.resultText = 'This is not the end of the world. Keep moving on!';
+      this.a.gotcha.outcome = 'rejected';
+    } else if (result === 'refuse') {
+      this.resultText = 'Follow that little voice inside your head';
+      this.resultStatus = 'refuse';
+      this.a.gotcha.outcome = 'refuse';
     }
   }
 
-  
+
   private cancelEdits() {
     Promise.all(this.temporaryDocs.map(
       this.storageService.delete

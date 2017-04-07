@@ -96,11 +96,8 @@
 
         <!-- TODO upload attachments -->
       </div>
-    </div>
 
-    <!-- Form step 2 -->
-    <div class="form-group" *ngIf="a.status==='applied'">
-      <label for="dreaming-contact">Contact person</label>
+      <label class="fullwidth" for="dreaming-contact"><h4>Contact person</h4></label>
       <div id="dreaming-contact" class="form-set">
         <input placeholder="The Boss"
                class="form-control" type="text"
@@ -115,13 +112,14 @@
                class="form-control" type="text"
                [(ngModel)]="a.dreamingOf.contactPerson.role" name="dreamingContactRole">
       </div>
-      <label for="dreaming-deadlines">Reminders</label>
+
+      <label class="fullwidth" for="dreaming-deadlines"><h4>Deadlines</h4></label>
       <div id="dreaming-deadlines">
-        <div *ngFor="let d of a.dreamingOf.deadlines" class="form-inline">
+        <div *ngFor="let d of a.dreamingOf.deadlines; let i=index" class="form-inline">
           <input placeholder="Applications open"
                  class="form-control" type="text"
                  [(ngModel)]="d.what" name="deadlineWhat">
-          <input class="form-control" type="datetime"
+          <input class="form-control" type="datetime-local"
                  [(ngModel)]="d.when" name="deadlineWhen">
           <ng-container *ngIf="d.reminder">
             <input placeholder="1"
@@ -135,18 +133,32 @@
             </select>
           </ng-container>
           <ng-container *ngIf="!d.reminder">
-            <button md-button (click)="d['reminder']={howMuch:0, unit: 'hours', beforeAfter: 'before'}">
-              ADD
+            <button md-button (click)="addReminder(d)">
+              <md-icon>add_alert</md-icon>
             </button>
           </ng-container>
+          <button md-button (click)="a.dreamingOf.deadlines.splice(i,1)">
+            <md-icon>delete_forever</md-icon>
+          </button>
         </div>
         <button md-button (click)="addDreamingDeadline()">Add</button>
-      </div>  
+      </div>
+
+    </div>
+
+    <!-- Form step 2 -->
+    <div class="form-group" *ngIf="a.status==='applied'">
 
       <label for="upload-documents">Upload CV / Cover Letter</label>
       <div class="row file-uploader" id="upload-documents">
-        <div *ngFor="let doc of a.applied.documents.concat(temporaryDocs)"
+        <div *ngFor="let doc of a.applied.documents"
              class="col-md-4 col-sm-6 col-xs-12">
+          <span (click)="deleteFile(doc.name)">X</span>
+          <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
+        </div>
+        <div *ngFor="let doc of temporaryDocs"
+             class="col-md-4 col-sm-6 col-xs-12">
+          <span (click)="deleteFile(doc.name)">X</span>
           <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">

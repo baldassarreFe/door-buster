@@ -22,8 +22,8 @@ export class StorageService {
     );
   }
 
-  public delete(doc) {
-    return this.uploadRef.child(doc.name).delete();
+  public delete(name) {
+    return this.uploadRef.child(name).delete();
   }
 
   public uploadPdf(file: File): Promise<any> {
