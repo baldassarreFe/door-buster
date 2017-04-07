@@ -16,7 +16,6 @@ import {StorageService} from '../../core/storage.service';
   providers: [GlassdoorService]
 })
 export class EditorComponent implements OnInit {
-
   private _dropdownVisible: boolean;
 
   // errorMessage: string = '';
@@ -26,23 +25,20 @@ export class EditorComponent implements OnInit {
   company = [];
   isSelected: string;
 
-  /*
-   * TODO refactor this so that we only use an indexer 1-2-3-4,
-   * progress bar is at 25*idx
-   * and the steps are on if they match that number
-   */
-  // Progress bar properties
-  color = 'primary';
-  mode = 'determinate';
-  progressValue = 25;
-  bufferValue = 25;
-  stepActive = 'step1';
-  step1: boolean = true;
-  step2: boolean;
-  step3: boolean;
-  step4: boolean;
+  get progressValue() {
+    switch (this.a.status) {
+      case 'dreamingOf':
+        return 25;
+      case 'applied':
+        return 50;
+      case 'ongoing':
+        return 75;
+      case 'gotcha':
+        return 100;
+    }
+  }
 
-  @Input() applicationId;
+  @Input() public applicationId;
 
   public a: any;
   private temporaryDocs = [];
@@ -61,20 +57,6 @@ export class EditorComponent implements OnInit {
         .get(this.applicationId)
         .subscribe(a => {
           this.a = a;
-          switch (this.a.status.toLowerCase()) {
-            case 'dreamingof':
-              this.moveTo('step1');
-              break;
-            case 'applied':
-              this.moveTo('step2');
-              break;
-            case 'ongoing':
-              this.moveTo('step3');
-              break;
-            case 'gotcha':
-              this.moveTo('step4');
-              break;
-          }
           // don't know why, angular does not detect this change automatically
           this.ref.detectChanges();
         });
@@ -137,41 +119,6 @@ export class EditorComponent implements OnInit {
     Promise.all(this.temporaryDocs.map(
       this.storageService.delete
     )).then(() => this.router.navigate(['/home']));
-  }
-
-  // Move from one step to another
-  moveTo(stepTarget) {
-    this.stepActive = stepTarget;
-    if (stepTarget === 'step1') {
-      this.progressValue = 25;
-      this.step2 = false;
-      this.step3 = false;
-      this.step4 = false;
-      this.step1 = true;
-    } else if (stepTarget === 'step2') {
-      this.progressValue = 50;
-      this.step1 = false;
-      this.step3 = false;
-      this.step4 = false;
-      this.step2 = true;
-    } else if (stepTarget === 'step3') {
-      this.progressValue = 75;
-      this.step1 = false;
-      this.step2 = false;
-      this.step4 = false;
-      this.step3 = true;
-    } else {
-      this.progressValue = 100;
-      this.step1 = false;
-      this.step2 = false;
-      this.step3 = false;
-      this.step4 = true;
-    }
-  }
-
-  // TODO: Remove this when we're done
-  get diagnostic() {
-    return JSON.stringify(this.a);
   }
 
   /*

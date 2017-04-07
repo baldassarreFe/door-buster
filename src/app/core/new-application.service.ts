@@ -54,7 +54,7 @@ export class NewApplicationService {
         'deadlines': []
       },
       'gotcha': {
-        'contract type': '',
+        'contractType': '',
         'deadline': '',
         'notes': '',
         'outcome': '',
@@ -63,7 +63,7 @@ export class NewApplicationService {
           'currency': '',
           'value': ''
         },
-        'starting date': ''
+        'startingDate': ''
       },
       'ongoing': {
         'events': []

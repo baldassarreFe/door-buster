@@ -32,7 +32,7 @@
     <h4 class="board-title">Applied</h4>
     <div class="board-content">
       <div *ngFor="let job of applicationsService.applications$| async">
-        <ng-container *ngIf="job.status==='Applied'">
+        <ng-container *ngIf="job.status==='applied'">
           <md-card class="board-item" (click)="popup(job.$key)">
             <md-card-header>
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
@@ -49,7 +49,7 @@
     <h4 class="board-title">Ongoing</h4>
     <div class="board-content">
       <div *ngFor="let job of applicationsService.applications$| async">
-        <ng-container *ngIf="job.status==='Ongoing'">
+        <ng-container *ngIf="job.status==='ongoing'">
           <md-card class="board-item" (click)="popup(job.$key)">
             <md-card-header>
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
@@ -67,7 +67,7 @@
     <h4 class="board-title">Gotcha!</h4>
     <div class="board-content">
       <div *ngFor="let job of applicationsService.applications$| async">
-        <ng-container *ngIf="job.status==='Gotcha!'">
+        <ng-container *ngIf="job.status==='gotcha'">
           <md-card class="board-item" (click)="popup(job.$key)">
             <md-card-header>
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
@@ -94,8 +94,8 @@
           <img class="logo" src="{{job.company.squareLogo}}">
           <h2>{{job.company.name}}</h2>
           <p *ngIf="job.dreamingOf.website!==''"><a href="{{job.company.website}}">{{job.company.website}}</a></p>
-        </div>    
-        <div class="position">    
+        </div>
+        <div class="position">
           <h5> - {{job.position.title}} - </h5>
           <p>{{job.position.notes}}</p>
           <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}}{{job.position.expectedSalary.currency}}/{{job.position.expectedSalary.billing}}</p>
@@ -105,14 +105,14 @@
           <ng-container *ngIf="job.dreamingOf.deadlines">
               <p *ngFor="let d of job.dreamingOf.deadlines">{{d.what}}: {{d.when}}</p>
           </ng-container>
-          <p *ngIf="job.dreamingOf.contactPerson.name!==''">Contact: {{job.dreamingOf.contactPerson.name}}({{job.dreamingOf.contactPerson.role}}) - {{job.dreamingOf.contactPerson.email}}</p> 
+          <p *ngIf="job.dreamingOf.contactPerson.name!==''">Contact: {{job.dreamingOf.contactPerson.name}}({{job.dreamingOf.contactPerson.role}}) - {{job.dreamingOf.contactPerson.email}}</p>
         </div>
-                   
-        <div *ngIf="job.status==='Applied'">
+
+        <div *ngIf="job.status==='applied'">
           <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate}}</p>
         </div>
 
-        <div *ngIf="job.status==='Ongoing'">
+        <div *ngIf="job.status==='ongoing'">
           <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate}}</p>
           <ng-container *ngIf="job.ongoing.events">
             <div *ngFor="let e of job.ongoing.events" class="event_style">
@@ -123,8 +123,8 @@
             </div>
           </ng-container>
         </div>
-        
-        <div *ngIf="job.status==='Gotcha!'">
+
+        <div *ngIf="job.status==='gotcha'">
           <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate}}</p>
           <div *ngIf="job.ongoing.events" class="position">
             <div *ngFor="let e of job.ongoing.events" class="event_style">
@@ -141,7 +141,7 @@
             <h5>Get Offer! &#9786;</h5>
             <p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billing}}</p>
             <p>reply before: {{job.gotcha.deadline}}</p>
-            <p>start work: {{job.gotcha.starting-date}}</p>
+            <p>start work: {{job.gotcha.startingDate}}</p>
           </div>
 
         </div>
