@@ -10,3 +10,4 @@ To do list :
 5. Drag and drop interaction
 6. Add logout button >> Aleksi
 7. Profile page (Name, statistics, list of CVs)
+8. Add datetime picker

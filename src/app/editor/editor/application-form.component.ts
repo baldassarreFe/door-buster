@@ -1,12 +1,13 @@
-import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
-import {NewApplicationService} from '../../core/new-application.service';
-import {ApplicationsService} from '../../core/applications.service';
-import {Deadline} from '../../core/model/deadline';
-import {GlassdoorService} from '../../core/glassdoor.service';
-import {Company} from '../../core/model/company';
-import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
-import {Router} from '@angular/router';
+import {Component, OnInit, Input, NgZone, ChangeDetectorRef} from "@angular/core";
+import {NewApplicationService} from "../../core/new-application.service";
+import {ApplicationsService} from "../../core/applications.service";
+import {Deadline} from "../../core/model/deadline";
+import {Event} from "../../core/model/event";
+import {GlassdoorService} from "../../core/glassdoor.service";
+import {Company} from "../../core/model/company";
+import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs/Observable";
+import {Router} from "@angular/router";
 import {StorageService} from '../../core/storage.service';
 
 @Component({
@@ -24,6 +25,8 @@ export class EditorComponent implements OnInit {
   term = new FormControl();
   company = [];
   isSelected: string;
+  resultStatus:string;
+  resultText:string;
 
   get progressValue() {
     switch (this.a.status) {
@@ -108,6 +111,10 @@ export class EditorComponent implements OnInit {
     this.a.dreamingOf.deadlines.push(new Deadline());
   }
 
+  private addOngoingEvents() {
+    this.a.ongoing.events.push(new Event());
+  }
+
   private saveApplication() {
     this.a.applied.documents = this.a.applied.documents.concat(this.temporaryDocs);
     this.temporaryDocs = [];
@@ -115,6 +122,27 @@ export class EditorComponent implements OnInit {
       .then(() => this.router.navigate(['/home']));
   }
 
+  private addJobResult(result){
+    if(result==='thinking'){
+      this.resultStatus='thinking';
+      this.resultText='What are you waiting for?';
+      this.a.gotcha.outcome='thinking';
+    } else if(result==='accept'){
+      this.resultStatus='accept';
+      this.resultText='Time to party!';
+      this.a.gotcha.outcome='accept';
+    }else if(result==='rejected'){
+      this.resultStatus='rejected';
+      this.resultText='This is not the end of the world. Keep moving on!';
+      this.a.gotcha.outcome='rejected';
+    } else if(result==='refuse'){
+      this.resultText='Follow that little voice inside your head';
+      this.resultStatus='refuse';
+      this.a.gotcha.outcome='refuse';
+    }
+  }
+
+  
   private cancelEdits() {
     Promise.all(this.temporaryDocs.map(
       this.storageService.delete
