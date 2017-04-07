@@ -101,7 +101,7 @@
     <!-- Form step 2 -->
     <div class="form-group" *ngIf="a.status==='applied'">
       <label for="dreaming-contact">Contact person</label>
-      <div id="dreaming-contact">
+      <div id="dreaming-contact" class="form-set">
         <input placeholder="The Boss"
                class="form-control" type="text"
                [(ngModel)]="a.dreamingOf.contactPerson.name" name="dreamingContactName">
@@ -158,7 +158,7 @@
 
     <!-- Form step 3 -->
 
-    <div class="form-group" id="ongoing" class="step3" *ngIf="step3">
+    <div class="form-group" id="ongoing" class="step3" *ngIf="a.status==='ongoing'">
       <div class="button-wrapper">
         <button class="btn-add-more" md-button  (click)="addOngoingEvents()">
           <md-icon>add</md-icon>
@@ -245,7 +245,9 @@
                 [(ngModel)]="a.gotcha.notes" name="gotchaNotes"></textarea>
     </div>
 
-    <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
-    <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
+    <div class="button-wrapper">
+      <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
+      <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
+    </div>
   </form>
 </div>
