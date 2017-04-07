@@ -42,12 +42,15 @@
 	border: none;
 	background-color: rgba(255,255,255,0.5);
 }
+
 .board-item{
+	position: relative;
 	margin: 10px 15px 0 15px;
 	box-shadow: none;
 	padding: 20px 10px;
 	border-radius: 5px;
 	border: 1px solid #eee;
+	z-index: 10;
 }
 .blue-theme .board-title{
 	background-color: #8693e8;
@@ -74,6 +77,7 @@
 	position: absolute;
 	top: 20px;
 	right: 0;
+	z-index: 100;
 	cursor: pointer;
 }
 /*#popUp {
