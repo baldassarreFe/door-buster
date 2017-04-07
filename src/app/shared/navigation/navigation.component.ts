@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {LoginService} from '../../core/login.service';
 
 @Component({
   selector: 'navigation',
@@ -10,7 +11,7 @@ export class NavigationComponent {
   @Input() title = 'Navigation';
   @Input() buttons: any[] = [];
 
-  constructor() {
-
+  constructor(public userService: LoginService) {
   }
+  
 }
