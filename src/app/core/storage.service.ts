@@ -28,11 +28,12 @@ export class StorageService {
 
   public uploadPdf(file: File): Promise<any> {
     if (this.uploadRef) {
+      const name = file.name.substring(0, file.name.length - 4) + '_' + new Date().toTimeString() + '.pdf';
       return new Promise((resolve, reject) => {
         const metadata: UploadMetadata = {
           contentType: 'application/pdf',
         };
-        const uploadTask = this.uploadRef.child(file.name).put(file, metadata);
+        const uploadTask = this.uploadRef.child(name).put(file, metadata);
 
         // Register three observers:
         // 1. 'state_changed' observer, called any time the state changes
@@ -58,7 +59,7 @@ export class StorageService {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           resolve({
-            name: file.name,
+            name: name,
             link: uploadTask.snapshot.downloadURL
           });
         });

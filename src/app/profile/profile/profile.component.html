@@ -1,0 +1,26 @@
+<navigation title="{{loginService.userName}}" [buttons]="[{icon:'reply', link:'/home'}]"></navigation>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <md-list>
+        <h3>Files</h3>
+        <md-list-item *ngIf="(userDocs | async)?.length==0">
+          You have no docs yet :(
+        </md-list-item>
+        <md-list-item *ngFor="let doc of userDocs | async">
+          <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
+        </md-list-item>
+      </md-list>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <md-list>
+        <h3>Overview</h3>
+        <md-list-item>Dreaming of {{dreaming}}</md-list-item>
+        <md-list-item>Applied {{applied}}</md-list-item>
+        <md-list-item>Ongoing {{ongoing}}</md-list-item>
+        <md-list-item>Gotcha {{gotcha}}</md-list-item>
+      </md-list>
+    </div>
+  </div>
+</div>
