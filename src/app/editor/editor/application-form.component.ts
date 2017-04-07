@@ -23,11 +23,7 @@ export class EditorComponent implements OnInit {
   // isLoading: boolean = true;
   autocompletions: Observable<Company[]>;
   term = new FormControl();
-  result: Company[] = [];
   company = [];
-  isVisible: string;
-  fileInfo: File;
-  fileName: string;
   isSelected: string;
 
   /*
@@ -65,6 +61,20 @@ export class EditorComponent implements OnInit {
         .get(this.applicationId)
         .subscribe(a => {
           this.a = a;
+          switch (this.a.status.toLowerCase()) {
+            case 'dreamingof':
+              this.moveTo('step1');
+              break;
+            case 'applied':
+              this.moveTo('step2');
+              break;
+            case 'ongoing':
+              this.moveTo('step3');
+              break;
+            case 'gotcha':
+              this.moveTo('step4');
+              break;
+          }
           // don't know why, angular does not detect this change automatically
           this.ref.detectChanges();
         });

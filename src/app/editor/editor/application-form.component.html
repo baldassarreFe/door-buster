@@ -86,8 +86,7 @@
     </div>
 
     <!-- Form step 2 -->
-    <div class="form-group" id="dreaming" class="step2" *ngIf="step2">
-      <label for="dreaming" class="fullwidth"><h4>Applied</h4></label>
+    <div class="form-group" class="step2" *ngIf="step2">
       <label for="dreaming-contact">Contact person</label>
       <div id="dreaming-contact">
         <input placeholder="The Boss"
@@ -131,34 +130,17 @@
         <button md-button (click)="addDreamingDeadline()">Add</button>
       </div>
 
-      <!-- TODO make this work
-      <label for="upload-files">Upload CV / Cover Letter</label>
-      <div class="row file-uploader">
+      <label for="upload-documents">Upload CV / Cover Letter</label>
+      <div class="row file-uploader" id="upload-documents">
         <div *ngFor="let doc of a.applied.documents.concat(temporaryDocs)"
              class="col-md-4 col-sm-6 col-xs-12">
-          <a target="_blank" [href]="doc.link" >{{doc.name}}</a>
+          <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
-        <div *ngFor="let doc of a.applied.documents.concat(temporaryDocs)"
-             class="col-md-3 col-sm-4 col-xs-12">
-          <label class="btn-upload">
+        <div class="col-md-4 col-sm-6 col-xs-12">
             <input type="file" name="file" (change)="uploadFile($event)">
-            <button class="btn">+</button>
-          </label>
+            <span class="center-me">+</span>
         </div>
       </div>
-      -->
-
-      <ul class="files-uploading list-unstyled" id="upload-files">
-        <li *ngFor="let doc of a.applied.documents.concat(temporaryDocs)">
-          <label for="file" class="isSelected"></label>
-          <a class="fileinfo" target="_blank" [href]="doc.link" >{{doc.name}}</a>
-        </li>
-        <li>
-          <input type="file" name="file" class="inputfile" id="file" (change)="uploadFile($event)">
-          <label for="file" [ngClass]="isSelected"></label>
-          <p class="fileinfo">{{fileName}}</p>
-        </li>
-      </ul>
     </div>
 
     <!-- Form step 3 -->
@@ -189,7 +171,7 @@
              name="contractType">
     </div>
 
-    <button type="button" (click)="saveApplicfileation()" class="submit-btn btn btn-success">Submit</button>
+    <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
     <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
   </form>
 </div>
