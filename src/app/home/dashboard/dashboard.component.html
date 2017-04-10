@@ -18,7 +18,7 @@
             <md-card-content>
               <ng-container *ngIf="job.dreamingOf.deadlines">
                 <ul>
-                  <li *ngFor="let d of job.dreamingOf.deadlines">{{d.what}} - {{d.when}}</li>
+                  <li *ngFor="let d of job.dreamingOf.deadlines">{{d.what}} - {{d.when | date}}</li>
                 </ul>
               </ng-container>
 
@@ -103,7 +103,7 @@
 
         <div *ngIf="job.status==='dreamingOf'">
           <ng-container *ngIf="job.dreamingOf.deadlines">
-              <p *ngFor="let d of job.dreamingOf.deadlines">{{d.what}}: {{d.when}}</p>
+              <p *ngFor="let d of job.dreamingOf.deadlines">{{d.what}}: {{d.when | date}}</p>
           </ng-container>
           <p *ngIf="job.dreamingOf.contactPerson.name!==''">Contact: {{job.dreamingOf.contactPerson.name}}({{job.dreamingOf.contactPerson.role}}) - {{job.dreamingOf.contactPerson.email}}</p>
         </div>

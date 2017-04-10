@@ -26,8 +26,6 @@ export class EditorComponent implements OnInit {
   term = new FormControl();
   company = [];
   isSelected: string;
-  resultStatus: string;
-  resultText: string;
   tempLogoDel=[];
 
   get progressValue() {
@@ -162,23 +160,18 @@ export class EditorComponent implements OnInit {
       .then(() => this.router.navigate(['/home']));
   }
 
-  private addJobResult(result) {
-    if (result === 'thinking') {
-      this.resultStatus = 'thinking';
-      this.resultText = 'What are you waiting for?';
-      this.a.gotcha.outcome = 'thinking';
-    } else if (result === 'accept') {
-      this.resultStatus = 'accept';
-      this.resultText = 'Time to party!';
-      this.a.gotcha.outcome = 'accept';
-    } else if (result === 'rejected') {
-      this.resultStatus = 'rejected';
-      this.resultText = 'This is not the end of the world. Keep moving on!';
-      this.a.gotcha.outcome = 'rejected';
-    } else if (result === 'refuse') {
-      this.resultText = 'Follow that little voice inside your head';
-      this.resultStatus = 'refuse';
-      this.a.gotcha.outcome = 'refuse';
+  public get resultText() {
+    switch (this.a.gotcha.outcome){
+      case 'thinking':
+        return 'What are you waiting for?';
+      case 'accept':
+        return 'Time to party!';
+      case 'rejected':
+        return 'This is not the end of the world. Keep moving on!';
+      case 'refuse':
+        return 'Follow that little voice inside your head';
+      default:
+        return 'What\'s gonna happen with this application?';
     }
   }
 

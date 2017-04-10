@@ -200,7 +200,7 @@
         <div id="eventContact" class="form-set">
         <label>Date</label>
         <input placeholder="mm/dd/yy"
-         class="form-control" type="datetime"
+         class="form-control" type="datetime-local"
          [(ngModel)]="d.date" [ngModelOptions]="{standalone: true}">
           <label class="subtitle">Contact Person</label>
           <input placeholder="Name"
@@ -227,16 +227,16 @@
     <div class="form-group" *ngIf="a.status==='gotcha'">
       <div class="result-wrapper">
         <ul class="list-unstyled" [ngClass]="a.gotcha.outcome">
-          <li class="thinking" mdTooltip="Thinking Offer" (click)="addJobResult('thinking')">
+          <li class="thinking" mdTooltip="Thinking Offer" (click)="a.gotcha.outcome = 'thinking'">
             <md-icon>sms</md-icon>
           </li>
-          <li class="accept" mdTooltip="Accepted!" (click)="addJobResult('accept')">
+          <li class="accept" mdTooltip="Accepted!" (click)="a.gotcha.outcome = 'accept'">
             <md-icon>mood</md-icon>
           </li>
-          <li class="reject" mdTooltip="Rejected" (click)="addJobResult('rejected')">
+          <li class="reject" mdTooltip="Rejected" (click)="a.gotcha.outcome = 'rejected'">
             <md-icon>mood_bad</md-icon>
           </li>
-          <li class="refuse" mdTooltip="Refuse" (click)="addJobResult('refuse')">
+          <li class="refuse" mdTooltip="Refuse" (click)="a.gotcha.outcome = 'refuse'">
             <md-icon>pan_tool</md-icon>
           </li>
         </ul>
