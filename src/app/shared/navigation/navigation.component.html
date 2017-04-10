@@ -8,8 +8,8 @@
   <nav-icon-link *ngFor="let ic of buttons" [icon]="ic.icon" [link]="ic.link" [action]="ic.action"></nav-icon-link>
 
   <!-- LogOut button -->
-  <a href="/#" *ngIf="userService.loggedIn">
-    <md-icon (click)="userService.logout()" style="color:white;margin-left:1em;">power_settings_new</md-icon>
+  <a href="/#" style="margin-left:5px;" *ngIf="userService.loggedIn">
+    <md-icon (click)="userService.logout()" style="color:white;">power_settings_new</md-icon>
   </a>
 
 </md-toolbar>
