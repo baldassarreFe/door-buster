@@ -28,6 +28,7 @@ export class EditorComponent implements OnInit {
   isSelected: string;
   resultStatus: string;
   resultText: string;
+  tempLogoDel=[];
 
   get progressValue() {
     switch (this.a.status) {
@@ -96,6 +97,28 @@ export class EditorComponent implements OnInit {
       .catch(error => alert(error.message));
   }
 
+  uploadLogo(event: EventTarget) {
+    const eventObj: MSInputMethodContext = <MSInputMethodContext> event;
+    const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
+    const files: FileList = target.files;
+    const file = files[0];
+    const uploadLogo = this.storageService.uploadLogo(file)
+      .then(logo => {
+        this.a.company.squareLogo=logo.link;
+        target.value = '';
+      })
+      .catch(error => alert(error.message));
+  }
+
+  removeLogo(link){
+    this.a.company.squareLogo='';
+    var expr='firebasestorage';
+    if(link.match(expr)){
+      this.tempLogoDel.push({'link':link});
+    }
+    console.log(this.tempLogoDel);
+  }
+
   get dropdownVisible(): boolean {
     return this._dropdownVisible;
   }
@@ -132,6 +155,9 @@ export class EditorComponent implements OnInit {
   private saveApplication() {
     this.a.applied.documents = this.a.applied.documents.concat(this.temporaryDocs);
     this.temporaryDocs = [];
+    for (var i = this.tempLogoDel.length - 1; i >= 0; i--) {
+      this.storageService.deleteLogo(this.tempLogoDel[i].link);
+    }
     this.applicationsService.update(this.applicationId, this.a)
       .then(() => this.router.navigate(['/home']));
   }

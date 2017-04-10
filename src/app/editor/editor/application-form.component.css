@@ -210,6 +210,50 @@
 	margin: 5px 0;
 }
 
+.company-editor-logo{
+	width:25%;
+	float: left;
+	box-sizing: border-box;
+	padding: 10px;
+}
+.company-editor-detail{
+	width: 75%;
+	float: left;
+}
+.logo-wrapper{
+	overflow: hidden;
+	text-align: center;
+}
+.logo-wrapper img{
+	width: 80%;
+}
+.logo-uploader{
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: #eee;
+	position: relative;
+	display: inline-block;
+	margin-top: 30px;
+}
+.logo-wrapper input[type="file"]{
+	opacity: 0;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+.logo-wrapper span{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-weight: bold;
+	font-size: 2em;
+	transform: translate(-50%,-50%);
+}
+
 @media (max-width: 410px) {
   .new-event {
     width: 100%;

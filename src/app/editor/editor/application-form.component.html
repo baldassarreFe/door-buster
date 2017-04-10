@@ -50,25 +50,40 @@
                 [label]="c.website"></option>
       </datalist>
       -->
-      <label for="company-name">Name</label>
-      <input placeholder="Your New Company Ltd" id="company-name" required
-             class="form-control" type="text"
-             [formControl]="term"
-             (blur)="dropdownVisible = false" (focus)="dropdownVisible = true"
-             [(ngModel)]="a.company.name" name="companyName">
-      <ul class="list-unstyled dropdown" [ngClass]="{'isVisible': dropdownVisible}">
-        <li *ngFor="let item of autocompletions | async">
-          <a (click)="showCompanyInfo(item)">{{item.name}}</a>
-        </li>
-      </ul>
-      <label for="company-website">Website</label>
-      <input placeholder="Website URL" id="company-website"
-             class="form-control" type="text"
-             [(ngModel)]="a.company.website" name="companyLocation">
-      <label for="company-business-area">Business area</label>
-      <input placeholder="Recreation" id="company-business-area"
-             class="form-control" type="text"
-             [(ngModel)]="a.company.businessArea" name="companyBusinessArea">
+     <div class="company-editor-logo">
+       <div *ngIf="a.company.squareLogo" class="logo-wrapper">
+         <img src="{{a.company.squareLogo}}">
+         <a (click)="removeLogo(a.company.squareLogo)" md-button>Remove Logo</a>
+       </div>
+        <div *ngIf="!a.company.squareLogo" class="logo-wrapper">
+            <div class="logo-uploader">
+              <span class="center-me">+</span>
+              <input type="file" name="uploadLogo" (change)="uploadLogo($event)">
+            </div>
+        </div>
+
+     </div>
+     <div class="company-editor-detail">
+       <label for="company-name">Name</label>
+       <input placeholder="Your New Company Ltd" id="company-name" required
+              class="form-control" type="text"
+              [formControl]="term"
+              (blur)="dropdownVisible = false" (focus)="dropdownVisible = true"
+              [(ngModel)]="a.company.name" name="companyName">
+       <ul class="list-unstyled dropdown" [ngClass]="{'isVisible': dropdownVisible}">
+         <li *ngFor="let item of autocompletions | async">
+           <a (click)="showCompanyInfo(item)">{{item.name}}</a>
+         </li>
+       </ul>
+       <label for="company-website">Website</label>
+       <input placeholder="Website URL" id="company-website"
+              class="form-control" type="text"
+              [(ngModel)]="a.company.website" name="companyLocation">
+       <label for="company-business-area">Business area</label>
+       <input placeholder="Recreation" id="company-business-area"
+              class="form-control" type="text"
+              [(ngModel)]="a.company.businessArea" name="companyBusinessArea">
+     </div>
 
       <div id="position">
         <label for="position" class="fullwidth"><h4>Position</h4></label>
@@ -79,7 +94,7 @@
         <label for="position-notes">Notes</label>
         <textarea placeholder="A little bird told me about this position" id="position-notes"
                   class="form-control" type="text" rows="3"
-                  [(ngModel)]="a.position.notes" name="positionTitle"></textarea>
+                  [(ngModel)]="a.position.notes" name="positionNotes"></textarea>
         <label for="position-salary">Expected Salary</label>
         <div class="form-inline" id="position-salary">
           <input placeholder="100"
