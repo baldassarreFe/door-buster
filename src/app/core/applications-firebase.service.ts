@@ -43,4 +43,10 @@ export class ApplicationsFirebaseService extends ApplicationsService {
       }
     }
   }
+
+  public delete(key: string): firebase.Promise<void> {
+    if (this._applications$) {
+      return this._applications$.remove(key);
+    }
+  }
 }

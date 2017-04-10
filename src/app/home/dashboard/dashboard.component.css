@@ -80,6 +80,15 @@
 	z-index: 100;
 	cursor: pointer;
 }
+
+.delete-icon{
+  font-size: 1em;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  z-index: 100;
+  cursor: pointer;
+}
 /*#popUp {
 	position: absolute;
 	top:0;
@@ -89,7 +98,7 @@
 	z-index: 10;
 }*/
 #popUp {
-  
+
 }
 .view-show {
   display: none;

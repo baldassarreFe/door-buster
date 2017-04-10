@@ -7,6 +7,8 @@ export abstract class ApplicationsService {
 
   public abstract update(id: string, application: any): any;
 
+  public abstract delete(key: string): any;
+
   public currencies = [
     { value: 'eur', display: '€' },
     { value: 'usd', display: '$' },

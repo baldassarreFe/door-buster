@@ -14,6 +14,7 @@
               <md-card-title>{{job.company.name}}</md-card-title>
               <md-card-subtitle>{{job.position.title}}</md-card-subtitle>
               <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
+              <md-icon class="delete-icon" color="warn" (click)="delete(job.$key, job.company.name)">delete_forever</md-icon>
             </md-card-header>
             <md-card-content>
               <ng-container *ngIf="job.dreamingOf.deadlines">
