@@ -12,7 +12,7 @@ export abstract class ApplicationsService {
   public currencies = [
     { value: 'eur', display: '€' },
     { value: 'usd', display: '$' },
-    { value: 'sek', display: 'sek' }
+    { value: 'sek', display: 'SEK' }
   ];
   public billings = [
     { value: 'hourly', display: 'Hourly' },
