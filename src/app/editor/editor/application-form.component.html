@@ -277,8 +277,8 @@
     </div>
 
     <div class="button-wrapper">
-      <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
-      <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
+      <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | applicationStatus}}</button>
+      <button md-raised-button (click)="cancelEdits()">Cancel</button>
     </div>
   </form>
 </div>
