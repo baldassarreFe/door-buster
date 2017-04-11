@@ -78,7 +78,7 @@
             <md-card-content>
               <ng-container *ngIf="job.ongoing.events">
                 <ul>
-                  <li *ngFor="let event of job.ongoing.events">{{event.title}} with 
+                  <li *ngFor="let event of job.ongoing.events">{{event.title}} with
                     <span *ngIf="event.with.name"><a href="mailto:{{event.with.email}}">{{event.with.name}}</a></span>
                     <span *ngIf="!event.with.name">n/a</span>
                   </li>
@@ -148,7 +148,7 @@
         <div class="position">
           <h5> - {{job.position.title}} - </h5>
           <p>{{job.position.notes}}</p>
-          <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}}{{job.position.expectedSalary.currency}}/{{job.position.expectedSalary.billing}}</p>
+          <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}} {{applicationsService.currencies[job.position.expectedSalary.currency]}}/{{job.position.expectedSalary.billing}}</p>
         </div>
 
         <div *ngIf="job.status==='dreamingOf'">
@@ -159,15 +159,15 @@
         </div>
 
         <div *ngIf="job.status==='applied'">
-          <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate}}</p>
+          <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate | date}}</p>
         </div>
 
         <div *ngIf="job.status==='ongoing'">
-          <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate}}</p>
+          <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate | date}}</p>
           <ng-container *ngIf="job.ongoing.events">
             <div *ngFor="let e of job.ongoing.events" class="event_style">
               <h5>{{e.title}}</h5>
-              <p>{{e.date}}</p>
+              <p>{{e.date | date}}</p>
               <p>with - {{e.with.name}}, {{e.with.email}}</p>
               <p>{{e.notes}}</p>
             </div>
@@ -175,11 +175,11 @@
         </div>
 
         <div *ngIf="job.status==='gotcha'">
-          <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate}}</p>
+          <p *ngIf="job.applied.applicationDate!==''">Application date: {{job.applied.applicationDate | date}}</p>
           <div *ngIf="job.ongoing.events" class="position">
             <div *ngFor="let e of job.ongoing.events" class="event_style">
               <h5>{{e.title}}</h5>
-              <p>{{e.date}}</p>
+              <p>{{e.date | date}}</p>
               <p>with - {{e.with.name}}, {{e.with.email}}</p>
               <p>{{e.notes}}</p>
             </div>
@@ -191,7 +191,7 @@
             <h5>Get Offer! &#9786;</h5>
             <p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billing}}</p>
             <p>reply before: {{job.gotcha.deadline}}</p>
-            <p>start work: {{job.gotcha.startingDate}}</p>
+            <p>start work: {{job.gotcha.startingDate | date}}</p>
           </div>
 
         </div>

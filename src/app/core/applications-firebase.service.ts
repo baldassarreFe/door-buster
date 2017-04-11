@@ -30,7 +30,11 @@ export class ApplicationsFirebaseService extends ApplicationsService {
   private replaceNulls = (application) => {
     application.dreamingOf.deadlines = application.dreamingOf.deadlines || [];
     application.applied.documents = application.applied.documents || [];
-    application.ongoing.events = application.ongoing.events || [];
+    if (!application.ongoing) {
+      application['ongoing'] = {events: []};
+    } else {
+      application.ongoing.events = application.ongoing.events || [];
+    }
     return application;
   }
 

@@ -12,22 +12,26 @@
       </md-progress-bar>
       <ul class="steps-list">
         <li (click)="a.status='dreamingOf'"
-            [class.active-step]="a.status=='dreamingOf'">
+            [class.active-step]="a.status=='dreamingOf'"
+            mdTooltip="Move to dreaming">
           <span>1</span>
           <p>Dreaming of</p>
         </li>
         <li (click)="a.status='applied'"
-            [class.active-step]="a.status=='applied'">
+            [class.active-step]="a.status=='applied'"
+            mdTooltip="Move to applied">
           <span>2</span>
           <p>Applied</p>
         </li>
         <li (click)="a.status='ongoing'"
-            [class.active-step]="a.status=='ongoing'">
+            [class.active-step]="a.status=='ongoing'"
+            mdTooltip="Move to ongoing">
           <span>3</span>
           <p>Ongoing</p>
         </li>
         <li (click)="a.status='gotcha'"
-            [class.active-step]="a.status=='gotcha'">
+            [class.active-step]="a.status=='gotcha'"
+            mdTooltip="Move to Gotcha!">
           <span>4</span>
           <p>Gotcha!</p>
         </li>

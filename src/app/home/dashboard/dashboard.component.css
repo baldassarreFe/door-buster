@@ -89,7 +89,16 @@
 	border-bottom: 3px solid #e52163;
 }
 
+md-card:hover .edit-icon {
+  opacity: 1;
+}
+
+md-card:hover .delete-icon {
+  opacity: 1;
+}
+
 .edit-icon{
+  opacity: 0.2;
 	font-size: 1em;
 	position: absolute;
 	top: 20px;
@@ -99,10 +108,11 @@
 }
 
 .delete-icon{
+  opacity: 0.1;
   font-size: 1em;
   position: absolute;
   top: 20px;
-  right: 25px;
+  right: 20px;
   z-index: 100;
   cursor: pointer;
 }
