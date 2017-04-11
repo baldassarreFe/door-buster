@@ -125,7 +125,7 @@
               </div>
               <p *ngIf="job.gotcha.contractType">Contract type: {{job.gotcha.contractType}}</p>
               <p *ngIf="job.gotcha.salary">Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency | uppercase}}
-                <span *ngIf="job.gotcha.salary.billing"> / {{job.gotcha.salary.billing}}</span>
+                <span *ngIf="job.gotcha.salary.billings"> / {{job.gotcha.salary.billings}}</span>
               </p>
             </md-card-content>
           </md-card>
@@ -148,7 +148,7 @@
         <div class="position">
           <h5> - {{job.position.title}} - </h5>
           <p>{{job.position.notes}}</p>
-          <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}} {{applicationsService.currencies[job.position.expectedSalary.currency]}}/{{job.position.expectedSalary.billing}}</p>
+          <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}} {{applicationsService.currencies[job.position.expectedSalary.currency]}}/{{job.position.expectedSalary.billings}}</p>
         </div>
 
         <div *ngIf="job.status==='dreamingOf'">
@@ -189,7 +189,7 @@
           </div>
           <div *ngIf="job.gotcha.outcome!=='rejected'" class="success">
             <h5>Get Offer! &#9786;</h5>
-            <p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billing}}</p>
+            <p>Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency}} /{{job.gotcha.salary.billings}}</p>
             <p>reply before: {{job.gotcha.deadline}}</p>
             <p>start work: {{job.gotcha.startingDate | date}}</p>
           </div>
