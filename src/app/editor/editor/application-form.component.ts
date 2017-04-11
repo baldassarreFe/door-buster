@@ -87,7 +87,7 @@ export class EditorComponent implements OnInit {
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     const files: FileList = target.files;
     const file = files[0];
-    const uploadTask = this.storageService.uploadPdf(file)
+    this.storageService.uploadPdf(file)
       .then(doc => {
         this.temporaryDocs.push(doc);
         target.value = '';
@@ -100,19 +100,18 @@ export class EditorComponent implements OnInit {
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     const files: FileList = target.files;
     const file = files[0];
-    const uploadLogo = this.storageService.uploadLogo(file)
+    this.storageService.uploadLogo(file)
       .then(logo => {
-        this.a.company.squareLogo=logo.link;
+        this.a.company.squareLogo = logo.link;
         target.value = '';
       })
       .catch(error => alert(error.message));
   }
 
   removeLogo(link){
-    this.a.company.squareLogo='';
-    var expr='firebasestorage';
-    if(link.match(expr)){
-      this.tempLogoDel.push({'link':link});
+    this.a.company.squareLogo = '';
+    if (link.match('firebasestorage')) {
+      this.tempLogoDel.push({'link': link});
     }
     console.log(this.tempLogoDel);
   }
@@ -124,12 +123,12 @@ export class EditorComponent implements OnInit {
   set dropdownVisible(value: boolean) {
     // HACK to prevent the dropdown to disappear
     // before a click on it is performed
-    setTimeout(() => this._dropdownVisible = value, 20);
+    setTimeout(() => this._dropdownVisible = value, 100);
   }
 
   private showCompanyInfo(companyInfo) {
     // TODO see if we can do: this.a.company = companyInfo
-    console.log('Clicked on', companyInfo.name);
+    // console.log('Clicked on', companyInfo.name);
     this.a.company.name = companyInfo.name;
     this.a.company.businessArea = companyInfo.industry;
     this.a.company.website = companyInfo.website;
@@ -181,10 +180,4 @@ export class EditorComponent implements OnInit {
       this.storageService.delete
     )).then(() => this.router.navigate(['/home']));
   }
-
-  /*
-   test(event: Event) {
-   console.log(event.target['value']);
-   }
-   */
 }
