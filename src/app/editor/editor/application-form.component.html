@@ -130,18 +130,21 @@
       <div id="dreaming-deadlines">
         <div *ngFor="let d of a.dreamingOf.deadlines; let i=index" class="form-inline">
           <input placeholder="Applications open"
+                 [ngModelOptions]="{standalone: true}"
                  class="form-control" type="text"
                  [(ngModel)]="d.what" name="deadlineWhat">
           <input class="form-control" type="datetime-local"
+                 [ngModelOptions]="{standalone: true}"
                  [(ngModel)]="d.when" name="deadlineWhen">
           <ng-container *ngIf="d.reminder">
             <input placeholder="1"
                    class="form-control" type="number"
+                   [ngModelOptions]="{standalone: true}"
                    [(ngModel)]="d.reminder.howMuch" name="deadlineHowMuch">
-            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit">
+            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit" [ngModelOptions]="{standalone: true}">
               <option *ngFor="let tu of applicationsService.timeUnits" [value]="tu.value">{{tu.display}}</option>
             </select>
-            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter">
+            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter" [ngModelOptions]="{standalone: true}">
               <option *ngFor="let ba of applicationsService.beforeAfter" [value]="ba.value">{{ba.display}}</option>
             </select>
           </ng-container>
