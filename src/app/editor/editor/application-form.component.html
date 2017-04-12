@@ -169,12 +169,12 @@
       <div class="row file-uploader" id="upload-documents">
         <div *ngFor="let doc of a.applied.documents"
              class="col-md-4 col-sm-6 col-xs-12">
-          <span class="pointer" (click)="deleteFile(doc.name)">X</span>
+          <span class="pointer" (click)="deleteFile(doc.link)">X</span>
           <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
         <div *ngFor="let doc of temporaryDocs"
              class="col-md-4 col-sm-6 col-xs-12">
-          <span class="pointer" (click)="deleteFile(doc.name)">X</span>
+          <span class="pointer" (click)="deleteFile(doc.link)">X</span>
           <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
