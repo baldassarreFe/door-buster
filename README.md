@@ -25,29 +25,39 @@ Backend (auth and storage):
 * Firebase
 
 External APIs:
-* LinkedIn and GlassDoor
+* GlassDoor
 * Some email/reminder service
 * Some other cool stuff we can add randomly
 
 ## Draft of the steps of an application
 
 1. Pre-application:
-  1. Name of the company and basic informations (headquarters, number of employees, founded, contacts)
-  2. Position (position, where you found it, when you found it, how to apply, requirements)
-  3. Kind of job (period, contract type)
-  4. Deadlines (applications open, application closes)
-  5. Reminders (apply before/after)
-  6. Documents: link to the job listing, photo of the advertise etc.
-  7. CV/CL drafts
+   1. Name of the company and basic informations (headquarters, number of employees, founded, contacts)
+   2. Position (position, where you found it, when you found it, how to apply, requirements)
+   3. Kind of job (period, contract type)
+   4. Deadlines (applications open, application closes)
+   5. Reminders (apply before/after)
+   6. Documents: link to the job listing, photo of the advertise etc.
+   7. CV/CL drafts
 2. Application step:
-  1. Upload a CV + Cover Letter (specific for that company, help deciding the skills to highlight, maybe some typo checking)
-  2. Reminders (when to expect a follow up)
+   1. Upload a CV + Cover Letter (specific for that company, help deciding the skills to highlight, maybe some typo checking)
+   2. Reminders (when to expect a follow up)
 3. Ongoing (the largest and more generic step):
-  1. Track each step of the interviewing process based on:
-  2. What (Skype/phone/in person/on site)
-  3. Who (interviewers you interacted with)
-  4. When (incoming/completed + optional reminders)
+   1. Track each step of the interviewing process based on:
+   2. What (Skype/phone/in person/on site)
+   3. Who (interviewers you interacted with)
+   4. When (incoming/completed + optional reminders)
 4. Final Step:
-  1. Rejected: keep it for reference/delete it
-  2. Got an offer: how much, starting when, type of contract, who you spoke with
-  3. Accepted: celebrate
+   1. Rejected: keep it for reference/delete it
+   2. Got an offer: how much, starting when, type of contract, who you spoke with
+   3. Accepted: celebrate
+   
+## Test it yourself
+1. Clone the repo
+   ```git clone https://github.com/baldassarreFe/door-buster```
+2. Npm install everything
+   ```npm install```
+3. Build and serve on localhost:4200
+   ```ng serve```
+   
+
