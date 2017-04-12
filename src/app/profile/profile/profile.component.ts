@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from '../../core/login.service';
-import {ApplicationsService} from '../../core/applications.service';
+import {ApplicationsService} from '../../core/applications/applications.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/operator/map';
 

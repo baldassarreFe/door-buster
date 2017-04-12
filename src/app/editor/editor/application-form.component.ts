@@ -1,15 +1,16 @@
-import {Component, OnInit, Input, ChangeDetectorRef} from "@angular/core";
-import {NewApplicationService} from "../../core/new-application.service";
-import {ApplicationsService} from "../../core/applications.service";
-import {Deadline} from "../../core/model/deadline";
-import {Event} from "../../core/model/event";
-import {GlassdoorService} from "../../core/glassdoor.service";
-import {Company} from "../../core/model/company";
-import {FormControl} from "@angular/forms";
-import {Observable} from "rxjs/Observable";
-import {Router} from "@angular/router";
-import {StorageService} from "../../core/storage.service";
-import {Reminder} from "../../core/model/reminder";
+import {ChangeDetectorRef, Component, Inject, Input, OnInit} from '@angular/core';
+import {NewApplicationService} from '../../core/applications/new-application.service';
+import {ApplicationsService} from '../../core/applications/applications.service';
+import {Deadline} from '../../core/model/deadline';
+import {Event} from '../../core/model/event';
+import {GlassdoorService} from '../../core/glassdoor.service';
+import {Company} from '../../core/model/company';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
+import {Reminder} from '../../core/model/reminder';
+import {DocumentService} from '../../core/storage/document.service';
+import {LogoService} from '../../core/storage/logo.service';
 
 @Component({
   selector: 'application-form',
@@ -26,7 +27,7 @@ export class EditorComponent implements OnInit {
   term = new FormControl();
   company = [];
   isSelected: string;
-  tempLogoDel=[];
+  tempLogoDel = [];
 
   get progressValue() {
     switch (this.a.status) {
@@ -49,7 +50,8 @@ export class EditorComponent implements OnInit {
   constructor(public newApplicationService: NewApplicationService,
               public applicationsService: ApplicationsService,
               public glassdoorService: GlassdoorService,
-              private storageService: StorageService,
+              @Inject(DocumentService) private documentService,
+              @Inject(LogoService) private logoService,
               private router: Router,
               private ref: ChangeDetectorRef) {
   }
@@ -74,12 +76,13 @@ export class EditorComponent implements OnInit {
       .switchMap(term => this.glassdoorService.search(term));
   }
 
-  deleteFile(name) {
-    this.storageService.delete(name)
-      .then(res => {
-        this.a.applied.documents = this.temporaryDocs.filter(d => d.name !== name);
-        this.temporaryDocs = this.temporaryDocs.filter(d => d.name !== name);
-      });
+  deleteFile(url) {
+    this.documentService.deleteDoc(url)
+      .then(deletedUrl => {
+        this.a.applied.documents = this.temporaryDocs.filter(d => d.link !== deletedUrl);
+        this.temporaryDocs = this.temporaryDocs.filter(d => d.link !== deletedUrl);
+      })
+      .catch(console.log);
   }
 
   uploadFile(event: EventTarget) {
@@ -87,7 +90,7 @@ export class EditorComponent implements OnInit {
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     const files: FileList = target.files;
     const file = files[0];
-    this.storageService.uploadPdf(file)
+    this.documentService.uploadDoc(file)
       .then(doc => {
         this.temporaryDocs.push(doc);
         target.value = '';
@@ -100,7 +103,7 @@ export class EditorComponent implements OnInit {
     const target: HTMLInputElement = <HTMLInputElement> eventObj.target;
     const files: FileList = target.files;
     const file = files[0];
-    this.storageService.uploadLogo(file)
+    this.logoService.uploadLogo(file)
       .then(logo => {
         this.a.company.squareLogo = logo.link;
         target.value = '';
@@ -108,7 +111,7 @@ export class EditorComponent implements OnInit {
       .catch(error => alert(error.message));
   }
 
-  removeLogo(link){
+  removeLogo(link) {
     this.a.company.squareLogo = '';
     if (link.match('firebasestorage')) {
       this.tempLogoDel.push({'link': link});
@@ -136,12 +139,12 @@ export class EditorComponent implements OnInit {
   }
 
   private addDreamingDeadline() {
-    console.log(this.a.dreamingOf.deadlines)
+    console.log(this.a.dreamingOf.deadlines);
     this.a.dreamingOf.deadlines.push(new Deadline());
   }
 
   private addReminder(deadline) {
-    console.log(JSON.stringify(deadline))
+    console.log(JSON.stringify(deadline));
     deadline.reminder = new Reminder();
   }
 
@@ -152,15 +155,15 @@ export class EditorComponent implements OnInit {
   private saveApplication() {
     this.a.applied.documents = this.a.applied.documents.concat(this.temporaryDocs);
     this.temporaryDocs = [];
-    for (var i = this.tempLogoDel.length - 1; i >= 0; i--) {
-      this.storageService.deleteLogo(this.tempLogoDel[i].link);
+    for (let i = this.tempLogoDel.length - 1; i >= 0; i--) {
+      this.logoService.deleteLogo(this.tempLogoDel[i].link);
     }
     this.applicationsService.update(this.applicationId, this.a)
       .then(() => this.router.navigate(['/home']));
   }
 
   public get resultText() {
-    switch (this.a.gotcha.outcome){
+    switch (this.a.gotcha.outcome) {
       case 'thinking':
         return 'What are you waiting for?';
       case 'accept':
@@ -176,8 +179,8 @@ export class EditorComponent implements OnInit {
 
 
   private cancelEdits() {
-    Promise.all(this.temporaryDocs.map(
-      this.storageService.delete
-    )).then(() => this.router.navigate(['/home']));
+    Promise
+      .all(this.temporaryDocs.map(this.documentService.deleteDoc))
+      .then(() => this.router.navigate(['/home']));
   }
 }

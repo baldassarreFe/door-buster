@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {ApplicationsService} from "./applications.service";
-import {Observable} from "rxjs/Observable";
-import {AngularFire, FirebaseListObservable} from "angularfire2";
-import {LoginService} from "./login.service";
-import "rxjs/operator/mergeMap";
+import {Injectable} from '@angular/core';
+import {ApplicationsService} from './applications.service';
+import {Observable} from 'rxjs/Observable';
+import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import {LoginService} from '../login.service';
+import 'rxjs/operator/mergeMap';
 import app = firebase.app;
 
 @Injectable()
