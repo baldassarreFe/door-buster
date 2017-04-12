@@ -10,15 +10,15 @@
 
         <ng-container *ngIf="job.status==='dreamingOf'">
           <md-card class="board-item" (click)="popup(job.$key)">
-            <md-card-header class="card-header">
+            <div class="card-header">
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
-              <md-card-title-group class="card-header-text">
-                <md-card-title>{{job.company.name}}</md-card-title>
-                <md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-              </md-card-title-group>
+              <div class="card-header-text">
+                <p class="card-title">{{job.company.name}}</p>
+                <p class="card-subtitle">{{job.position.title}}</p>
+              </div>
               <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
               <md-icon class="delete-icon" color="warn" (click)="delete(job.$key, job.company.name)">delete_forever</md-icon>
-            </md-card-header>
+            </div>
             <md-card-content>
               <ng-container *ngIf="job.dreamingOf.deadlines">
                 <ul>
@@ -38,15 +38,15 @@
       <div *ngFor="let job of applicationsService.applications$| async">
         <ng-container *ngIf="job.status==='applied'">
           <md-card class="board-item" (click)="popup(job.$key)">
-            <md-card-header class="card-header">
+            <div class="card-header">
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
-              <md-card-title-group class="card-header-text">
-                <md-card-title>{{job.company.name}}</md-card-title>
-                <md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-              </md-card-title-group>
+              <div class="card-header-text">
+                <p class="card-title">{{job.company.name}}</p>
+                <p class="card-subtitle">{{job.position.title}}</p>
+              </div>
               <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
               <md-icon class="delete-icon" color="warn" (click)="delete(job.$key, job.company.name)">delete_forever</md-icon>
-            </md-card-header>
+            </div>
             <md-card-content>
               <ng-container *ngIf="job.applied.documents">
                 <p>{{job.applied.documents.length}} document(s) uploaded</p>
@@ -66,15 +66,15 @@
       <div *ngFor="let job of applicationsService.applications$| async">
         <ng-container *ngIf="job.status==='ongoing'">
           <md-card class="board-item" (click)="popup(job.$key)">
-            <md-card-header class="card-header">
+            <div class="card-header">
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
-              <md-card-title-group class="card-header-text">
-                <md-card-title>{{job.company.name}}</md-card-title>
-                <md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-              </md-card-title-group>
+              <div class="card-header-text">
+                <p class="card-title">{{job.company.name}}</p>
+                <p class="card-subtitle">{{job.position.title}}</p>
+              </div>
               <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
               <md-icon class="delete-icon" color="warn" (click)="delete(job.$key, job.company.name)">delete_forever</md-icon>
-            </md-card-header>
+            </div>
             <md-card-content>
               <ng-container *ngIf="job.ongoing.events">
                 <ul>
@@ -97,15 +97,15 @@
       <div *ngFor="let job of applicationsService.applications$| async">
         <ng-container *ngIf="job.status==='gotcha'">
           <md-card class="board-item" (click)="popup(job.$key)">
-            <md-card-header class="card-header">
+            <div class="card-header">
               <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
-              <md-card-title-group class="card-header-text">
-                <md-card-title>{{job.company.name}}</md-card-title>
-                <md-card-subtitle>{{job.position.title}}</md-card-subtitle>
-              </md-card-title-group>
+              <div class="card-header-text">
+                <p class="card-title">{{job.company.name}}</p>
+                <p class="card-subtitle">{{job.position.title}}</p>
+              </div>
               <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
               <md-icon class="delete-icon" color="warn" (click)="delete(job.$key, job.company.name)">delete_forever</md-icon>
-            </md-card-header>
+            </div>
             <md-card-content>
               <div class="outcome-wrapper">
                 <ul class="list-unstyled" [ngClass]="job.gotcha.outcome">
@@ -148,14 +148,14 @@
         <div class="position">
           <h5> - {{job.position.title}} - </h5>
           <p>{{job.position.notes}}</p>
-          <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}} {{applicationsService.currencies[job.position.expectedSalary.currency]}}/{{job.position.expectedSalary.billing}}</p>
+          <p *ngIf="job.position.expectedSalary.value!==''">Expected salary: {{job.position.expectedSalary.value}}  {{job.position.expectedSalary.currency | uppercase}} / {{job.position.expectedSalary.billings}}</p>
         </div>
 
         <div *ngIf="job.status==='dreamingOf'">
           <ng-container *ngIf="job.dreamingOf.deadlines">
               <p *ngFor="let d of job.dreamingOf.deadlines">{{d.what}}: {{d.when | date}}</p>
           </ng-container>
-          <p *ngIf="job.dreamingOf.contactPerson.name!==''">Contact: {{job.dreamingOf.contactPerson.name}}({{job.dreamingOf.contactPerson.role}}) - {{job.dreamingOf.contactPerson.email}}</p>
+          <p *ngIf="job.dreamingOf.contactPerson.name!==''">Contact: <a href="mailto:{{job.dreamingOf.contactPerson.email}}">{{job.dreamingOf.contactPerson.name}}({{job.dreamingOf.contactPerson.role}})</a></p>
         </div>
 
         <div *ngIf="job.status==='applied'">
