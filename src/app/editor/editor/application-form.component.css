@@ -7,8 +7,15 @@
 .list-unstyled{
 	list-style: none;
 }
+.fullwidth{width: 100%;}
+.pointer{cursor: pointer;}
+
 .dropdown{
 	padding: 0;
+	position: absolute;
+	top: 60px; left: 20px;
+	width: 90%;
+	background: #fff;
 	margin-top: 2px;
 	border: 1px solid #eee;
 	display: none;
@@ -23,7 +30,7 @@
 	background: #eee;
 	cursor: pointer;
 }
-.fullwidth{width: 100%;}
+
 .form-horizontal label{
 	margin-top: 10px;
 	margin-bottom: 0px;
@@ -31,32 +38,27 @@
 .form-set input{
 	margin-bottom: 5px;
 }
-.submit-btn{
-	margin: 20px 0;
-}
 
+/* CV File Uploader */
 .file-uploader{
   margin-left: 0;
   margin-right: 0;
 }
-
 .file-uploader div{
   border: 1px dashed #2196f3;
   padding: 0;
   height: 5em;
-  margin: 0 5px;
+  margin: 5px;
   border-radius: 5px;
   color: #2196f3;
   font-weight: lighter;
   position: relative;
   transition: background-color 400ms ease;
 }
-
 .file-uploader div:hover{
   background-color: rgb(188, 222, 255);
   font-weight: bold;
 }
-
 .file-uploader .center-me{
   overflow: hidden;
   padding: 0;
@@ -66,7 +68,6 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
 .file-uploader input[type=file] {
   position: absolute;
   opacity: 0;
@@ -76,18 +77,7 @@
   display: block;
 }
 
-.step2 input.form-control{
-	margin: 5px 0;
-}
-
-.step3, .step4{
-  padding-top: 30px;
-}
-
-.btn-add-more{
-	margin: 10px;
-}
-
+/* Gotcha status */
 .result-wrapper{
 	width: 100%;
 	float: left;
@@ -136,36 +126,17 @@
 	padding: 13px;
 }
 
-.button-wrapper{
-	width: 100%;
-	float: left;
-}
-.new-event{
-	float: left;
-	width: 50%;
-	box-sizing: border-box;
-	margin-bottom: 30px;
-	padding: 10px 10px 20px 10px;
-	border-bottom: 1px solid #eee;
-}
-.input-date{
-	width: 100%;
-	max-width: 200px;
-}
-
-/*Progress indicator*/
+/* Progress indicator */
 .steps{
 	margin: 20px 0 75px;
 	position: relative;
 }
-
 .steps md-progress-bar{
-  margin: 5px 0;
+  	margin: 5px 0;
 }
-
 .steps-list{
 	display: block;
-  position: absolute;
+  	position: absolute;
 	list-style: none;
 	width: 100%;
 	margin: 0;
@@ -176,49 +147,32 @@
 	float: left;
 	width: 25%;
 	text-align: left;
-  opacity: 0.6;
+  	opacity: 0.6;
 }
-
 .steps-list li:hover{
 	cursor: pointer;
-  opacity: 1;
+  	opacity: 1;
 }
-
 .steps-list li.active-step{
-  font-weight: bold;
-  opacity: 1;
+  	font-weight: bold;
+  	opacity: 1;
 }
-
 .steps-list span{
 	display: inline-block;
 	text-align: center;
-  width: 36px;
-  height: 36px;
+  	width: 36px;
+  	height: 36px;
 	padding: 7px;
 	background: #2196f3;
 	color: #fff;
 	border-radius: 50%;
 }
-
 .steps-list p{
-  display: inline-block;
-  margin-left: 5px;
+  	display: inline-block;
+  	margin-left: 5px;
 }
 
-.progress-form{
-	margin: 5px 0;
-}
-
-.company-editor-logo{
-	width:25%;
-	float: left;
-	box-sizing: border-box;
-	padding: 10px;
-}
-.company-editor-detail{
-	width: 75%;
-	float: left;
-}
+/* Logo editor */
 .logo-wrapper{
 	overflow: hidden;
 	text-align: center;
@@ -251,10 +205,4 @@
 	font-weight: bold;
 	font-size: 2em;
 	transform: translate(-50%,-50%);
-}
-
-@media (max-width: 410px) {
-  .new-event {
-    width: 100%;
-  }
 }
