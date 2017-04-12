@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import {LoginService} from '../login.service';
 import 'rxjs/operator/mergeMap';
-import app = firebase.app;
 
 @Injectable()
 export class ApplicationsFirebaseService extends ApplicationsService {
@@ -14,8 +13,10 @@ export class ApplicationsFirebaseService extends ApplicationsService {
   constructor(private af: AngularFire, private loginService: LoginService) {
     super();
     this.af.auth.subscribe(user => {
-      this._applications$ = this.af.database.list('/users/' + user.uid);
-      this.applications$ = <Observable<any>> this._applications$;
+      this._applications$ = this.af.database
+        .list('/users/' + user.uid);
+      this.applications$ = <Observable<any>> this._applications$
+        .map(applications => applications ? applications.map(this.replaceNulls) : []);
     });
   }
 
@@ -28,12 +29,14 @@ export class ApplicationsFirebaseService extends ApplicationsService {
   // so when we retrieve applications we need to manually add them back
   // so that the UI does not crash
   private replaceNulls = (application) => {
-    application.dreamingOf.deadlines = application.dreamingOf.deadlines || [];
-    application.applied.documents = application.applied.documents || [];
-    if (!application.ongoing) {
-      application['ongoing'] = {events: []};
-    } else {
-      application.ongoing.events = application.ongoing.events || [];
+    if (application) {
+      application.dreamingOf.deadlines = application.dreamingOf.deadlines || [];
+      application.applied.documents = application.applied.documents || [];
+      if (!application.ongoing) {
+        application['ongoing'] = {events: []};
+      } else {
+        application.ongoing.events = application.ongoing.events || [];
+      }
     }
     return application;
   }
