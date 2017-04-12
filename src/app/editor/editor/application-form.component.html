@@ -41,7 +41,7 @@
     <!-- Form step 1 -->
     <div class="form-group" id="company" *ngIf="a.status==='dreamingOf'">
       <label class="fullwidth" for="company"><h4>Company</h4></label>
-      <div class="company-editor-logo">
+      <div class="col-xs-12 col-sm-4">
         <div *ngIf="a.company.squareLogo" class="logo-wrapper">
           <img src="{{a.company.squareLogo}}">
           <a (click)="removeLogo(a.company.squareLogo)" md-button>Remove Logo</a>
@@ -55,7 +55,7 @@
 
       </div>
 
-      <div class="company-editor-detail">
+      <div class="col-xs-12 col-sm-8">
         <label for="company-name">Name</label>
         <input placeholder="Your New Company Ltd" id="company-name" required
                class="form-control" type="text"
@@ -132,7 +132,7 @@
           <input placeholder="Applications open"
                  [ngModelOptions]="{standalone: true}"
                  class="form-control" type="text"
-                 [(ngModel)]="d.what" name="deadlineWhat">
+                 [(ngModel)]="d.what" [ngModelOptions]="{standalone: true}">
           <input class="form-control" type="datetime-local"
                  [ngModelOptions]="{standalone: true}"
                  [(ngModel)]="d.when" name="deadlineWhen">
@@ -165,16 +165,16 @@
     <!-- Form step 2 -->
     <div class="form-group" *ngIf="a.status==='applied'">
 
-      <label for="upload-documents">Upload CV / Cover Letter</label>
+      <label for="upload-documents">Upload CVsss / Cover Letter</label>
       <div class="row file-uploader" id="upload-documents">
         <div *ngFor="let doc of a.applied.documents"
              class="col-md-4 col-sm-6 col-xs-12">
-          <span (click)="deleteFile(doc.name)">X</span>
+          <span class="pointer" (click)="deleteFile(doc.name)">X</span>
           <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
         <div *ngFor="let doc of temporaryDocs"
              class="col-md-4 col-sm-6 col-xs-12">
-          <span (click)="deleteFile(doc.name)">X</span>
+          <span class="pointer" (click)="deleteFile(doc.name)">X</span>
           <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -186,15 +186,15 @@
 
     <!-- Form step 3 -->
 
-    <div class="form-group" id="ongoing" class="step3" *ngIf="a.status==='ongoing'">
+    <div class="form-group" id="ongoing" *ngIf="a.status==='ongoing'">
       <div class="button-wrapper">
-        <button class="btn-add-more" md-button (click)="addOngoingEvents()">
+        <button md-button (click)="addOngoingEvents()">
           <md-icon>add</md-icon>
           <span>Add event</span>
         </button>
       </div>
-      <div class="new-event" *ngFor="let d of a.ongoing.events">
-        <label>Event Title</label>
+      <div class="col-xs-12 col-sm-6 panel" *ngFor="let d of a.ongoing.events">
+        <h5>Event Title</h5>
         <input placeholder="Interview / Test / Event title"
                class="form-control" type="text"
                [(ngModel)]="d.title" [ngModelOptions]="{standalone: true}">
@@ -247,10 +247,12 @@
       <input placeholder="Contract Type"
              class="form-control" type="text"
              [(ngModel)]="a.gotcha.contractType" name="contractType">
-      <label>Starting Date</label>
-      <input placeholder="Starting date"
-             class="form-control input-date" type="date"
-             [(ngModel)]="a.gotcha.startingDate" name="startDate">
+      <label class="fullwidth">Starting Date</label>
+      <div class="form-inline">
+        <input placeholder="Starting date"
+               class="form-control" type="date"
+               [(ngModel)]="a.gotcha.startingDate" name="startDate">
+      </div>
       <label>Final Salary</label>
       <div class="form-inline" id="final-salary">
         <input placeholder="10000"
@@ -263,17 +265,19 @@
           <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
         </select>
       </div>
-      <label>Offer Deadline</label>
-      <input placeholder="Offer Deadline"
-             class="form-control input-date" type="date"
+      <label class="fullwidth">Offer Deadline</label>
+      <div class="form-inline">
+        <input placeholder="Offer Deadline"
+             class="form-control" type="date"
              [(ngModel)]="a.gotcha.deadline" name="offerDeadline">
+      </div>
       <label>Notes</label>
       <textarea placeholder="Such a cool job"
                 class="form-control" type="text" rows="3"
                 [(ngModel)]="a.gotcha.notes" name="gotchaNotes"></textarea>
     </div>
 
-    <div class="button-wrapper">
+    <div class="fullwidth">
       <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | applicationStatus}}
       </button>
       <button md-raised-button (click)="cancelEdits()">Cancel</button>

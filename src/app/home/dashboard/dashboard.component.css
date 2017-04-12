@@ -69,6 +69,10 @@
 	vertical-align: top;
 	overflow: hidden;
 }
+.card-title, .card-subtitle{margin-bottom: 5px;}
+.card-subtitle{
+	color: rgba(0, 0, 0, 0.54);
+}
 .blue-theme .board-title{
 	background-color: #8693e8;
 	border-bottom: 3px solid #4150b7;
