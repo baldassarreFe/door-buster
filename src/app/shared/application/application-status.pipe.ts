@@ -9,13 +9,13 @@ export class ApplicationStatusPipe implements PipeTransform {
     // amazing how simple this pipe is, close to useless
     switch (value.toLowerCase()) {
         case 'dreamingof':
-          return 'dreaming';
-        /*case 'applied':
-          return 'applied';
+          return 'Dreaming Of!';
+        case 'applied':
+          return 'Applied';
         case 'ongoing':
-          return 'ongoing';
+          return 'Ongoing';
         case 'gotcha':
-          return 'gotcha';*/
+          return 'Gotcha!';
       default:
         return value;
       }

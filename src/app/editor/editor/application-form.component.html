@@ -278,7 +278,7 @@
     </div>
 
     <div class="fullwidth">
-      <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | applicationStatus}}
+      <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | lowercase}}
       </button>
       <button md-raised-button (click)="cancelEdits()">Cancel</button>
     </div>

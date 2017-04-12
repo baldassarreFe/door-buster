@@ -1,0 +1,46 @@
+<div id="popUp">
+  <div id="{{job.$key}}" class="view-show">
+    <div class="white_content">
+      <button type="button" class="close" (click)="close(job.$key)" >&times;</button>
+      <div class="divider">
+        <img class="logo" src="{{job.company.squareLogo}}">
+        <h2>{{job.company.name}}</h2>
+        <p *ngIf="job.dreamingOf.website!==''"><a href="{{job.company.website}}">{{job.company.website}}</a></p>
+      </div>
+      <div class="divider">
+        <h5> - {{job.position.title}} - </h5>
+        <p>{{job.position.notes}}</p>
+        <p *ngIf="job.position.expectedSalary.value">Expected salary: {{job.position.expectedSalary.value}}  {{job.position.expectedSalary.currency | uppercase}} / {{job.position.expectedSalary.billings}}</p>
+      </div>
+      <div *ngIf="job.dreamingOf.deadlines" class="divider">
+        <p *ngFor="let d of job.dreamingOf.deadlines">{{d.what}}: {{d.when | date}}</p>
+        <p *ngIf="job.dreamingOf.contactPerson.name">Contact: <a href="mailto:{{job.dreamingOf.contactPerson.email}}">{{job.dreamingOf.contactPerson.name}}({{job.dreamingOf.contactPerson.role}})</a></p>
+        <!-- applied -->
+        <p *ngIf="job.applied.applicationDate">{{job.applied.documents.length}} document(s) uploaded on {{job.applied.applicationDate | date}}</p>
+        <!-- ongoing -->
+        <ng-container *ngIf="job.ongoing">
+          <p>{{job.ongoing.events.length}} event(s) : </p>
+          <ul>
+            <li *ngFor="let event of job.ongoing.events">
+              <p><span>{{event.date | date}} - </span>{{event.title}} with
+                <span *ngIf="event.with.name"><a href="mailto:{{event.with.email}}">{{event.with.name}}</a></span>
+                <span *ngIf="!event.with.name">n/a</span>
+              </p>
+              <p *ngIf="event.notes">Notes : {{event.notes}}</p>
+            </li>
+          </ul>
+        </ng-container>
+      </div>
+        <!-- gotcha -->
+      <div  class="divider" *ngIf="job.gotcha.outcome">
+          <h4>Result : {{job.gotcha.outcome}}</h4>
+          <p *ngIf="job.gotcha.contractType">Contract type: {{job.gotcha.contractType}}</p>
+          <p *ngIf="job.gotcha.salary">Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency | uppercase}}
+            <span *ngIf="job.gotcha.salary.billing"> / {{job.gotcha.salary.billing}}</span>
+          </p>
+      </div>
+
+      
+    </div>
+  </div>
+</div>

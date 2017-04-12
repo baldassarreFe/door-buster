@@ -1,0 +1,16 @@
+<md-card class="board-item" (click)="popup(job.$key)">
+  <div class="card-header">
+    <img class="avatar" md-card-avatar src="{{job.company.squareLogo}}">
+    <div class="card-header-text">
+      <p class="card-title">{{job.company.name}}</p>
+      <p class="card-subtitle">{{job.position.title}}</p>
+    </div>
+    <md-icon class="edit-icon" color="primary" (click)="edit(job.$key)">edit</md-icon>
+    <md-icon class="delete-icon" color="warn" (click)="delete(job.$key, job.company.name)">delete_forever</md-icon>
+  </div>
+  <card-detail [status]=job.status [job]=job></card-detail>
+</md-card>
+
+<popup [job]=job></popup>
+
+

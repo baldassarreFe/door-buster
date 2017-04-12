@@ -1,0 +1,8 @@
+<div class="col-sm-12 col-md-3 column">
+    <h4 class="board-title {{category}}">{{category | applicationStatus}}</h4>
+    <div class="board-content">
+      <div *ngFor="let job of applicationsService.applications$ | async | columnFilter:category">
+        <card [job]=job></card>
+      </div>
+    </div>
+</div>

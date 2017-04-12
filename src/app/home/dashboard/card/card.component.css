@@ -1,0 +1,98 @@
+.board-item{
+	position: relative;
+	margin: 10px 15px 0 15px;
+	padding: 20px 10px;
+	border-radius: 5px;
+	z-index: 10;
+}
+.avatar{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	display: table-cell;
+	vertical-align: top;
+}
+
+.card-header{
+	display: table;
+	overflow: hidden;
+	height: auto;
+	margin: 0 0 10px 0;
+}
+.card-header-text{
+	height: auto;
+	margin:0 8px;
+	padding-left: 8px;
+	display: table-cell;
+	vertical-align: top;
+	overflow: hidden;
+}
+.card-title, .card-subtitle{margin-bottom: 5px;}
+.card-subtitle{color: rgba(0, 0, 0, 0.54);}
+
+md-card:hover .edit-icon {
+  opacity: 1;
+}
+
+md-card:hover .delete-icon {
+  opacity: 1;
+}
+
+.edit-icon{
+  opacity: 0.2;
+	font-size: 1em;
+	position: absolute;
+	top: 20px;
+	right: 0;
+	z-index: 100;
+	cursor: pointer;
+}
+
+.delete-icon{
+  opacity: 0.1;
+  font-size: 1em;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.outcome-wrapper{
+	display: block;
+	width: 100%;
+}
+.outcome-wrapper li{
+	float: left;
+	width: 100%;
+	border-radius: 2px;
+	padding: 10px 5px;
+	color: #fff;
+	display: none;
+	text-align: center;
+	margin-bottom: 5px;
+}
+.outcome-wrapper li.thinking{
+	background: #febe11;
+}
+.outcome-wrapper li.accept{
+	background: #4dad4e;
+}
+.outcome-wrapper li.rejected{
+	background: #f04438;
+}
+.outcome-wrapper li.refuse{
+	background: #FF5722;
+}
+.thinking li.thinking{
+	display: block;
+}
+.accept li.accept{
+	display: block;
+}
+.rejected li.rejected{
+	display: block;
+}
+.refuse li.refuse{
+	display: block;
+}

@@ -1,0 +1,43 @@
+ <!-- Dreaming Of details -->
+  <md-card-content *ngIf="status==='dreamingOf'">
+      <ng-container *ngIf="job.dreamingOf.deadlines">
+        <ul>
+          <li *ngFor="let d of job.dreamingOf.deadlines">{{d.what}} - {{d.when | date}}</li>
+        </ul>
+      </ng-container>
+  </md-card-content>
+  <!-- Applied details -->
+  <md-card-content *ngIf="status==='applied'">
+      <ng-container *ngIf="job.applied.documents">
+        <p>{{job.applied.documents.length}} document(s) uploaded</p>
+      </ng-container>
+      <ng-container *ngIf="!job.applied.documents">
+        <p>no documents uploaded</p>
+      </ng-container>
+  </md-card-content>
+  <!-- Ongoing -->
+  <md-card-content *ngIf="status==='ongoing'">
+      <ng-container *ngIf="job.ongoing.events">
+        <ul>
+          <li *ngFor="let event of job.ongoing.events">{{event.title}} with
+            <span *ngIf="event.with.name"><a href="mailto:{{event.with.email}}">{{event.with.name}}</a></span>
+            <span *ngIf="!event.with.name">n/a</span>
+          </li>
+        </ul>
+      </ng-container>
+  </md-card-content>
+  <!-- Gotcha details -->
+  <md-card-content *ngIf="status==='gotcha'">
+      <div class="outcome-wrapper">
+        <ul class="list-unstyled" [ngClass]="job.gotcha.outcome">
+          <li class="thinking" mdTooltip="Thinking Offer">Thinking offer</li>
+          <li class="accept" mdTooltip="Accepted!">Accepted!</li>
+          <li class="rejected" mdTooltip="Rejected">Rejected</li>
+          <li class="refuse" mdTooltip="Refuse">Refuse</li>
+        </ul>
+      </div>
+      <p *ngIf="job.gotcha.contractType">Contract type: {{job.gotcha.contractType}}</p>
+      <p *ngIf="job.gotcha.salary">Salary: {{job.gotcha.salary.value}} {{job.gotcha.salary.currency | uppercase}}
+        <span *ngIf="job.gotcha.salary.billing"> / {{job.gotcha.salary.billing}}</span>
+      </p>
+  </md-card-content>
