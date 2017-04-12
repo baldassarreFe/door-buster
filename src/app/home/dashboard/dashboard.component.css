@@ -15,7 +15,7 @@
 	overflow-y: hidden;
 	z-index: 1;
 	/*background-color: #9cc5e6;*/
-	background-image: url("bg2.jpg");
+	background-image: url("../../../assets/images/bg2.jpg");
 	background-size: cover;
 }
 .mainboard .flex-item{
