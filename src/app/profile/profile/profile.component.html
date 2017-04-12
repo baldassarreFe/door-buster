@@ -1,4 +1,4 @@
-<navigation title="{{loginService.userName}}" [buttons]="[{icon:'reply', link:'/home'}]"></navigation>
+<navigation title="{{(loginService.userInfo|async)?.name}}" [buttons]="[{icon:'reply', link:'/home'}]"></navigation>
 
 <div class="container">
   <div class="row">

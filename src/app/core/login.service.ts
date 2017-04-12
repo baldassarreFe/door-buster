@@ -1,46 +1,29 @@
 import {Injectable} from '@angular/core';
 import {AngularFire, AuthProviders} from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
+import {User} from './model/user';
+import 'rxjs/operator/map';
 
 @Injectable()
 export class LoginService {
-  private _userName: string = null;
-  private _uid: string = null;
-  private _loggedIn: boolean = false;
-
-  public get userName(): string {
-    return this._userName;
-  }
-
-  public get uid(): string {
-    return this._uid;
-  }
-
-  public get loggedIn(): boolean {
-    return this._loggedIn;
-  }
+  public userInfo: Observable<User>;
+  public loggedIn$: Observable<boolean>;
 
   /*
    Use an => function here, otherwise calling
-   subscribe(this.authEventHandler)
+   subscribe(this.userInfoParser)
    will set this to be the Observer and not the class instance
 
    Alternatively, define the function normally and use
    subscribe(user => this.authEventHandler(user)) in the call
    */
-  private authEventHandler = (user) => {
-    if (user != null) {
-      this._userName = user.auth.displayName;
-      this._loggedIn = true;
-      this._uid = user.uid;
-    } else {
-      this._userName = null;
-      this._loggedIn = false;
-      this._uid = null;
-    }
+  private userInfoParser = (user): User => {
+    return user ? new User(user.uid, user.auth.displayName) : null;
   }
 
   constructor(private af: AngularFire) {
-    this.af.auth.subscribe(this.authEventHandler);
+    this.userInfo = this.af.auth.map(this.userInfoParser);
+    this.loggedIn$ = this.userInfo.map(u => !!u);
   }
 
   public login() {

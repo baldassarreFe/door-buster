@@ -1,35 +1,35 @@
 import {Injectable, Inject} from '@angular/core';
 import {AngularFire, FirebaseApp} from 'angularfire2';
 import UploadMetadata = firebase.storage.UploadMetadata;
+import {LoginService} from './login.service';
 
 @Injectable()
 export class StorageService {
   private firebaseApp: firebase.app.App;
-  private uploadRef: firebase.storage.Reference;
+  private uploadDocRef: firebase.storage.Reference;
   private uploadLogoRef: firebase.storage.Reference;
 
-  constructor(private af: AngularFire,
+  constructor(private loginService: LoginService,
               @Inject(FirebaseApp) firebaseApp: firebase.app.App) {
 
     this.firebaseApp = firebaseApp;
 
-    this.af.auth.subscribe(user => {
-        if (user) {
-          this.uploadRef = this.firebaseApp.storage().ref().child(`users/${user.uid}`);
-          this.uploadLogoRef=this.firebaseApp.storage().ref().child(`users/${user.uid}/company-logo`);
-        } else {
-          this.uploadRef = null;
-        }
+    this.loginService.userInfo.subscribe(user => {
+      if (user) {
+        this.uploadDocRef = this.firebaseApp.storage().ref().child(`users/${user.uid}`);
+        this.uploadLogoRef = this.firebaseApp.storage().ref().child(`users/${user.uid}/company-logo`);
+      } else {
+        this.uploadDocRef = null;
       }
-    );
+    });
   }
 
   public delete(name) {
-    return this.uploadRef.child(name).delete();
+    return this.uploadDocRef.child(name).delete();
   }
 
   public deleteLogo(link) {
-    var desertRef = this.firebaseApp.storage().refFromURL(link);
+    const desertRef = this.firebaseApp.storage().refFromURL(link);
     desertRef.delete().then(function() {
       // File deleted successfully
       }).catch(function(error) {
@@ -39,13 +39,13 @@ export class StorageService {
   }
 
   public uploadPdf(file: File): Promise<any> {
-    if (this.uploadRef) {
+    if (this.uploadDocRef) {
       const name = file.name.substring(0, file.name.length - 4) + '_' + new Date().toTimeString() + '.pdf';
       return new Promise((resolve, reject) => {
         const metadata: UploadMetadata = {
           contentType: 'application/pdf',
         };
-        const uploadTask = this.uploadRef.child(name).put(file, metadata);
+        const uploadTask = this.uploadDocRef.child(name).put(file, metadata);
 
         // Register three observers:
         // 1. 'state_changed' observer, called any time the state changes
@@ -81,15 +81,15 @@ export class StorageService {
     }
   }
 
-  public uploadLogo(file:File):Promise<any>{
-    if(this.uploadRef){
-      const logo=file.name;
+  public uploadLogo(file: File): Promise<any>{
+    if (this.uploadDocRef){
+      const logo = file.name;
       return new Promise((resolve, reject) => {
         const metadata: UploadMetadata = {
           contentType: 'image/jpeg',
         };
-        const uploadLogo = this.uploadLogoRef.child(logo).put(file,metadata);
-        // const uploadTask = this.uploadRef.child(name).put(file, metadata);
+        const uploadLogo = this.uploadLogoRef.child(logo).put(file, metadata);
+        // const uploadTask = this.uploadDocRef.child(name).put(file, metadata);
         uploadLogo.on('state_changed', snapshot => {
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log('Upload is ' + progress + '% done');
@@ -113,7 +113,7 @@ export class StorageService {
           });
         });
       });
-      
+
 
     } else {
       return Promise.reject(new Error('User not authenticated'));

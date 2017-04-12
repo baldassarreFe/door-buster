@@ -7,5 +7,9 @@ import {Component} from "@angular/core";
   `
 })
 export class HomeComponent {
-  public icons = [{icon: 'note_add', link: '/editor'}, {icon: 'account_circle', link: '/profile'}];
+  public icons = [
+    {icon: 'note_add', link: '/editor'},
+    {icon: 'account_circle', link: '/profile'},
+    {icon: 'info_outline', link: '/about'}
+  ];
 }

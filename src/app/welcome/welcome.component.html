@@ -7,17 +7,17 @@
     <p>Your door to success</p>
   </header>
       <div class="login-button">
-        <ng-container *ngIf="!userService.loggedIn">
+        <ng-container *ngIf="!(userService.loggedIn$ | async)">
           <button md-raised-button color="primary" (click)="userService.login()">
             <img width="30" src="assets/google-logo.png"/>Use My Google Account
           </button>
         </ng-container>
 
-        <ng-container *ngIf="userService.loggedIn">
-          <h3 class="subtitle">Welcome {{userService.userName}}</h3>
-          <a md-raised-button color="primary" routerLink="/home" routerLinkActive="active">
+        <ng-container *ngIf="userService.loggedIn$ | async">
+          <h3 class="subtitle">Welcome {{(userService.userInfo | async)?.name}}</h3>
+          <button md-raised-button color="primary" routerLink="/home" routerLinkActive="active">
             Continue
-          </a>
+          </button>
           <button md-raised-button (click)="userService.logout()">
             Logout
           </button>
@@ -26,4 +26,3 @@
     </div>
 </div>
 
-  

@@ -21,12 +21,11 @@ import {NotFoundComponent} from './not-found/not-found.component';
 const appRoutes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: 'home', loadChildren: 'app/home/home.module#HomeModule', canActivate: [AuthGuard]},
-  // TODO reactivate the guard once done testing the editor
-  {path: 'editor', loadChildren: 'app/editor/editor.module#EditorModule', /*canActivate: [AuthGuard]*/},
+  {path: 'editor', loadChildren: 'app/editor/editor.module#EditorModule', canActivate: [AuthGuard]},
   {path: 'profile', loadChildren: 'app/profile/profile.module#ProfileModule'},
   {path: 'about', loadChildren: 'app/about/about.module#AboutModule'},
-  {path: '**', redirectTo: '/not-found'},
-  {path: 'not-found', loadChildren: 'app/not-found/not-found.module#NotFoundModule'}
+  {path: 'not-found', loadChildren: 'app/not-found/not-found.module#NotFoundModule'},
+  {path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
