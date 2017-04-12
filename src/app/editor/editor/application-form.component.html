@@ -41,53 +41,47 @@
     <!-- Form step 1 -->
     <div class="form-group" id="company" *ngIf="a.status==='dreamingOf'">
       <label class="fullwidth" for="company"><h4>Company</h4></label>
-      <!-- TODO make this dropdown work, I don't know how to receive the selected event
-      <label for="company-name2">Name</label>
-      <input placeholder="Your New Company Ltd" id="company-name2" required
-             class="form-control" type="text" list="autocompletions-list"
-             [formControl]="term"
-             (select)="test($event)"
-             [(ngModel)]="a.company.name" name="companyName">
-      <datalist id="autocompletions-list">
-        <option *ngFor="let c of autocompletions | async"
-                [value]="c.name"
-                [label]="c.website"></option>
-      </datalist>
-      -->
-     <div class="company-editor-logo">
-       <div *ngIf="a.company.squareLogo" class="logo-wrapper">
-         <img src="{{a.company.squareLogo}}">
-         <a (click)="removeLogo(a.company.squareLogo)" md-button>Remove Logo</a>
-       </div>
+      <div class="company-editor-logo">
+        <div *ngIf="a.company.squareLogo" class="logo-wrapper">
+          <img src="{{a.company.squareLogo}}">
+          <a (click)="removeLogo(a.company.squareLogo)" md-button>Remove Logo</a>
+        </div>
         <div *ngIf="!a.company.squareLogo" class="logo-wrapper">
-            <div class="logo-uploader">
-              <span class="center-me">+</span>
-              <input type="file" name="uploadLogo" (change)="uploadLogo($event)">
-            </div>
+          <div class="logo-uploader">
+            <span class="center-me">+</span>
+            <input type="file" name="uploadLogo" (change)="uploadLogo($event)">
+          </div>
         </div>
 
-     </div>
-     <div class="company-editor-detail">
-       <label for="company-name">Name</label>
-       <input placeholder="Your New Company Ltd" id="company-name" required
-              class="form-control" type="text"
-              [formControl]="term"
-              (blur)="dropdownVisible = false" (focus)="dropdownVisible = true"
-              [(ngModel)]="a.company.name" name="companyName">
-       <ul class="list-unstyled dropdown" [ngClass]="{'isVisible': dropdownVisible}">
-         <li *ngFor="let item of autocompletions | async">
-           <a (click)="showCompanyInfo(item)">{{item.name}}</a>
-         </li>
-       </ul>
-       <label for="company-website">Website</label>
-       <input placeholder="Website URL" id="company-website"
-              class="form-control" type="text"
-              [(ngModel)]="a.company.website" name="companyLocation">
-       <label for="company-business-area">Business area</label>
-       <input placeholder="Recreation" id="company-business-area"
-              class="form-control" type="text"
-              [(ngModel)]="a.company.businessArea" name="companyBusinessArea">
-     </div>
+      </div>
+
+      <div class="company-editor-detail">
+        <label for="company-name">Name</label>
+        <input placeholder="Your New Company Ltd" id="company-name" required
+               class="form-control" type="text"
+               [formControl]="term"
+               autocomplete="off"
+               (focus)="dropdownVisible = true"
+               (blur)="dropdownVisible = false"
+               [(ngModel)]="a.company.name" name="companyName">
+        <ul class="list-unstyled dropdown" [ngClass]="{'isVisible': dropdownVisible && (autocompletions | async)?.length>0}">
+          <li *ngFor="let item of autocompletions | async" (click)="showCompanyInfo(item)">
+            <!-- Clicking on the link also sets the company as the company we're applying to
+                 needs fixing but it's not urgent-->
+            <b>{{item.name}}</b>
+            <span class="pull-right"><a target="_blank" [href]="'http://'+item.website">{{item.website}}</a></span>
+          </li>
+        </ul>
+
+        <label for="company-website">Website</label>
+        <input placeholder="Website URL" id="company-website"
+               class="form-control" type="text"
+               [(ngModel)]="a.company.website" name="companyLocation">
+        <label for="company-business-area">Business area</label>
+        <input placeholder="Recreation" id="company-business-area"
+               class="form-control" type="text"
+               [(ngModel)]="a.company.businessArea" name="companyBusinessArea">
+      </div>
 
       <div id="position">
         <label for="position" class="fullwidth"><h4>Position</h4></label>
@@ -136,18 +130,21 @@
       <div id="dreaming-deadlines">
         <div *ngFor="let d of a.dreamingOf.deadlines; let i=index" class="form-inline">
           <input placeholder="Applications open"
+                 [ngModelOptions]="{standalone: true}"
                  class="form-control" type="text"
                  [(ngModel)]="d.what" [ngModelOptions]="{standalone: true}">
           <input class="form-control" type="datetime-local"
-                 [(ngModel)]="d.when" [ngModelOptions]="{standalone: true}">
+                 [ngModelOptions]="{standalone: true}"
+                 [(ngModel)]="d.when" name="deadlineWhen">
           <ng-container *ngIf="d.reminder">
             <input placeholder="1"
                    class="form-control" type="number"
-                   [(ngModel)]="d.reminder.howMuch" [ngModelOptions]="{standalone: true}">
-            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit">
+                   [ngModelOptions]="{standalone: true}"
+                   [(ngModel)]="d.reminder.howMuch" name="deadlineHowMuch">
+            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit" [ngModelOptions]="{standalone: true}">
               <option *ngFor="let tu of applicationsService.timeUnits" [value]="tu.value">{{tu.display}}</option>
             </select>
-            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter">
+            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter" [ngModelOptions]="{standalone: true}">
               <option *ngFor="let ba of applicationsService.beforeAfter" [value]="ba.value">{{ba.display}}</option>
             </select>
           </ng-container>
@@ -181,8 +178,8 @@
           <a target="_blank" [href]="doc.link" class="center-me">{{doc.name}}</a>
         </div>
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <input type="file" name="file" (change)="uploadFile($event)">
-            <span class="center-me">+</span>
+          <input type="file" name="file" (change)="uploadFile($event)">
+          <span class="center-me">+</span>
         </div>
       </div>
     </div>
@@ -191,34 +188,34 @@
 
     <div class="form-group" id="ongoing" class="step3" *ngIf="a.status==='ongoing'">
       <div class="button-wrapper">
-        <button class="btn-add-more" md-button  (click)="addOngoingEvents()">
+        <button class="btn-add-more" md-button (click)="addOngoingEvents()">
           <md-icon>add</md-icon>
           <span>Add event</span>
         </button>
       </div>
       <div class="new-event" *ngFor="let d of a.ongoing.events">
-      <label>Event Title</label>
+        <label>Event Title</label>
         <input placeholder="Interview / Test / Event title"
-                 class="form-control" type="text"
-                 [(ngModel)]="d.title" [ngModelOptions]="{standalone: true}">
+               class="form-control" type="text"
+               [(ngModel)]="d.title" [ngModelOptions]="{standalone: true}">
         <div id="eventContact" class="form-set">
-        <label>Date</label>
-        <input placeholder="mm/dd/yy"
-         class="form-control" type="datetime-local"
-         [(ngModel)]="d.date" [ngModelOptions]="{standalone: true}">
+          <label>Date</label>
+          <input placeholder="mm/dd/yy"
+                 class="form-control" type="datetime-local"
+                 [(ngModel)]="d.date" [ngModelOptions]="{standalone: true}">
           <label class="subtitle">Contact Person</label>
           <input placeholder="Name"
-                   class="form-control" type="text"
-                   [(ngModel)]="d.with.name" [ngModelOptions]="{standalone: true}">
+                 class="form-control" type="text"
+                 [(ngModel)]="d.with.name" [ngModelOptions]="{standalone: true}">
           <input placeholder="example@email.com"
-                   class="form-control" type="text"
-                   [(ngModel)]="d.with.email" [ngModelOptions]="{standalone: true}">
+                 class="form-control" type="text"
+                 [(ngModel)]="d.with.email" [ngModelOptions]="{standalone: true}">
           <input placeholder="phone number"
-                   class="form-control" type="text"
-                   [(ngModel)]="d.with.phone" [ngModelOptions]="{standalone: true}">
+                 class="form-control" type="text"
+                 [(ngModel)]="d.with.phone" [ngModelOptions]="{standalone: true}">
           <input placeholder="role"
-                   class="form-control" type="text"
-                   [(ngModel)]="d.with.role" [ngModelOptions]="{standalone: true}">
+                 class="form-control" type="text"
+                 [(ngModel)]="d.with.role" [ngModelOptions]="{standalone: true}">
         </div>
         <label>Notes</label>
         <textarea placeholder="Important interview with R&D manager"
@@ -256,15 +253,15 @@
              [(ngModel)]="a.gotcha.startingDate" name="startDate">
       <label>Final Salary</label>
       <div class="form-inline" id="final-salary">
-          <input placeholder="10000"
-                 class="form-control" type="number" step="100" min="0"
-                 [(ngModel)]="a.gotcha.salary.value" name="finalSalaryValue">
-          <select class="form-control" [(ngModel)]="a.gotcha.salary.currency" name="finalSalaryCurrency">
-            <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
-          </select>
-          <select class="form-control" [(ngModel)]="a.gotcha.salary.billings" name="finalSalaryBilling">
-            <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
-          </select>
+        <input placeholder="10000"
+               class="form-control" type="number" step="100" min="0"
+               [(ngModel)]="a.gotcha.salary.value" name="finalSalaryValue">
+        <select class="form-control" [(ngModel)]="a.gotcha.salary.currency" name="finalSalaryCurrency">
+          <option *ngFor="let c of applicationsService.currencies" [value]="c.value">{{c.display}}</option>
+        </select>
+        <select class="form-control" [(ngModel)]="a.gotcha.salary.billings" name="finalSalaryBilling">
+          <option *ngFor="let b of applicationsService.billings" [value]="b.value">{{b.display}}</option>
+        </select>
       </div>
       <label>Offer Deadline</label>
       <input placeholder="Offer Deadline"
@@ -277,8 +274,9 @@
     </div>
 
     <div class="button-wrapper">
-      <button type="button" (click)="saveApplication()" class="submit-btn btn btn-success">Submit</button>
-      <button type="button" (click)="cancelEdits()" class="submit-btn btn btn-default">Cancel</button>
+      <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | applicationStatus}}
+      </button>
+      <button md-raised-button (click)="cancelEdits()">Cancel</button>
     </div>
   </form>
 </div>
