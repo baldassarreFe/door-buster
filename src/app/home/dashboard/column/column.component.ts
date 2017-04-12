@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewContainerRef, Input} from "@angular/core";
-import {ApplicationsService} from "../../../core/applications.service";
+import {ApplicationsService} from "../../../core/applications/applications.service";
 
 @Component({
   selector: 'column',

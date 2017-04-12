@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewContainerRef, Input} from "@angular/core";
 import {Overlay} from "angular2-modal";
 import {Modal} from "angular2-modal/plugins/bootstrap";
-import {ApplicationsService} from "../../../core/applications.service";
+import {ApplicationsService} from "../../../core/applications/applications.service";
 import {Router} from "@angular/router";
 
 
