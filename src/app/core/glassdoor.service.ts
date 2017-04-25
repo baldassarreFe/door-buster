@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Rx";
 @Injectable()
 export class GlassdoorService {
 
-  private baseUrl = 'http://api.glassdoor.com/api';
+  private baseUrl = 'https://api.glassdoor.com/api';
   private headers: Headers;
 
   constructor(private http: Http, private jsonp: Jsonp) {

@@ -4,11 +4,12 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {CoreModule} from './core/core.module';
 import {WelcomeModule} from './welcome/welcome.module';
-import {Router} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CoreModule.forRoot(),
     WelcomeModule,
     AppRoutingModule

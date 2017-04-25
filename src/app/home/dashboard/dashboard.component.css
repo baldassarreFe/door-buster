@@ -9,7 +9,7 @@
 	height: 100%;
 	top:-64px;
 	box-sizing: border-box;
-	overflow-y: hidden;
+	overflow-y: auto;
 	z-index: 1;
 	background-image: url("../../../assets/images/bg2.jpg");
 	background-size: cover;
