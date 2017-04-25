@@ -64,7 +64,7 @@ External APIs:
 Using [angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages):
 ```bash
 ng build --prod --base-href "https://USERNAME.github.io/REPOSITORY/"
-ngh --no-silent --message "Deploying"
+ngh --no-silent --message "Deploy to gh-pages"
 ```
    
 
