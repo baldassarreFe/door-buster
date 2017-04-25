@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
+import {Component} from '@angular/core';
 
 @Component({
   template: `
-    <navigation title="Door Buster!" [buttons]="icons"></navigation>
-    <dashboard></dashboard>
+    <app-navigation title="Door Buster!" [buttons]="icons"></app-navigation>
+    <app-dashboard></app-dashboard>
   `
 })
 export class HomeComponent {

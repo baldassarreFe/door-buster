@@ -1,14 +1,14 @@
-import {NgModule, Optional, SkipSelf, ModuleWithProviders} from '@angular/core';
-import {AuthMethods, AngularFireModule, AuthProviders} from 'angularfire2';
+import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
+import {AngularFireModule, AuthMethods, AuthProviders} from 'angularfire2';
 import {LoginService} from './login.service';
 import {AuthGuard} from './auth-guard.service';
 import {ApplicationsService} from './applications/applications.service';
 import {NewApplicationService} from './applications/new-application.service';
 import {ApplicationsFirebaseService} from './applications/applications-firebase.service';
 import {JsonpModule} from '@angular/http';
-import {LogoService} from 'app/core/storage/logo.service';
+import {LogoServiceToken} from 'app/core/storage/logo.token';
 import {FirebaseLogoService} from './storage/firebase-logo';
-import {DocumentService} from './storage/document.service';
+import {DocumentServiceToken} from './storage/document.token';
 import {FirebaseDocumentService} from './storage/firebase-document';
 
 const firebaseConfig = {
@@ -36,8 +36,8 @@ export class CoreModule {
       providers: [
         LoginService,
         {provide: ApplicationsService, useClass: ApplicationsFirebaseService},
-        {provide: LogoService, useClass: FirebaseLogoService},
-        {provide: DocumentService, useClass: FirebaseDocumentService},
+        {provide: LogoServiceToken, useClass: FirebaseLogoService},
+        {provide: DocumentServiceToken, useClass: FirebaseDocumentService},
         NewApplicationService,
         AuthGuard
       ]

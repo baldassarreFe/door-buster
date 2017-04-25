@@ -1,37 +1,42 @@
-.column{
-	border-radius: 6px;
-	padding-bottom:40px;
-	height: 100%;
-	overflow: hidden;
-}
-.board-content{
-	overflow-y: auto;
-	position: relative;
-	height: 100%;
-	width:100%;
-	border: none;
-	background-color: rgba(255,255,255,0.5);
+.column {
+  border-radius: 6px;
+  padding-bottom: 40px;
+  height: 100%;
+  overflow: hidden;
 }
 
-.board-title{
-	margin: 0;
-	padding: 13px;
-	color: #fff;
-	font-weight:400;
+.board-content {
+  overflow-y: auto;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
 }
-.dreamingOf{
-	background-color: #8693e8;
-	border-bottom: 3px solid #4150b7;
+
+.board-title {
+  margin: 0;
+  padding: 13px;
+  color: #fff;
+  font-weight: 400;
 }
-.applied{
-	background-color: #96df91;
-	border-bottom: 3px solid #52ae4b;
+
+.dreamingOf {
+  background-color: #8693e8;
+  border-bottom: 3px solid #4150b7;
 }
-.ongoing{
-	background-color: #e9d18f;
-	border-bottom: 3px solid #ff9800;
+
+.applied {
+  background-color: #96df91;
+  border-bottom: 3px solid #52ae4b;
 }
-.gotcha{
-	background-color: #e89bb4;
-	border-bottom: 3px solid #e52163;
+
+.ongoing {
+  background-color: #e9d18f;
+  border-bottom: 3px solid #ff9800;
+}
+
+.gotcha {
+  background-color: #e89bb4;
+  border-bottom: 3px solid #e52163;
 }

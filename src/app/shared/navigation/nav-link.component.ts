@@ -1,7 +1,7 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'nav-icon-link',
+  selector: 'app-nav-icon-link',
   template: `
     <ng-container *ngIf="link">
       <a [routerLink]="link" routerLinkActive="active">

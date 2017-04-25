@@ -48,7 +48,7 @@ External APIs:
    3. Who (interviewers you interacted with)
    4. When (incoming/completed + optional reminders)
 4. Final Step:
-   1. Rejected: keep it for reference/delete it
+   1. Rejected: keep it for reference/remove it
    2. Got an offer: how much, starting when, type of contract, who you spoke with
    3. Accepted: celebrate
    
@@ -59,5 +59,12 @@ External APIs:
    ```npm install```
 3. Build and serve on localhost:4200
    ```ng serve```
+   
+## Deploy on GitHub pages
+Using [angular-cli-ghpages](https://www.npmjs.com/package/angular-cli-ghpages):
+```bash
+ng build --prod --base-href "https://USERNAME.github.io/REPOSITORY/"
+ngh --no-silent --message "Deploying"
+```
    
 

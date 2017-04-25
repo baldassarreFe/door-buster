@@ -1,18 +1,19 @@
-import {Component, OnInit, ViewContainerRef, Input} from "@angular/core";
-import {Overlay} from "angular2-modal";
-import {Modal} from "angular2-modal/plugins/bootstrap";
-import {ApplicationsService} from "../../../core/applications/applications.service";
-import {Router} from "@angular/router";
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {Overlay} from 'angular2-modal';
+import {Modal} from 'angular2-modal/plugins/bootstrap';
+import {ApplicationsService} from '../../../core/applications/applications.service';
+import {Router} from '@angular/router';
 
 
 @Component({
-  selector: 'card',
+  selector: 'app-card',
   templateUrl: 'card.component.html',
   styleUrls: ['card.component.css']
 })
 export class CardComponent implements OnInit {
-  @Input() job: any[] = [];
-  public jobKey:String;
+  @Input() job: any;
+  public jobKey: string;
+
   constructor(public applicationsService: ApplicationsService,
               private router: Router,
               overlay: Overlay,
@@ -26,11 +27,11 @@ export class CardComponent implements OnInit {
 
   public edit(key: string) {
     // console.log(key);
-    this.router.navigate(['/editor'], { queryParams: { applicationId: key } });
+    this.router.navigate(['/editor'], {queryParams: {applicationId: key}});
     event.stopPropagation();
   }
 
-  public delete(key: string, companyName: string) {
+  public remove(key: string, companyName: string) {
     this.modal.confirm()
       .size('lg')
       .isBlocking(true)
@@ -43,8 +44,9 @@ export class CardComponent implements OnInit {
       .open()
       .then(dialog => {
         dialog.result.then(choice => {
-          this.applicationsService.delete(key);
-        }, () => {});
+          this.applicationsService.remove(key);
+        }, () => {
+        });
       });
     event.stopPropagation();
   }

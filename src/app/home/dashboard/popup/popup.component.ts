@@ -1,17 +1,17 @@
-import {Component, OnInit, ViewContainerRef, Input} from "@angular/core";
-import {Overlay} from "angular2-modal";
-import {Modal} from "angular2-modal/plugins/bootstrap";
-import {Router} from "@angular/router";
-
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {Overlay} from 'angular2-modal';
+import {Modal} from 'angular2-modal/plugins/bootstrap';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'popup',
+  selector: 'app-popup',
   templateUrl: 'popup.component.html',
   styleUrls: ['popup.component.css']
 })
 export class PopupComponent implements OnInit {
-  @Input() job: any[] = [];
-  @Input() key:String;
+  @Input() job: any;
+  @Input() key: String;
+
   constructor(private router: Router,
               overlay: Overlay,
               vcRef: ViewContainerRef,
@@ -22,7 +22,7 @@ export class PopupComponent implements OnInit {
   ngOnInit() {
   }
 
-  public close(cardKey: string){
+  public close(cardKey: string) {
     document.getElementById(cardKey).style.display = 'none';
   }
 

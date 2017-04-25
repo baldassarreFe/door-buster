@@ -1,14 +1,15 @@
-import {Component, OnInit, Input} from "@angular/core";
+import {Component, Input, OnInit} from '@angular/core';
 
 
 @Component({
-  selector: 'card-detail',
+  selector: 'app-card-detail',
   templateUrl: 'card-detail.component.html',
   styleUrls: ['card.component.css']
 })
 export class CardDetailComponent implements OnInit {
-  @Input() status:String;
-  @Input() job:any[]=[];
+  @Input() status: String;
+  @Input() job: any[] = [];
+
   constructor() {
   }
 

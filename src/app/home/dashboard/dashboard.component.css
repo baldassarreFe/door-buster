@@ -1,17 +1,17 @@
-.mainboard{
-	width: 100%;
-	max-width: 1920px;
-	padding:84px 20px 20px;
-	margin : 64px auto 0;
-	left: 0;
-	right: 0;
-	position: absolute;
-	height: 100%;
-	top:-64px;
-	box-sizing: border-box;
-	overflow-y: auto;
-	z-index: 1;
-	background-image: url("../../../assets/images/bg2.jpg");
-	background-size: cover;
+.mainboard {
+  width: 100%;
+  max-width: 1920px;
+  padding: 84px 20px 20px;
+  margin: 64px auto 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  height: 100%;
+  top: -64px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 1;
+  background-image: url("../../../assets/images/bg2.jpg");
+  background-size: cover;
 }
 

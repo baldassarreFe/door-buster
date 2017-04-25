@@ -64,7 +64,8 @@
                (focus)="dropdownVisible = true"
                (blur)="dropdownVisible = false"
                [(ngModel)]="a.company.name" name="companyName">
-        <ul class="list-unstyled dropdown" [ngClass]="{'isVisible': dropdownVisible && (autocompletions | async)?.length>0}">
+        <ul class="list-unstyled dropdown"
+            [ngClass]="{'isVisible': dropdownVisible && (autocompletions | async)?.length>0}">
           <li *ngFor="let item of autocompletions | async" (click)="showCompanyInfo(item)">
             <!-- Clicking on the link also sets the company as the company we're applying to
                  needs fixing but it's not urgent-->
@@ -132,7 +133,7 @@
           <input placeholder="Applications open"
                  [ngModelOptions]="{standalone: true}"
                  class="form-control" type="text"
-                 [(ngModel)]="d.what" [ngModelOptions]="{standalone: true}">
+                 [(ngModel)]="d.what">
           <input class="form-control" type="datetime-local"
                  [ngModelOptions]="{standalone: true}"
                  [(ngModel)]="d.when" name="deadlineWhen">
@@ -141,10 +142,12 @@
                    class="form-control" type="number"
                    [ngModelOptions]="{standalone: true}"
                    [(ngModel)]="d.reminder.howMuch" name="deadlineHowMuch">
-            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit" [ngModelOptions]="{standalone: true}">
+            <select class="form-control" [(ngModel)]="d.reminder.unit" name="deadlineTimeUnit"
+                    [ngModelOptions]="{standalone: true}">
               <option *ngFor="let tu of applicationsService.timeUnits" [value]="tu.value">{{tu.display}}</option>
             </select>
-            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter" [ngModelOptions]="{standalone: true}">
+            <select class="form-control" [(ngModel)]="d.reminder.beforeAfter" name="deadlineBeforeAfter"
+                    [ngModelOptions]="{standalone: true}">
               <option *ngFor="let ba of applicationsService.beforeAfter" [value]="ba.value">{{ba.display}}</option>
             </select>
           </ng-container>
@@ -268,8 +271,8 @@
       <label class="fullwidth">Offer Deadline</label>
       <div class="form-inline">
         <input placeholder="Offer Deadline"
-             class="form-control" type="date"
-             [(ngModel)]="a.gotcha.deadline" name="offerDeadline">
+               class="form-control" type="date"
+               [(ngModel)]="a.gotcha.deadline" name="offerDeadline">
       </div>
       <label>Notes</label>
       <textarea placeholder="Such a cool job"
@@ -278,7 +281,8 @@
     </div>
 
     <div class="fullwidth">
-      <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | applicationStatus | lowercase}}
+      <button md-raised-button color="primary" (click)="saveApplication()">Save as {{a.status | applicationStatus |
+        lowercase}}
       </button>
       <button md-raised-button (click)="cancelEdits()">Cancel</button>
     </div>

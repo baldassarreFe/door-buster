@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './core/auth-guard.service';
-import {NotFoundComponent} from './not-found/not-found.component';
 
 /*
  loadChildren: 'app/home/home.module#HomeModule'

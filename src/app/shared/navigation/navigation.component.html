@@ -5,7 +5,7 @@
   <span class="spacer"></span>
 
   <!-- AddNew button -->
-  <nav-icon-link *ngFor="let ic of buttons" [icon]="ic.icon" [link]="ic.link" [action]="ic.action"></nav-icon-link>
+  <app-nav-icon-link *ngFor="let ic of buttons" [icon]="ic.icon" [link]="ic.link" [action]="ic.action"></app-nav-icon-link>
 
   <!-- LogOut button -->
   <a href="/#" style="margin-left:5px;" *ngIf="userService.loggedIn$ | async">

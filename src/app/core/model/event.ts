@@ -5,9 +5,9 @@ export class Event {
   public date = new Date();
   public reminder = new Reminder();
   public with = {
-  	name:'',
-  	email:'',
-  	phone:'',
-  	role:''
-  }
+    name: '',
+    email: '',
+    phone: '',
+    role: ''
+  };
 }

@@ -4,13 +4,14 @@ import {Observable} from 'rxjs/Observable';
 import {AngularFire, FirebaseListObservable} from 'angularfire2';
 import {LoginService} from '../login.service';
 import 'rxjs/operator/mergeMap';
+import {userInfo} from 'os';
 
 @Injectable()
 export class ApplicationsFirebaseService extends ApplicationsService {
   private _applications$: FirebaseListObservable<any[]> | null;
   public applications$: Observable<any[]>;
 
-  constructor(private af: AngularFire, private loginService: LoginService) {
+  constructor(private af: AngularFire) {
     super();
     this.af.auth.subscribe(user => {
       this._applications$ = this.af.database
@@ -51,7 +52,7 @@ export class ApplicationsFirebaseService extends ApplicationsService {
     }
   }
 
-  public delete(key: string): firebase.Promise<void> {
+  public remove(key: string): firebase.Promise<void> {
     if (this._applications$) {
       return this._applications$.remove(key);
     }

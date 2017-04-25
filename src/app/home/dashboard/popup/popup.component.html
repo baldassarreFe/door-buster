@@ -1,7 +1,7 @@
 <div id="popUp">
   <div id="{{job.$key}}" class="view-show">
     <div class="white_content">
-      <button type="button" class="close" (click)="close(job.$key)" >&times;</button>
+      <button type="button" class="close" (click)="close(job.$key)">&times;</button>
 
       <!-- Popup header -->
       <div class="divider">
@@ -24,36 +24,39 @@
 
       <!-- Dreaming of contacts -->
       <div *ngIf="job.dreamingOf.contactPerson.name" class="divider">
-        <p>Contact: <a href="mailto:{{job.dreamingOf.contactPerson.email}}">{{job.dreamingOf.contactPerson.name}}</a> ({{job.dreamingOf.contactPerson.role}})</p>
+        <p>Contact: <a href="mailto:{{job.dreamingOf.contactPerson.email}}">{{job.dreamingOf.contactPerson.name}}</a>
+          ({{job.dreamingOf.contactPerson.role}})</p>
       </div>
 
       <!-- Applied date and documents-->
       <div *ngIf="job.applied.applicationDate" class="divider">
         <p>Applied on {{job.applied.applicationDate | date}}</p>
-        <p *ngIf="job.applied.applicationDate">{{job.applied.documents ? job.applied.documents.length : 0}} document(s) uploaded</p>
+        <p *ngIf="job.applied.applicationDate">{{job.applied.documents ? job.applied.documents.length : 0}} document(s)
+          uploaded</p>
       </div>
 
       <!-- Ongoing events-->
       <div *ngIf="job.ongoing.events.length>0" class="divider">
-          <p>{{job.ongoing.events.length}} event(s) :</p>
-          <ul>
-            <li *ngFor="let event of job.ongoing.events">
-              <p>
-                {{event.date | date}} - {{event.title}}
-                <ng-container *ngIf="event.with.name"> with <a href="mailto:{{event.with.email}}">{{event.with.name}}</a></ng-container>
-              </p>
-              <p *ngIf="event.notes">Notes : {{event.notes}}</p>
-            </li>
-          </ul>
+        <p>{{job.ongoing.events.length}} event(s) :</p>
+        <ul>
+          <li *ngFor="let event of job.ongoing.events">
+            <p>
+              {{event.date | date}} - {{event.title}}
+              <ng-container *ngIf="event.with.name"> with <a href="mailto:{{event.with.email}}">{{event.with.name}}</a>
+              </ng-container>
+            </p>
+            <p *ngIf="event.notes">Notes : {{event.notes}}</p>
+          </li>
+        </ul>
       </div>
 
       <!-- gotcha -->
-      <div *ngIf="job.gotcha.outcome" class="divider" >
-          <h4>Outcome: {{job.gotcha.outcome}}</h4>
-          <p *ngIf="job.gotcha.contractType">Contract type: {{job.gotcha.contractType}}</p>
-          <p *ngIf="job.gotcha.salary">Salary: {{job.gotcha.salary | salaryFormat}}
-            <span *ngIf="job.gotcha.salary.billing"> / {{job.gotcha.salary.billing}}</span>
-          </p>
+      <div *ngIf="job.gotcha.outcome" class="divider">
+        <h4>Outcome: {{job.gotcha.outcome}}</h4>
+        <p *ngIf="job.gotcha.contractType">Contract type: {{job.gotcha.contractType}}</p>
+        <p *ngIf="job.gotcha.salary">Salary: {{job.gotcha.salary | salaryFormat}}
+          <span *ngIf="job.gotcha.salary.billing"> / {{job.gotcha.salary.billing}}</span>
+        </p>
       </div>
 
 

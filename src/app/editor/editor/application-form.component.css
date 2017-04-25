@@ -1,50 +1,64 @@
-.ng-valid[required], .ng-valid.required  {
+.ng-valid[required], .ng-valid.required {
   border-left: 5px solid #42A948; /* green */
 }
-.ng-invalid:not(form)  {
+
+.ng-invalid:not(form) {
   border-left: 5px solid #a94442; /* red */
 }
-.list-unstyled{
-	list-style: none;
-}
-.fullwidth{width: 100%;}
-.pointer{cursor: pointer;}
 
-.dropdown{
-	padding: 0;
-	position: absolute;
-	top: 60px; left: 20px;
-	width: 90%;
-	background: #fff;
-	margin-top: 2px;
-	border: 1px solid #eee;
-	display: none;
-}
-.dropdown.isVisible{
-	display: block;
-}
-.dropdown li{
-	padding: 5px 10px;
-}
-.dropdown li:hover{
-	background: #eee;
-	cursor: pointer;
+.list-unstyled {
+  list-style: none;
 }
 
-.form-horizontal label{
-	margin-top: 10px;
-	margin-bottom: 0px;
+.fullwidth {
+  width: 100%;
 }
-.form-set input{
-	margin-bottom: 5px;
+
+.pointer {
+  cursor: pointer;
+}
+
+.dropdown {
+  padding: 0;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  width: 90%;
+  background: #fff;
+  margin-top: 2px;
+  border: 1px solid #eee;
+  display: none;
+}
+
+.dropdown.isVisible {
+  display: block;
+}
+
+.dropdown li {
+  padding: 5px 10px;
+}
+
+.dropdown li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.form-horizontal label {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.form-set input {
+  margin-bottom: 5px;
 }
 
 /* CV File Uploader */
-.file-uploader{
+.file-uploader {
   margin-left: 0;
   margin-right: 0;
 }
-.file-uploader div{
+
+.file-uploader div {
   border: 1px dashed #2196f3;
   padding: 0;
   height: 5em;
@@ -55,11 +69,13 @@
   position: relative;
   transition: background-color 400ms ease;
 }
-.file-uploader div:hover{
+
+.file-uploader div:hover {
   background-color: rgb(188, 222, 255);
   font-weight: bold;
 }
-.file-uploader .center-me{
+
+.file-uploader .center-me {
   overflow: hidden;
   padding: 0;
   margin: 0;
@@ -68,6 +84,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 .file-uploader input[type=file] {
   position: absolute;
   opacity: 0;
@@ -78,131 +95,151 @@
 }
 
 /* Gotcha status */
-.result-wrapper{
-	width: 100%;
-	float: left;
+.result-wrapper {
+  width: 100%;
+  float: left;
 }
-.result-wrapper li{
-	float: left;
-	width: 70px;
-	height: 70px;
-	padding: 21px;
-	border-radius: 50%;
-	border: 3px solid #fff;
-	box-shadow:0px 0px 0px 1px #ccc;
-	margin-right: 10px;
-	margin-bottom: 20px;
-	color: #fff;
-	cursor: pointer;
-	transition: border ease 0.5s, padding 0.2s;
+
+.result-wrapper li {
+  float: left;
+  width: 70px;
+  height: 70px;
+  padding: 21px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px #ccc;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  color: #fff;
+  cursor: pointer;
+  transition: border ease 0.5s, padding 0.2s;
 }
-.result-wrapper li.thinking{
-	background: #febe11;
+
+.result-wrapper li.thinking {
+  background: #febe11;
 }
-.result-wrapper li.accept{
-	background: #4dad4e;
+
+.result-wrapper li.accept {
+  background: #4dad4e;
 }
-.result-wrapper li.reject{
-	background: #f04438;
+
+.result-wrapper li.reject {
+  background: #f04438;
 }
-.result-wrapper li.refuse{
-	background: #FF5722;
-	padding: 19px;
+
+.result-wrapper li.refuse {
+  background: #FF5722;
+  padding: 19px;
 }
-.thinking li.thinking{
-	border:8px solid #1e88e5;
-	padding: 16px;
+
+.thinking li.thinking {
+  border: 8px solid #1e88e5;
+  padding: 16px;
 }
-.accept li.accept{
-	border:8px solid #1e88e5;
-	padding: 16px;
+
+.accept li.accept {
+  border: 8px solid #1e88e5;
+  padding: 16px;
 }
-.rejected li.reject{
-	border:8px solid #1e88e5;
-	padding: 16px;
+
+.rejected li.reject {
+  border: 8px solid #1e88e5;
+  padding: 16px;
 }
-.refuse li.refuse{
-	border:8px solid #1e88e5;
-	padding: 13px;
+
+.refuse li.refuse {
+  border: 8px solid #1e88e5;
+  padding: 13px;
 }
 
 /* Progress indicator */
-.steps{
-	margin: 20px 0 75px;
-	position: relative;
+.steps {
+  margin: 20px 0 75px;
+  position: relative;
 }
-.steps md-progress-bar{
-  	margin: 5px 0;
+
+.steps md-progress-bar {
+  margin: 5px 0;
 }
-.steps-list{
-	display: block;
-  	position: absolute;
-	list-style: none;
-	width: 100%;
-	margin: 0;
-	padding: 0;
+
+.steps-list {
+  display: block;
+  position: absolute;
+  list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
-.steps-list li{
-	position: relative;
-	float: left;
-	width: 25%;
-	text-align: left;
-  	opacity: 0.6;
+
+.steps-list li {
+  position: relative;
+  float: left;
+  width: 25%;
+  text-align: left;
+  opacity: 0.6;
 }
-.steps-list li:hover{
-	cursor: pointer;
-  	opacity: 1;
+
+.steps-list li:hover {
+  cursor: pointer;
+  opacity: 1;
 }
-.steps-list li.active-step{
-  	font-weight: bold;
-  	opacity: 1;
+
+.steps-list li.active-step {
+  font-weight: bold;
+  opacity: 1;
 }
-.steps-list span{
-	display: inline-block;
-	text-align: center;
-  	width: 36px;
-  	height: 36px;
-	padding: 7px;
-	background: #2196f3;
-	color: #fff;
-	border-radius: 50%;
+
+.steps-list span {
+  display: inline-block;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  background: #2196f3;
+  color: #fff;
+  border-radius: 50%;
 }
-.steps-list p{
-  	display: inline-block;
-  	margin-left: 5px;
+
+.steps-list p {
+  display: inline-block;
+  margin-left: 5px;
 }
 
 /* Logo editor */
-.logo-wrapper{
-	overflow: hidden;
-	text-align: center;
+.logo-wrapper {
+  overflow: hidden;
+  text-align: center;
 }
-.logo-wrapper img{
-	width: 80%;
+
+.logo-wrapper img {
+  width: 80%;
 }
-.logo-uploader{
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	background-color: #eee;
-	position: relative;
-	display: inline-block;
-	margin-top: 30px;
+
+.logo-uploader {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #eee;
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
 }
-.logo-wrapper input[type="file"]{
-	opacity: 0;
-	width: 100px;
-	height: 100px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	cursor: pointer;
+
+.logo-wrapper input[type="file"] {
+  opacity: 0;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
 }
-.logo-wrapper span{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	font-weight: bold;
-	font-size: 2em;
-	transform: translate(-50%,-50%);
+
+.logo-wrapper span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-weight: bold;
+  font-size: 2em;
+  transform: translate(-50%, -50%);
 }

@@ -11,9 +11,11 @@ import {Router} from '@angular/router';
 import {Reminder} from '../../core/model/reminder';
 import {DocumentService} from '../../core/storage/document.service';
 import {LogoService} from '../../core/storage/logo.service';
+import {DocumentServiceToken} from '../../core/storage/document.token';
+import {LogoServiceToken} from '../../core/storage/logo.token';
 
 @Component({
-  selector: 'application-form',
+  selector: 'app-application-form',
   templateUrl: 'application-form.component.html',
   styleUrls: ['application-form.component.css'],
   providers: [GlassdoorService]
@@ -26,7 +28,6 @@ export class EditorComponent implements OnInit {
   autocompletions: Observable<Company[]>;
   term = new FormControl();
   company = [];
-  isSelected: string;
   tempLogoDel = [];
 
   get progressValue() {
@@ -50,8 +51,8 @@ export class EditorComponent implements OnInit {
   constructor(public newApplicationService: NewApplicationService,
               public applicationsService: ApplicationsService,
               public glassdoorService: GlassdoorService,
-              @Inject(DocumentService) private documentService,
-              @Inject(LogoService) private logoService,
+              @Inject(DocumentServiceToken) private documentService: DocumentService,
+              @Inject(LogoServiceToken) private logoService: LogoService,
               private router: Router,
               private ref: ChangeDetectorRef) {
   }
@@ -129,7 +130,7 @@ export class EditorComponent implements OnInit {
     setTimeout(() => this._dropdownVisible = value, 100);
   }
 
-  private showCompanyInfo(companyInfo) {
+  public showCompanyInfo(companyInfo) {
     // TODO see if we can do: this.a.company = companyInfo
     // console.log('Clicked on', companyInfo.name);
     this.a.company.name = companyInfo.name;
@@ -138,21 +139,19 @@ export class EditorComponent implements OnInit {
     this.a.company.squareLogo = companyInfo.squareLogo;
   }
 
-  private addDreamingDeadline() {
-    console.log(this.a.dreamingOf.deadlines);
+  public addDreamingDeadline() {
     this.a.dreamingOf.deadlines.push(new Deadline());
   }
 
-  private addReminder(deadline) {
-    console.log(JSON.stringify(deadline));
+  public addReminder(deadline) {
     deadline.reminder = new Reminder();
   }
 
-  private addOngoingEvents() {
+  public addOngoingEvents() {
     this.a.ongoing.events.push(new Event());
   }
 
-  private saveApplication() {
+  public saveApplication() {
     this.a.applied.documents = this.a.applied.documents.concat(this.temporaryDocs);
     this.temporaryDocs = [];
     for (let i = this.tempLogoDel.length - 1; i >= 0; i--) {
@@ -178,7 +177,7 @@ export class EditorComponent implements OnInit {
   }
 
 
-  private cancelEdits() {
+  public cancelEdits() {
     Promise
       .all(this.temporaryDocs.map(this.documentService.deleteDoc))
       .then(() => this.router.navigate(['/home']));
